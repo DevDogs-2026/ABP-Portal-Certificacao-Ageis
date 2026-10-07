@@ -63,7 +63,3 @@ O projeto integra os conhecimentos do semestre abordando do design à infraestru
    ```bash
    cd portal-certificacao-ageis
    ```
-3. Execute o comando do Docker Compose para subir a aplicação e o banco de dados:
-   ```bash
-   docker-compose up -d
-   ```
