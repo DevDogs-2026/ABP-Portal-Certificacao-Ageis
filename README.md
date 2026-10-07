@@ -53,3 +53,17 @@ O projeto integra os conhecimentos do semestre abordando do design à infraestru
 | Lucas Vilas Boas Fukuoka | Scrum Master | [Lucas](https://github.com/LuFukuo) |
 | Marcos Antonio Floreano Gonçalves | Dev Team | [Marcos](https://github.com/MarcosFloreano) |
 | Vitor Souza Leal | Dev Team | [Vitor](https://github.com/vitor-leal1) |
+
+
+1. Clone o repositório da equipe:
+   ```bash
+   git clone https://github.com/DevDogs-2026/ABP-Portal-Certificacao-Ageis.git
+   ```
+2. Navegue até a pasta raiz do projeto:
+   ```bash
+   cd portal-certificacao-ageis
+   ```
+3. Execute o comando do Docker Compose para subir a aplicação e o banco de dados:
+   ```bash
+   docker-compose up -d
+   ```
