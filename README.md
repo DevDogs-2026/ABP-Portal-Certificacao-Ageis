@@ -61,5 +61,5 @@ O projeto integra os conhecimentos do semestre abordando do design à infraestru
    ```
 2. Navegue até a pasta raiz do projeto:
    ```bash
-   cd portal-certificacao-ageis
+   cd ABP-Portal-Certificacao-Ageis
    ```
