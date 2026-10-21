@@ -194,13 +194,13 @@ Mesmo funcionalidades cuja implementação esteja prevista para Sprints posterio
 
 | Papel | Integrante |
 |---|---|
-| Product Owner | Abdi |
-| Scrum Master | Breno |
-| Developer | Gabriel A. |
-| Developer | Guilherme |
-| Developer | Miguel |
-| Developer | Sophia |
-| Developer | Tiago |
+| Product Owner | Gabriel |
+| Scrum Master | Lucas |
+| Developer | Hector |
+| Developer | Igor |
+| Developer | João |
+| Developer | Marcos |
+| Developer | Vitor |
 
 > A relação acima representa a composição da equipe registrada no planejamento do projeto e não deve ser utilizada como comprovação de presença em uma Daily específica.
 
