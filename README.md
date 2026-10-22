@@ -63,3 +63,8 @@ O projeto integra os conhecimentos do semestre abordando do design à infraestru
    ```bash
    cd ABP-Portal-Certificacao-Ageis
    ```
+
+3. Vídeo de Apresentação da Sprint 01
+   ```bash
+   cd docs/videoSprint/Sprint-01.mp4
+   ```
