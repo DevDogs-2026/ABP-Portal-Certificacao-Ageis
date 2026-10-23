@@ -39,8 +39,6 @@ Agendar apresentação com o próprio time para aprimorar o domínio de todos co
 ### Plano de ação:
 Atentar para aderência dos elementos desenvolvidos das próximas entregas aos entregáveis da Sprint01.
 
-## 8. Atentar para a organização do projeto.
+## 9. Atentar para a organização do projeto.
 ### Plano de ação:
 Registrar todas as ações no repositório, produtos intermediários. Utilizar o ReadMe para linkar aos arquivos relevantes.
-
-## 9.
