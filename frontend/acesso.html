@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Metodologia Ágil</title>
+    <link rel="stylesheet" href="src/css/acesso.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container" id="container">
+        
+        <nav class="btn-home">
+            <a href="index.html" class="button-voltar"><img src="src/images/seta-voltar.png" class="icone-voltar">Home</a>
+        </nav>
+
+        <!-- Cadastro -->
+        <div class="form-container sign-up">
+            <form id="signupForm" method="post">
+                <h1>Criar Conta</h1>
+                <input type="text" name="nome" placeholder="Nome Completo" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="cpf" placeholder="CPF" required>
+                <input type="password" name="senha" placeholder="Senha" required>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+
+        <!-- Login -->
+        <div class="form-container sign-in">
+            <form id="loginForm" method="post">
+                <h1>Entrar na Conta</h1>
+                <input type="text" name="cpf" placeholder="CPF" required>
+                <input type="password" name="senha" placeholder="Senha" required>
+                <a href="esqueci-senha.html" class="forgot">Esqueci Minha Senha</a>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+
+        <!-- Painel de alternância -->
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Bem-vindo de volta!</h1>
+                    <p>Entre com seus dados para acessar todo o conteúdo</p>
+                    <button class="hidden" id="login">Entrar</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Olá! Seja bem-vindo!</h1>
+                    <p>Registre seus dados para acessar todo o conteúdo</p>
+                    <button class="hidden" id="register">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/js/acesso.js"></script>
+</body>
+</html>

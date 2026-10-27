@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Metodologia Ágil</title>
+    <link rel="stylesheet" href="src/css/esqueci-senha.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container" id="container">
+
+        <!-- Esqueci minha sinha box -->
+
+        <div class="form-container">
+            <form id="forgotform" method="post">
+                
+                <h1 class="title">Esqueci minha senha</h1>
+
+                <input type="email" name="email" placeholder="Email" required>
+
+                <input type="text" name="codigo" placeholder="Código de verificação" required>
+
+                <input type="password" name="senha" placeholder="Digite sua nova senha novamente" required>
+
+                <button type="submit">Redefinir</button>
+            </form>
+        </div>
+                <a href="acesso.html" class="button-voltar"><img src="images/seta-voltar.png" class="icone-voltar">Voltar</a>
+    </div>
+    <script src="src/js/esqueci-senha.js"></script>
+</body>
+</html>
