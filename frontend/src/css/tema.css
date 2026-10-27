@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+}
+
+body {
+    background: #0f172a;
+}
+
+/* ---------- Header ---------- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6em 2em;
+    background: linear-gradient(130deg, #3A66FF 60%, #7A33CC);;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.4s;
+}
+
+.logo img {
+    display: block;
+    height: 100px;
+    width: auto;
+}
+
+/* ---------- Menu ---------- */
+.nav-bar ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nav-bar ul li a {
+    color: #fff;
+    font-size: 1.4rem;
+    padding: 10px 22px;
+    border-radius: 50px;
+    margin: 0 4px;
+    transition: 0.4s;
+}
+
+.nav-bar ul li a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btnLogin-popup {
+    display: inline-block;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 8px 20px;
+    border-radius: 25px;
+    border: 2px solid #fff;
+    white-space: nowrap;
+    transition: 0.4s;
+}
+
+.btnLogin-popup:hover {
+    background: #fff;
+    color: #7A33CC;
+}
+
+/* ---------- Section 01 ---------- */
+.estudo {
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    padding: 10em 1.5em 3em;
+    background: linear-gradient(130deg, #3A66FF 0%, #7A33CC 95%);
+}
+
+/* ---------- Tópicos (acordeão) ---------- */
+.acordeao {
+    width: 100%;
+    max-width: 720px;
+}
+
+.item {
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+
+/* o botão com o título do tópico */
+.gatilho {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 18px;
+    border: none;
+    background: none;
+    color: #3f5efb;
+    font-size: 1.3rem;
+    font-weight: 400;
+    text-align: left;
+    cursor: pointer;
+}
+
+/* setinha feita só com borda */
+.seta {
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid #8a8fa3;
+    border-bottom: 2px solid #8a8fa3;
+    transform: rotate(45deg);
+    transition: transform 0.3s;
+}
+
+.item.ativo .seta {
+    transform: rotate(-135deg);
+}
+
+/* parte que abre e fecha (o JS mexe no max-height) */
+.painel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.conteudo {
+    padding: 8px 20px 24px;
+    color: #1f2430;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.conteudo p {
+    margin-bottom: 10px;
+    color: #111111;
+}
+
+.texto-explicativo p {
+    color: #111111;
+}
+
+
+/* ---------- Linha e rodapé ---------- */
+.hr-1 {
+    min-width: 100rem;
+    opacity: 55%;
+}
+
+footer {
+    background: transparent;
+
+    color: #e6e6e6;
+    max-height: 400px;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2.5em 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* ---------- Hambúrguer (ainda sem função) ---------- */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px;
+}
+
+.hamburger .line {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: #fff;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.hamburger.open .line:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburger.open .line:nth-child(2) { opacity: 0; }
+.hamburger.open .line:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 800px) {
+    header { padding: 0.6em 1em; }
+
+    .hamburger { display: flex; }
+
+    .nav-bar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 23, 42, 0.95);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s;
+    }
+
+    .nav-bar.open { max-height: 300px; }
+
+    .nav-bar ul {
+        flex-direction: column;
+        align-items: center;
+        padding: 1em 0;
+    }
+
+    .nav-bar ul li a { display: block; margin: 4px 0; }
+
+    .login-container { display: none; }
+}
