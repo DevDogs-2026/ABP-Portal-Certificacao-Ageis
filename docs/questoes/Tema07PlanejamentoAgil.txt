@@ -1,0 +1,46 @@
+Planejamento Ágil 
+
+1. Qual é a principal diferença entre o Planejamento Ágil e os modelos tradicionais de planejamento?
+
+A) O Planejamento Ágil exige que todos os detalhes do projeto sejam definidos antes do início.
+
+B) O Planejamento Ágil elimina a necessidade de estabelecer objetivos para o projeto.
+
+C) O Planejamento Ágil trata o planejamento como uma atividade contínua, permitindo adaptações conforme surgem mudanças.
+
+D) O Planejamento Ágil utiliza documentos rígidos que não podem ser modificados durante o projeto.
+Resposta correta: C
+
+2. Qual é a função da Cebola do Planejamento Ágil (Agile Planning Onion)?
+
+A) Dividir o planejamento em camadas que representam diferentes horizontes de tempo, do longo ao curtíssimo prazo.
+
+B) Organizar os funcionários de acordo com seus níveis de experiência.
+
+C) Determinar exclusivamente o orçamento necessário para cada Sprint.
+
+D) Substituir o planejamento diário por um planejamento anual.
+Resposta correta: A
+
+3. Como o uso de estimativas ágeis e da medição da velocidade da equipe contribui para o Planejamento Ágil?
+
+A) Impede que o projeto sofra alterações durante seu desenvolvimento.
+
+B) Permite estabelecer prazos com base em dados reais, mantendo a flexibilidade para mudanças e inovações.
+
+C) Garante que todas as tarefas sejam concluídas exatamente no mesmo período.
+
+D) Elimina a necessidade de acompanhar os resultados de cada ciclo.
+Resposta correta: B
+
+4. No Planejamento Ágil, como o Roadmap é utilizado em relação às entregas futuras?
+
+A) Como um documento definitivo que não permite alterações nas entregas.
+
+B) Como uma ferramenta utilizada apenas para organizar as tarefas diárias.
+
+C) Como uma forma de substituir as reuniões de planejamento das Sprints.
+
+D) Como uma projeção de médio prazo, cujos detalhes são ajustados conforme o momento das entregas se aproxima.
+Resposta correta: D
+
