@@ -1,0 +1,39 @@
+Questão 13: Qual evento é utilizado para planejar o trabalho da Sprint?
+
+A) Sprint Review.
+
+B) Daily Scrum.
+
+C) Sprint Retrospective.
+
+D) Sprint Planning.
+
+Questão 14: Qual é o tempo máximo de duração da Daily Scrum?
+
+A) 15 minutos.
+
+B) 30 minutos.
+
+C) 1 hora.
+
+D) 2 horas.
+
+Questão 15: Qual é o principal objetivo da Sprint Review?
+
+A) Avaliar individualmente os funcionários.
+
+B) Definir salários da equipe.
+
+C) Inspecionar o resultado da Sprint e discutir adaptações futuras.
+
+D) Substituir o planejamento da Sprint.
+
+Questão 16: O que acontece durante a Sprint Retrospective?
+
+A) O cliente realiza o pagamento.
+
+B) A equipe identifica maneiras de melhorar sua qualidade e eficácia.
+
+C) O projeto é obrigatoriamente encerrado.
+
+D) Todos os requisitos são descartados.
