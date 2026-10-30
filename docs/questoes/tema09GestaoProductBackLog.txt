@@ -1,0 +1,39 @@
+Questão 21: Quem é responsável pela gestão eficaz do Product Backlog?
+
+A) Scrum Master.
+
+B) Cliente.
+
+C) Product Owner.
+
+D) Gerente de recursos humanos.
+
+Questão 22: O que significa realizar o refinamento do Product Backlog?
+
+A) Detalhar e dividir itens para melhorar seu entendimento.
+
+B) Excluir todas as tarefas antigas.
+
+C) Encerrar automaticamente a Sprint.
+
+D) Substituir os desenvolvedores.
+
+Questão 23: Qual característica é importante para um Product Backlog eficiente?
+
+A) Nunca sofrer alterações.
+
+B) Ser conhecido apenas pelo gerente.
+
+C) Conter exclusivamente tarefas concluídas.
+
+D) Ser transparente, ordenado e continuamente atualizado.
+
+Questão 24: Qual fator pode influenciar a ordenação dos itens do Product Backlog?
+
+A) A ordem alfabética dos desenvolvedores.
+
+B) O valor de negócio, os riscos e as dependências.
+
+C) A quantidade de reuniões realizadas.
+
+D) A preferência pessoal do Scrum Master.
