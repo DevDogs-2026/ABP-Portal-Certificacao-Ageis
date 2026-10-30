@@ -1,0 +1,39 @@
+Questão 17: Quais são os três artefatos oficiais do Scrum?
+
+A) Product Backlog, Sprint Backlog e Increment.
+
+B) Kanban, Daily Scrum e Sprint Planning.
+
+C) Cronograma, Relatório e Contrato.
+
+D) Sprint Review, Daily Scrum e Retrospective.
+
+Questão 18: O que representa o Product Backlog?
+
+A) Uma lista de funcionários.
+
+B) Um relatório financeiro.
+
+C) Um histórico de reuniões.
+
+D) Uma lista ordenada do que é necessário para melhorar o produto.
+
+Questão 19: O Sprint Backlog contém:
+
+A) Apenas os problemas encontrados.
+
+B) O objetivo da Sprint, os itens selecionados e o plano de entrega.
+
+C) Somente as tarefas concluídas.
+
+D) Todas as funcionalidades de projetos futuros.
+
+Questão 20: O que é um Increment no Scrum?
+
+A) Uma reunião semanal.
+
+B) Um documento de planejamento.
+
+C) Uma parte utilizável do produto que atende à Definition of Done.
+
+D) Uma lista de requisitos não aprovados.
