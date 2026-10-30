@@ -1,0 +1,46 @@
+Ferramentas para Equipes Ágeis
+
+1. Qual é o principal papel das ferramentas utilizadas pelas equipes ágeis?
+
+A) Substituir a comunicação entre os integrantes por processos automatizados.
+
+B) Tornar uma empresa ágil automaticamente após a aquisição de softwares especializados.
+
+C) Controlar individualmente o desempenho dos funcionários.
+
+D) Apoiar a colaboração, centralizar informações e proporcionar transparência ao fluxo de trabalho.
+Resposta correta: D
+
+2. Qual é a principal diferença entre as ferramentas de gestão de fluxo e as ferramentas de colaboração visual?
+
+A) As ferramentas de gestão organizam tarefas, Backlogs e métricas, enquanto as de colaboração visual facilitam reuniões, ideias e atividades em grupo.
+
+B) As ferramentas de gestão são utilizadas exclusivamente para comunicação, enquanto as visuais servem para controlar horários.
+
+C) Ambas possuem a mesma finalidade e são utilizadas apenas para desenvolver códigos.
+
+D) As ferramentas visuais substituem completamente o planejamento e a gestão das tarefas.
+Resposta correta: A
+
+3. Qual característica é fundamental para escolher e utilizar uma boa ferramenta ágil?
+
+A) Possuir o maior número possível de funcionalidades e campos obrigatórios.
+
+B) Exigir atualizações constantes e processos burocráticos para registrar tarefas.
+
+C) Ser simples, fácil de atualizar e representar fielmente a realidade do trabalho da equipe.
+
+D) Impedir alterações no fluxo de trabalho depois que o projeto começar.
+Resposta correta: C
+
+4. Por que o excesso de customização em ferramentas como Jira e Azure DevOps pode prejudicar uma equipe ágil?
+
+A) Porque impede que os funcionários tenham acesso às informações do projeto.
+
+B) Porque cria burocracias e obrigações excessivas, fazendo com que a equipe perca mais tempo alimentando o sistema do que colaborando.
+
+C) Porque elimina automaticamente todas as funcionalidades de gestão do software.
+
+D) Porque impede a utilização de métricas como Lead Time e Burndown.
+Resposta correta: B
+
