@@ -1,0 +1,45 @@
+Extreme Programming (XP)
+
+1. Qual é o principal foco da metodologia Extreme Programming (XP) no desenvolvimento de software?
+
+A) Organizar exclusivamente reuniões e distribuir tarefas entre os funcionários.
+
+B) Priorizar a documentação extensa antes de iniciar qualquer desenvolvimento.
+
+C) Concentrar-se na excelência técnica e na qualidade do software, permitindo adaptações às mudanças de requisitos.
+
+D) Evitar alterações no código depois que o desenvolvimento começa.
+Resposta correta: C
+
+2. Quais são os cinco valores essenciais do Extreme Programming (XP)?
+
+A) Comunicação, simplicidade, feedback, coragem e respeito.
+
+B) Planejamento, organização, liderança, produtividade e controle.
+
+C) Qualidade, velocidade, documentação, hierarquia e segurança.
+
+D) Comunicação, competitividade, planejamento, inovação e disciplina.
+Resposta correta: A
+
+3. Qual é a principal característica das práticas de Integração Contínua (CI) e design simples no XP?
+
+A) Desenvolver todo o sistema antes de realizar os primeiros testes.
+
+B) Evitar alterações frequentes no código para diminuir os riscos.
+
+C) Criar funcionalidades futuras antecipadamente para evitar novos desenvolvimentos.
+
+D) Integrar e testar alterações frequentemente, desenvolvendo apenas o necessário para o momento atual.
+Resposta correta: D
+
+4. Como a prática do design simples contribui para o desenvolvimento de software no XP?
+
+A) Incentiva a criação de arquiteturas complexas para prever todas as funcionalidades futuras.
+
+B) Busca resolver os problemas atuais com soluções simples e elegantes, evitando complexidade desnecessária.
+
+C) Elimina a necessidade de testes automatizados durante o desenvolvimento.
+
+D) Impede que o sistema receba novas funcionalidades depois de concluído.
+Resposta correta: B
