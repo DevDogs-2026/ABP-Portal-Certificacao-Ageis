@@ -1,0 +1,42 @@
+Questão 1: Qual é o principal objetivo das metodologias ágeis?
+
+A) Eliminar completamente o planejamento.
+
+B) Entregar valor continuamente e adaptar-se às mudanças.
+
+C) Aumentar a documentação dos projetos.
+
+D) Evitar a participação do cliente.
+
+
+Questão 2: Quantos valores fundamentais possui o Manifesto Ágil?
+
+A) 3
+
+B) 5
+
+C) 4
+
+D) 6
+
+
+Questão 3: Qual das alternativas representa um valor do Manifesto Ágil?
+
+A) Indivíduos e interações mais que processos e ferramentas.
+
+B) Seguir um plano mais que responder a mudanças.
+
+C) Documentação abrangente mais que software funcionando.
+
+D) Negociação de contratos mais que colaboração com o cliente.
+
+
+Questão 4: Uma característica importante das equipes ágeis é:
+
+A) Trabalhar sem comunicação.
+
+B) Depender exclusivamente do gerente.
+
+C) Evitar alterações durante o projeto.
+
+D) Colaborar e adaptar-se às necessidades.
