@@ -1,6 +1,6 @@
 // ============================================================
 // Os usuários ficam salvos no localStorage do navegador, só para
-// testar o fluxo. Quando o back-end existir, troque as funções
+// testar o fluxo. Quando o back-end existir, trocae as funções
 // da seção "ARMAZENAMENTO TEMPORÁRIO" por chamadas fetch().
 // ============================================================
 
