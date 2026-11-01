@@ -328,6 +328,7 @@ button.btnLogin-popup {
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
     transition: transform 0.4s ease, border-color 0.4s ease;
+    background: var(--color-primary);
 }
 
 .sobre-box:hover {
@@ -341,13 +342,13 @@ button.btnLogin-popup {
     font-weight: 700;
     text-align: center;
     margin-bottom: 40px;
-    background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+    background: var(--color-surface);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .text-box {
-    color: var(--color-text);
+    color: var(--color-surface);
     font-size: larger;
 }
 
