@@ -225,7 +225,7 @@ button.btnLogin-popup {
 }
 
 footer {
-    color: #e6e6e6;
+    color: var(--color-text);
     max-height: 400px;
     height: 100%;
     width: 100%;
