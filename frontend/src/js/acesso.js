@@ -160,6 +160,7 @@ loginForm.addEventListener('submit', async (e) => {
     } else {
       alert(data.error);
     }
+
   } catch (error) {
     alert('Ocorreu um erro. Tente novamente.');
     console.error(error);
@@ -167,3 +168,4 @@ loginForm.addEventListener('submit', async (e) => {
     setCarregando(submitBtn, false, 'Entrar', 'Entrando...');
   }
 });
+
