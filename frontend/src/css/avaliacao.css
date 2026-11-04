@@ -1,0 +1,425 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--color-text);
+}
+
+:root {
+    --color-primary: #3A66FF;
+    --color-secondary: #7A33CC;
+    --color-background: #F5F7FC;
+    --color-surface: #FFFFFF;
+    --color-text: #18233D;
+    --color-success: #16804A;
+    --color-error: #C53D47;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --light: 300;
+    --regular: 400;
+    --medium: 500;
+    --semi-bold: 600;
+    --bold: 700;
+    --bolder: 900;
+}
+
+body {
+    background: var(--color-background);
+}
+
+.logo {
+    position: relative;
+    font-size: 2.5rem;
+    font-weight: 700;
+    padding: 0.3em clamp(0.5em, calc(16.4vw - 180px), 3em);
+}
+
+.title-primary {
+    color: var(--color-primary);
+}
+
+.title-secondary {
+    background: linear-gradient(to right, var(--color-text), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ---------- Header transparente ---------- */
+header {
+    position: fixed;          /* fica por cima do hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6em 2em;
+    background: transparent;
+    border-bottom: 0.2rem solid #EDE7FF;
+    transition: background 0.4s, backdrop-filter 0.4s;
+}
+
+/* ao rolar a página, o header ganha um fundo translúcido */
+header.scrolled {
+    background: var(--color-background);
+    backdrop-filter: blur(8px);
+}
+
+/* ---------- Menu ---------- */
+.nav-bar {
+    display: flex;
+    align-items: center;
+    font-weight: 200;
+}
+
+.nav-bar ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-bar ul li a {
+    position: relative;          /* sempre, não só no hover */
+    display: inline-block;       /* padding e bottom passam a funcionar direito */
+    color: var(--color-text);
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 10px 22px;
+    border-radius: 50px;
+    margin: 0 4px;
+    transition: var(--transition);
+}
+
+.nav-bar ul li a:hover {
+    color: var(--color-primary); /* variável que existe */
+}
+
+.nav-bar ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;                 /* dentro da área do padding */
+    left: 22px;                  /* alinha com o início do texto */
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: var(--transition);
+}
+
+.nav-bar ul li a:hover::after {
+    width: calc(100% - 44px);    /* largura do texto (desconta o padding dos dois lados) */
+}
+
+.btnLogin-popup {
+    display: inline-block;
+    color: var(--color-secondary);
+    font-size: 1rem;
+    font-weight: var(--bolder);
+    padding: 12px 40px;
+    border-radius: 25px;
+    border: 2px solid var(--color-secondary);
+    white-space: nowrap;
+    transition: 0.4s;
+}
+
+.btnLogin-popup:hover {
+    background: var(--color-secondary);
+    color: var(--color-text);
+}
+
+.login-container { 
+    padding: 0 clamp(1rem, calc(21.9vw - 240px), 10rem);
+    display: flex; 
+    align-items: center; 
+
+}
+
+.usuario-nome { 
+    color: var(--color-text); 
+    font-size: 1.2rem; 
+    margin-right: 12px; 
+}
+
+button.btnLogin-popup { 
+    background: transparent; 
+    cursor: pointer; 
+}
+
+
+/* ---------- Hambúrguer (ainda sem função) ---------- */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px;
+}
+
+.hamburger .line {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.hamburger.open .line:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburger.open .line:nth-child(2) { opacity: 0; }
+.hamburger.open .line:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+
+/* Main */
+.main {
+    position: absolute;
+    top: 10vh;
+    left: 10%;
+    width: 80%;
+}
+
+/* Sub-Titulo */
+.sub_titulo {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.sub_titulo h2 {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-size: 2.2rem;
+    padding: 1rem;
+    border-radius: 18px;
+}
+
+/* Main Regras */
+.main__regras {
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.div__regra {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.regra__h3 {
+    color: var(--color-text);
+    font-size: 1.6rem;
+}
+
+.regra__ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.regra__li {
+    color: var(--color-text);
+    font-size: 1.2rem;
+}
+.regra__span {
+    font-weight: var(--semi-bold);
+    font-size: 1.3rem;
+}
+
+/* Botão para Avaliação */
+.main__btn_questao {
+    display: flex;
+    justify-content: center;
+    margin: 5rem 0;
+}
+
+.btn__avaliacao {
+    background-color: var(--color-success);
+    color: var(--color-surface);
+    font-weight: var(--medium);
+    font-size: 1.875rem;
+    text-decoration: none;
+    padding: 1.4rem 0.8rem;
+    border: solid 2px var(--color-text);
+    border-radius: 50px;
+    transition: all 0.4s ease;
+}
+
+.btn__avaliacao:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 1280px) {
+    /* Remover apenas a barra de rolagem horizontal */
+    body {
+        overflow-x: hidden;
+    }
+    /* Header */
+    header {
+        max-width: 100%;
+        padding: 1rem 0;
+        border-bottom: 0.2rem solid var(--color-secondary);
+    }
+    .logo {
+        font-size: 2.2rem;
+        font-weight: 700;
+        padding: 0.2rem 2rem;
+    }
+    .nav-bar ul {
+        flex-wrap: nowrap;
+    }
+    .nav-bar ul li a {
+        font-size: 1.2rem;
+        padding: 0.5rem 0.8rem;
+        margin: 0;
+    }
+
+    /* Botão para Avaliação */
+    .btn__avaliacao {
+        font-size: 1.5rem;
+    }
+
+}
+
+/* Tablets em pé e celulares: menu hambúrguer + hero em uma coluna */
+@media (max-width: 960px) {
+    /* Header */
+    header {
+        padding: 0.8rem 1.5rem;
+    }
+    .logo {
+        font-size: 2rem;
+        padding: 0;
+    }
+    .hamburger {
+        display: flex;
+        order: 3;
+        margin-left: 0.6rem;
+    }
+    .login-container {
+        order: 2;
+        margin-left: auto;
+        padding: 0;
+    }
+    .nav-bar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-secondary);
+        max-height: 0;
+        border-bottom-left-radius: 28px;
+        border-bottom-right-radius: 28px;
+        overflow: hidden;
+        transition: max-height 0.4s;
+    }
+    .nav-bar.open { max-height: 320px; }
+    .nav-bar ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 1rem 0;
+    }
+    .nav-bar ul li a {
+        color: var(--color-surface);
+        display: block;
+        margin: 4px 0;
+        padding: 0.5rem 1.2rem;
+    }
+    .nav-bar ul li a::after { display: none; }
+
+    /* Sub-Titulo */
+    .sub_titulo h2 {
+        font-size: 2rem;
+    }
+    /* Main Regras */
+    .main__regras {
+        gap: 1.8rem;
+    }
+    .regra__h3 {
+        font-size: 1.5rem;
+    }
+    .regra__li {
+        font-size: 1.1rem;
+    }
+    .regra__span {
+        font-size: 1.2rem;
+    }
+    /* Botão para Avaliação */
+    .main__btn_questao {
+        margin: 3rem 0;
+    }
+    .btn__avaliacao {
+        font-size: 1.4rem;
+    }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+    .hamburger { display: flex; }
+    .nav-bar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-secondary);
+        max-height: 0;
+        border-bottom-left-radius: 28px;
+        border-bottom-right-radius: 28px;
+        overflow: hidden;
+        transition: max-height 0.4s;
+    }
+    .nav-bar.open { max-height: 300px; }
+    .nav-bar ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 1rem 0;
+    }
+    .nav-bar ul li a { 
+        color: var(--color-surface);
+        display: block; 
+        margin: 4px 0; 
+    }
+    .login-container { display: none; }
+    /* Header */
+    header {
+        padding: 0.7rem 1rem;
+    }
+    .logo {
+        font-size: 1.7rem;
+    }
+    .btnLogin-popup {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+
+    /* Sub-Titulo */
+    .sub_titulo h2 {
+        font-size: 1.8rem;
+    }
+    /* Main Regras */
+    .main__regras {
+        gap: 1.5rem;
+    }
+    .regra__h3 {
+        font-size: 1.4rem;
+    }
+    .regra__li {
+        font-size: 1rem;
+    }
+    .regra__span {
+        font-size: 1.1rem;
+    }
+    /* Botão para Avaliação */
+    .main__btn_questao {
+        margin: 2rem 0;
+    }
+    .btn__avaliacao {
+        font-size: 1.2rem;
+        padding: 1rem 0.6rem;
+    }
+}
