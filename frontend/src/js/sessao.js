@@ -37,24 +37,26 @@ function atualizarHeader() {
   area.replaceChildren(nome, botaoSair);
 }
 
-atualizarHeader();
-
-// ---------- Ferramenta de testes (rodar pelo console) ----------
+// ---------- Ferramenta de testes (rodar pelo console, em qualquer página) ----------
 // limparDadosDeTeste()                 -> apaga a sessão e todos os cadastros
 // limparDadosDeTeste('seu@email.com')  -> apaga só esse usuário e a sessão
 function limparDadosDeTeste(email) {
-  localStorage.removeItem('usuarioLogado');
+  localStorage.removeItem(CHAVE_SESSAO);
 
   if (email) {
     let lista = [];
     try {
       lista = JSON.parse(localStorage.getItem('usuarios')) || [];
     } catch {}
-    const restantes = lista.filter((u) => u.email !== email.trim().toLowerCase());
+    const alvo = String(email).trim().toLowerCase();
+    const restantes = lista.filter((u) => u.email !== alvo);
     localStorage.setItem('usuarios', JSON.stringify(restantes));
-    console.log('Usuários removidos: ' + (lista.length - restantes.length));
   } else {
     localStorage.removeItem('usuarios');
-    console.log('Sessão e cadastros apagados.');
   }
+
+  window.location.reload();
 }
+
+atualizarHeader();
+

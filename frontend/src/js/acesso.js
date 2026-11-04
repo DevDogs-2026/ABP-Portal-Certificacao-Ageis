@@ -1,6 +1,6 @@
 // ============================================================
 // Os usuários ficam salvos no localStorage do navegador, só para
-// testar o fluxo. Quando o back-end existir, trocae as funções
+// testar o fluxo. Quando o back-end existir, troque as funções
 // da seção "ARMAZENAMENTO TEMPORÁRIO" por chamadas fetch().
 // ============================================================
 
@@ -156,11 +156,14 @@ loginForm.addEventListener('submit', async (e) => {
     if (data.success) {
       // Guarda só id e nome — nunca senha nem CPF
       localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
-      window.location.href = './index.html';
+
+      // Volta para a página que o usuário tentou abrir (ex.: avaliacao.html)
+      const destino = sessionStorage.getItem('voltarPara') || 'index.html';
+      sessionStorage.removeItem('voltarPara');
+      window.location.href = destino;
     } else {
       alert(data.error);
     }
-
   } catch (error) {
     alert('Ocorreu um erro. Tente novamente.');
     console.error(error);
@@ -168,4 +171,3 @@ loginForm.addEventListener('submit', async (e) => {
     setCarregando(submitBtn, false, 'Entrar', 'Entrando...');
   }
 });
-
