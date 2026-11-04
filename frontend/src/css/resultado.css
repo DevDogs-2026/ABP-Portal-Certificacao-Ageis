@@ -446,6 +446,103 @@ body::after {
     }
 }
 
+.cartao-resultado {
+    animation: entrada-card 750ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.sobretitulo,
+.cartao-resultado h1,
+.descricao,
+.resultado-principal,
+.resumo,
+.acoes {
+    animation: entrada-conteudo 600ms ease-out both;
+}
+
+.sobretitulo {
+    animation-delay: 120ms;
+}
+
+.cartao-resultado h1 {
+    animation-delay: 200ms;
+}
+
+.descricao {
+    animation-delay: 270ms;
+}
+
+.resultado-principal {
+    animation-delay: 340ms;
+}
+
+.resumo {
+    animation-delay: 430ms;
+}
+
+.acoes {
+    animation-delay: 520ms;
+}
+
+.grafico-aproveitamento {
+    animation: entrada-grafico 850ms cubic-bezier(0.2, 0.8, 0.2, 1) 350ms both;
+}
+
+@keyframes entrada-card {
+    0% {
+        opacity: 0;
+        transform: translateY(28px) scale(0.96);
+    }
+
+    70% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.01);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes entrada-conteudo {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes entrada-grafico {
+    from {
+        opacity: 0;
+        transform: scale(0.72) rotate(-35deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cartao-resultado,
+    .sobretitulo,
+    .cartao-resultado h1,
+    .descricao,
+    .resultado-principal,
+    .resumo,
+    .acoes,
+    .grafico-aproveitamento {
+        animation: none !important;
+        opacity: 1;
+        transform: none;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
