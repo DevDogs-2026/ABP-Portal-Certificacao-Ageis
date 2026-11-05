@@ -89,7 +89,7 @@ btn.addEventListener("click", () => {
     }
   }
 
-  /* Aguarda 6,5 segundos (6500 milissegundos) com feedback visual antes de abrir a tela de Pausa/Continuar */
+  /* Aguarda 6,5 segundos (5000 milissegundos) com feedback visual antes de abrir a tela de Pausa/Continuar */
   setTimeout(() => {
     contPausa.classList.remove("continuar__pausar_div_off");
     contPausa.classList.add("continuar__pausar_div");
@@ -98,7 +98,7 @@ btn.addEventListener("click", () => {
     main.classList.add("desfoque");
     btn.classList.remove("main__botao");
     btn.classList.add("main__botao_off");
-  }, 6500); 
+  }, 5000); 
 });
 
 
