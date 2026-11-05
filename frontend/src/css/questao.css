@@ -114,6 +114,12 @@
     font-size: 1.25rem;
 }
 
+.main__questao_imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .main__questao_img {
     width: 90%;
     height: 30rem;
@@ -194,7 +200,7 @@
 
 .main__alternativa_texto {
     font-weight: var(--regular);
-    font-size: 22px;
+    font-size: 1.5rem;
     margin-left: 44px;
 }
 
@@ -216,9 +222,9 @@
     color: var(--color-surface);
     cursor: pointer;
     font-weight: var(--medium);
-    font-size: 22px;
-    width: 127px;
-    height: 60px;
+    font-size: 1.5rem;
+    width: 100%;
+    padding: 1rem 2rem;
     border: solid var(--color-text) 2px;
     border-radius: 50px;
 }
@@ -237,12 +243,13 @@
     justify-content: center;
     gap: 6rem;
     align-items: center;
-    width: 40%;
+    width: 70%;
     height: 500px;
     border-radius: 20px;
     position: fixed;
     top: 20%;
-    left: 30%;
+    right: 15%;
+    left: 15%;
 }
 
 .limite__tempo_div_off {
@@ -258,6 +265,7 @@
 .limite__tempo_div div:nth-child(2) {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-around;
     width: 80%;
 }
@@ -270,8 +278,8 @@
     font-weight: var(--medium);
     font-size: 1.875rem;
     text-align: center;
-    width: 230px;
-    height: 80px;
+    width: 190px;
+    height: 65px;
     border: none;
     border-radius: 50px;
 }
@@ -347,8 +355,162 @@
     transition: filter 0.3s ease;
 }
 
-@media (max-widht: 1280px) {}
+@media (max-width: 960px) {
+    /* Header */
+    .header__tema_p, 
+    .header__tempo_p {
+        font-size: 1.4rem;
+    }
+    .header__tema_span,
+    .header__tempo_span {
+        font-size: 1.3rem;
+    }
 
-@media (max-widht: 960px) {}
+    /* Main Questão */
+    .main__questao {
+        right: 10%;
+        left: 10%;
+        width: 80%;
+        height: 35rem;
+    }
+    .main__questao_img {
+        min-width: 90%;
+        height: 25rem;
+    }
+    /* Main Alternativa */
+    .main__alternativas {
+        top: 37rem;
+        right: 10%;
+        left: 10%;
+        width: 80%;
+    }
+    /* Main Botão de confirmar */
+    .main__btn {
+        font-size: 1.3rem;
+        padding: 0.6rem 1.6rem;
+        border-radius: 50px;
+    }
+    /* Limite de Tempo */
+    .limite_tempo_text {
+        font-size: 1.6rem;
+    }
+    .limite_tempo_btn {
+        font-size: 1.6rem;
+        width: 170px;
+        height: 50px;
+    }
+    /* Continuar ou Pausar Certificação */
+    .continuar__pausar_div {
+        gap: 5rem;
+        width: 80%;
+        position: fixed;
+        top: 10%;
+        bottom: 10%;
+        left: 10%;
+        right: 10%;
+    }
+    .continuar__pausar_div div:nth-child(2) {
+        width: 90%;
+    }
+    .cont__paus_btn {
+        font-size: 1.5rem;
+        width: 200px;
+        height: 60px;
+    }
+}
 
-@media (max-widht: 600px) {}
+@media (max-width: 600px) {
+    /* Header */
+    .header__tema_p, 
+    .header__tempo_p {
+        font-size: 1.2rem;
+    }
+    .header__tema_span,
+    .header__tempo_span {
+        font-size: 1.1rem;
+    }
+
+    /* Main Questão */
+    .main__questao {
+        right: 5%;
+        left: 5%;
+        width: 90%;
+        height: 28rem;
+    }
+    .main__questao_enunciado {
+        margin-top: 1rem;
+    }
+    .main__questao_texto {
+        font-size: 1.1rem;
+    }
+    .main__questao_img {
+        min-width: 90%;
+        height: 16rem;
+    }
+    /* Main Alternativa */
+    .main__alternativas {
+        top: 30rem;
+        right: 5%;
+        left: 5%;
+        width: 90%;
+    }
+    .main__alternativa {
+        font-size: 1.2rem;
+        margin-left: 20px;
+    }
+    .main__alternativa_span {
+        width: 15px;
+        height: 15px;
+    }
+    /* Main Botão de confirmar */
+    .main__alternativa_texto {
+        font-size: 1.2rem;
+        margin-left: 20px;
+    }
+    .main__btn {
+        font-size: 1.2rem;
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+    }
+    /* Limite de Tempo */
+    .limite_tempo_text {
+        font-size: 1.4rem;
+    }
+    .limite_tempo_btn {
+        font-size: 1.4rem;
+        width: 150px;
+        height: 40px;
+    }
+    .limite__tempo_div div:nth-child(2) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    /* Continuar ou Pausar Certificação */
+    .continuar__pausar_div {
+        gap: 5rem;
+        width: 80%;
+        position: fixed;
+        top: 10%;
+        bottom: 10%;
+        left: 10%;
+        right: 10%;
+    }
+    .cont__paus_text {
+        color: var(--color-surface);
+        text-align: center;
+        font-family: var(--fonte-01);
+        font-weight: var(--medium);
+        font-size: 1.5rem;
+    }
+    .continuar__pausar_div div:nth-child(2) {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        width: 90%;
+    }
+    .cont__paus_btn {
+        font-size: 1.3rem;
+        width: 180px;
+        height: 50px;
+    }
+}
