@@ -1,0 +1,46 @@
+Métricas Ágeis 
+
+1. Qual é o principal objetivo das Métricas Ágeis dentro de uma equipe?
+
+A) Vigiar individualmente os funcionários e controlar as horas trabalhadas.
+
+B) Punir os integrantes que não conseguem concluir suas tarefas rapidamente.
+
+C) Fornecer dados reais para avaliar o fluxo de trabalho e promover melhorias contínuas.
+
+D) Aumentar a quantidade de tarefas iniciadas durante cada ciclo.
+Resposta correta: C
+
+2. Qual é a diferença entre Lead Time e Cycle Time nas Métricas Ágeis?
+
+A) Lead Time mede as horas trabalhadas, enquanto Cycle Time mede os custos do projeto.
+
+B) Lead Time mede o tempo desde o nascimento do pedido até a entrega, enquanto Cycle Time mede o tempo desde o início efetivo do trabalho até sua conclusão.
+
+C) Lead Time mede a quantidade de funcionários, enquanto Cycle Time mede a quantidade de reuniões.
+
+D) Ambos medem exclusivamente o número de tarefas concluídas durante uma Sprint.
+Resposta correta: B
+
+3. Qual é a principal finalidade de utilizar métricas ágeis, como ferramentas de transparência e tomada de decisões?
+
+A) Identificar problemas no processo, melhorar estimativas e acompanhar o valor entregue ao cliente.
+
+B) Substituir todas as reuniões da equipe por relatórios automáticos.
+
+C) Avaliar exclusivamente o desempenho individual de cada funcionário.
+
+D) Garantir que todas as tarefas sejam iniciadas ao mesmo tempo.
+Resposta correta: A
+
+4. Para que serve o Cumulative Flow Diagram (CFD) na análise das métricas ágeis?
+
+A) Calcular o salário dos integrantes da equipe com base na produtividade.
+
+B) Determinar quantas horas cada funcionário precisa trabalhar diariamente.
+
+C) Organizar os integrantes conforme suas funções dentro do projeto.
+
+D) Visualizar o fluxo de trabalho, identificar acúmulos de tarefas e antecipar possíveis atrasos.
+Resposta correta: D
+

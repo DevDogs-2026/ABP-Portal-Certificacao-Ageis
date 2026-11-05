@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Metodologia Ágil</title>
+    <link rel="stylesheet" href="src/css/esqueci-senha.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container" id="container">
+
+        <!-- Esqueci minha sinha box -->
+
+        <div class="form-container">
+            <form id="forgotform" method="post">
+                
+                <h1 class="title">Esqueci minha senha</h1>
+
+                <div class="input-icon">
+                    <img src="src/images/icons/cpf-icon.svg" alt="" aria-hidden="true">
+                    <input type="email" name="email" placeholder="Email" autocomplete="email" required>
+                </div>
+
+                <div class="input-icon">
+                    <img src="src/images/icons/lock-icon.svg" alt="" aria-hidden="true">
+                    <input type="password" name="senha" placeholder="Nova senha" minlength="6" autocomplete="new-password" required>
+                </div>
+
+
+                <div class="input-icon">
+                    <img src="src/images/icons/lock-icon.svg" alt="" aria-hidden="true">
+                    <input type="password" name="confirmacaoSenha" placeholder="Confirme a nova senha" minlength="6" autocomplete="new-password" required>
+                </div>
+
+                <button type="submit">Redefinir</button>
+            </form>
+        </div>
+                <a href="acesso.html" class="button-voltar"><img src="src/images/icons/seta-icon.png" class="icone-voltar">Voltar</a>
+    </div>
+    <script src="src/js/esqueci-senha.js"></script>
+</body>
+</html>

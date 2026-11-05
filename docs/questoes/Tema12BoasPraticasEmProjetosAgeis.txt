@@ -1,0 +1,46 @@
+Boas Práticas em Projetos Ágeis 
+
+1. Qual é o principal objetivo de adotar boas práticas em projetos ágeis?
+
+A) Seguir rigidamente um manual, sem permitir adaptações durante o projeto.
+
+B) Utilizar os nomes e eventos do Scrum, mesmo mantendo métodos tradicionais de trabalho.
+
+C) Desenvolver hábitos de disciplina, transparência e melhoria contínua, garantindo que a equipe realmente trabalhe de forma ágil.
+
+D) Priorizar a quantidade de tarefas realizadas, independentemente da qualidade das entregas.
+Resposta correta: C
+
+2. Qual é a finalidade do critério INVEST e das definições DoR e DoD em projetos ágeis?
+
+A) O INVEST avalia o desempenho individual, enquanto DoR e DoD controlam os horários da equipe.
+
+B) O INVEST ajuda a garantir a qualidade das Histórias de Usuário, o DoR verifica se o trabalho está pronto para começar e o DoD estabelece os critérios para considerar uma entrega concluída.
+
+C) O INVEST organiza as reuniões, enquanto DoR e DoD determinam a duração das Sprints.
+
+D) O INVEST define o orçamento do projeto, enquanto DoR e DoD substituem o Product Backlog.
+Resposta correta: B
+
+3. Por que o refinamento do Backlog, o ritmo sustentável e a segurança psicológica são importantes para uma equipe ágil?
+
+A) Porque permitem eliminar todas as reuniões e impedir que ocorram erros durante o desenvolvimento.
+
+B) Porque garantem que os integrantes trabalhem sempre sob pressão para aumentar a produtividade.
+
+C) Porque substituem a necessidade de planejamento e acompanhamento das tarefas.
+
+D) Porque melhoram a organização do trabalho, evitam sobrecargas e permitem que os integrantes identifiquem problemas sem medo de punições.
+Resposta correta: D
+
+4. O que pode acontecer quando uma equipe inicia uma tarefa sem que ela atenda aos critérios mínimos da Definição de Pronto (DoR)?
+
+A) Podem surgir dúvidas, impedimentos técnicos e atrasos durante a Sprint, prejudicando o fluxo de trabalho.
+
+B) A tarefa será concluída automaticamente com maior qualidade.
+
+C) O tempo de desenvolvimento será reduzido obrigatoriamente.
+
+D) A equipe não precisará realizar reuniões de alinhamento durante a Sprint.
+Resposta correta: A
+

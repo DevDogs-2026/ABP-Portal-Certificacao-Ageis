@@ -1,0 +1,516 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+:root {
+    --color-primary: #3A66FF;
+    --color-secondary: #7A33CC;
+    --color-background: #F5F7FC;
+    --color-surface: #FFFFFF;
+    --color-text: #18233D;
+    --color-success: #16804A;
+    --color-error: #C53D47;
+
+    --light: 300;
+    --regular: 400;
+    --medium: 500;
+    --semi-bold: 600;
+    --bold: 700;
+}
+
+.body {
+    background-color: var(--color-background);
+    position: relative;
+}
+
+/* Header */
+.header {
+    display: flex;
+    
+}
+.header__off {
+    display: none;
+}
+
+.header__tema,
+.header__tempo {
+    background-color: var(--color-primary);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+.header__tema {
+    z-index: 2;
+    position: absolute;
+    top: 1rem;
+    left: 2%;
+    max-width: 100%;
+}
+
+.header__tempo {
+    z-index: 2;
+    position: fixed;
+    top: 1rem;
+    right: 2%;
+    max-width: 100%;
+}
+
+
+.header__tema_p, 
+.header__tempo_p {
+    color: var(--color-surface);
+    font-weight: var(--semi-bold);
+    font-size: 1.6rem;
+}
+
+.header__tema_span,
+.header__tempo_span {
+    color: var(--color-background);
+    font-size: var(--medium);
+    font-size: 1.5rem;
+}
+
+/* Main */
+.main {
+    position: relative;
+    top: 6rem;
+    max-width: 100%;
+}
+
+/* Main Questão */
+.main__questao {
+    background-color: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 15%;
+    left: 15%;
+    width: 70%;
+    height: 40rem;
+    gap: 1rem;
+    border-radius: 1.625rem;
+}
+
+.main__questao_enunciado {
+    width: 90%;
+    height: 6rem;
+    margin-top: 2rem;
+}
+
+.main__questao_texto {
+    color: var(--color-text);
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.main__questao_imagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main__questao_img {
+    width: 90%;
+    height: 30rem;
+}
+
+/* Main Alternativas */
+.main__alternativas {
+    position: absolute;
+    top: 42rem;
+    right: 15%;
+    left: 15%;
+    width: 70%;
+    height: 353px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.main__alternativa_div {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    height: 65px;
+    border-radius: 26px;
+    border: solid transparent 3px;
+}
+
+.main__alternativa_div:hover {
+    opacity: 0.8;
+    border: solid var(--color-text) 3px;
+    transition: all 0.6s;
+}
+
+.main__alternativa_selecionada {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border: solid var(--color-text) 3px;
+    transition: all 0.6s;
+}
+.main__alternativa_selecionada .main__alternativa_span {
+    background-color: var(--color-primary);
+}
+
+.main__alternativa_certo {
+    background-color: var(--color-success);
+    border: solid var(--color-success) 3px;
+    transition: all 0.6s;
+}
+.main__alternativa_certo .main__alternativa_span {
+    background-color: var(--color-success);
+}
+
+.main__alternativa_errado {
+    background-color: var(--color-error);
+    border: solid var(--color-error) 3px;
+    transition: all 0.6s;
+}
+.main__alternativa_errado .main__alternativa_span {
+    background-color: var(--color-error);
+}
+
+.main__alternativa {
+    font-weight: var(--medium);
+    font-size: 1.5rem;
+    margin-left: 20px;
+}
+
+.main__alternativa_span {
+    width: 20px;
+    height: 20px;
+    border: solid var(--color-text) 2px;
+    border-radius: 50%;
+    margin-left: 24px;
+}
+
+.main__alternativa_texto {
+    font-weight: var(--regular);
+    font-size: 1.5rem;
+    margin-left: 44px;
+}
+
+/* Botão para Confirma a alternativa*/
+.main__botao {
+    z-index: 2;
+    display: flex;
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+}
+
+.main__botao_off {
+    display: none;
+}
+
+.main__btn {
+    background-color: var(--color-success);
+    color: var(--color-surface);
+    cursor: pointer;
+    font-weight: var(--medium);
+    font-size: 1.5rem;
+    width: 100%;
+    padding: 1rem 2rem;
+    border: solid var(--color-text) 2px;
+    border-radius: 50px;
+}
+
+.main__btn:hover {
+    opacity: 0.9;
+    transition: all 0.6s ease-in-out;
+}
+
+/* Limite de Tempo */
+.limite__tempo_div {
+    z-index: 3;
+    background-color: var(--color-error);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6rem;
+    align-items: center;
+    width: 70%;
+    height: 500px;
+    border-radius: 20px;
+    position: fixed;
+    top: 20%;
+    right: 15%;
+    left: 15%;
+}
+
+.limite__tempo_div_off {
+    display: none;
+}
+
+.limite_tempo_text {
+    color: var(--color-background);
+    font-weight: var(--medium);
+    font-size: 1.875rem;
+}
+
+.limite__tempo_div div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+}
+
+.limite_tempo_btn {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    font-family: var(--fonte-01);
+    font-weight: var(--medium);
+    font-size: 1.875rem;
+    text-align: center;
+    width: 190px;
+    height: 65px;
+    border: none;
+    border-radius: 50px;
+}
+
+.limite_tempo_btn:hover {
+    opacity: 0.9;
+}
+
+
+/* Continuar ou Pausar */
+.continuar__pausar_div {
+    z-index: 3;
+    background-color: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6rem;
+    align-items: center;
+    width: 60%;
+    min-height: 80%;
+    border-radius: 20px;
+    position: fixed;
+    top: 10%;
+    bottom: 10%;
+    left: 20%;
+    right:20%;
+}
+
+.cont__paus_text {
+    color: var(--color-surface);
+    text-align: center;
+    font-family: var(--fonte-01);
+    font-weight: var(--medium);
+    font-size: 1.875rem;
+}
+
+.cont__paus_text span {
+    color: var(--color-text);
+}
+
+.continuar__pausar_div div:nth-child(2) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 80%;
+}
+
+.cont__paus_btn {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    font-family: var(--fonte-01);
+    font-weight: var(--medium);
+    font-size: 1.875rem;
+    text-align: center;
+    width: 230px;
+    height: 80px;
+    border: none;
+    border-radius: 50px;
+}
+
+.cont__paus_btn:hover {
+    opacity: 0.9;
+}
+
+.continuar__pausar_div_off {
+    display: none;
+}
+
+.desfoque {
+    filter: blur(8px);
+    pointer-events: none; /* Impede cliques nos elementos desfocados */
+    transition: filter 0.3s ease;
+}
+
+@media (max-width: 960px) {
+    /* Header */
+    .header__tema_p, 
+    .header__tempo_p {
+        font-size: 1.4rem;
+    }
+    .header__tema_span,
+    .header__tempo_span {
+        font-size: 1.3rem;
+    }
+
+    /* Main Questão */
+    .main__questao {
+        right: 10%;
+        left: 10%;
+        width: 80%;
+        height: 35rem;
+    }
+    .main__questao_img {
+        min-width: 90%;
+        height: 25rem;
+    }
+    /* Main Alternativa */
+    .main__alternativas {
+        top: 37rem;
+        right: 10%;
+        left: 10%;
+        width: 80%;
+    }
+    /* Main Botão de confirmar */
+    .main__btn {
+        font-size: 1.3rem;
+        padding: 0.6rem 1.6rem;
+        border-radius: 50px;
+    }
+    /* Limite de Tempo */
+    .limite_tempo_text {
+        font-size: 1.6rem;
+    }
+    .limite_tempo_btn {
+        font-size: 1.6rem;
+        width: 170px;
+        height: 50px;
+    }
+    /* Continuar ou Pausar Certificação */
+    .continuar__pausar_div {
+        gap: 5rem;
+        width: 80%;
+        position: fixed;
+        top: 10%;
+        bottom: 10%;
+        left: 10%;
+        right: 10%;
+    }
+    .continuar__pausar_div div:nth-child(2) {
+        width: 90%;
+    }
+    .cont__paus_btn {
+        font-size: 1.5rem;
+        width: 200px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Header */
+    .header__tema_p, 
+    .header__tempo_p {
+        font-size: 1.2rem;
+    }
+    .header__tema_span,
+    .header__tempo_span {
+        font-size: 1.1rem;
+    }
+
+    /* Main Questão */
+    .main__questao {
+        right: 5%;
+        left: 5%;
+        width: 90%;
+        height: 28rem;
+    }
+    .main__questao_enunciado {
+        margin-top: 1rem;
+    }
+    .main__questao_texto {
+        font-size: 1.1rem;
+    }
+    .main__questao_img {
+        min-width: 90%;
+        height: 16rem;
+    }
+    /* Main Alternativa */
+    .main__alternativas {
+        top: 30rem;
+        right: 5%;
+        left: 5%;
+        width: 90%;
+    }
+    .main__alternativa {
+        font-size: 1.2rem;
+        margin-left: 20px;
+    }
+    .main__alternativa_span {
+        width: 15px;
+        height: 15px;
+    }
+    /* Main Botão de confirmar */
+    .main__alternativa_texto {
+        font-size: 1.2rem;
+        margin-left: 20px;
+    }
+    .main__btn {
+        font-size: 1.2rem;
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+    }
+    /* Limite de Tempo */
+    .limite_tempo_text {
+        font-size: 1.4rem;
+    }
+    .limite_tempo_btn {
+        font-size: 1.4rem;
+        width: 150px;
+        height: 40px;
+    }
+    .limite__tempo_div div:nth-child(2) {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    /* Continuar ou Pausar Certificação */
+    .continuar__pausar_div {
+        gap: 5rem;
+        width: 80%;
+        position: fixed;
+        top: 10%;
+        bottom: 10%;
+        left: 10%;
+        right: 10%;
+    }
+    .cont__paus_text {
+        color: var(--color-surface);
+        text-align: center;
+        font-family: var(--fonte-01);
+        font-weight: var(--medium);
+        font-size: 1.5rem;
+    }
+    .continuar__pausar_div div:nth-child(2) {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        width: 90%;
+    }
+    .cont__paus_btn {
+        font-size: 1.3rem;
+        width: 180px;
+        height: 50px;
+    }
+}

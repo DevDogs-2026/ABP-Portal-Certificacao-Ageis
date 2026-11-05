@@ -1,0 +1,45 @@
+Kanban – Questionário
+1. Qual é o principal objetivo do Kanban dentro de uma equipe de trabalho?
+
+A) Estabelecer ciclos fixos de desenvolvimento chamados Sprints.
+
+B) Otimizar o fluxo de trabalho, identificar gargalos e reduzir desperdícios de tempo.
+
+C) Definir cargos e funções obrigatórias para todos os integrantes da equipe.
+
+D) Aumentar a quantidade de tarefas iniciadas simultaneamente.
+Resposta correta: B
+
+2. Qual é a importância da visualização do fluxo de trabalho e da limitação do WIP no Kanban?
+
+A) Permitir que cada funcionário trabalhe isoladamente, sem depender dos demais.
+
+B) Organizar as tarefas apenas depois que elas forem concluídas.
+
+C) Facilitar a visualização das etapas e incentivar a equipe a terminar tarefas antes de iniciar novas.
+
+D) Eliminar a necessidade de acompanhar o andamento das atividades.
+Resposta correta: C
+
+3. O que acontece quando o Kanban utiliza um sistema puxado e acompanha métricas como o Lead Time?
+
+A) As tarefas são distribuídas sem considerar a capacidade da equipe.
+
+B) O trabalho só entra no fluxo quando existe capacidade disponível, permitindo entregas mais previsíveis.
+
+C) A equipe precisa concluir todas as tarefas ao mesmo tempo.
+
+D) O Lead Time determina quantos funcionários devem participar de cada atividade.
+Resposta correta: B
+
+4. Qual é a consequência de estabelecer um limite de WIP na coluna "Em Teste" quando ela já atingiu sua capacidade máxima?
+
+A) A equipe continua desenvolvendo novas tarefas normalmente.
+
+B) As tarefas acumuladas são automaticamente removidas do sistema.
+
+C) Os desenvolvedores são incentivados a colaborar nos testes para liberar espaço no fluxo.
+
+D) O gerente precisa aumentar obrigatoriamente o número de funcionários.
+Resposta correta: C
+
