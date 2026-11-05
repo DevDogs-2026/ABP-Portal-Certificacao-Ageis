@@ -64,7 +64,15 @@ O projeto integra os conhecimentos do semestre abordando do design à infraestru
    cd ABP-Portal-Certificacao-Ageis
    ```
 
-3. Vídeo de Apresentação da Sprint 01
-   ```bash
-   cd docs/videoSprint/Sprint-01.mp4
-   ```
+3. Vídeos de Apresentação das Sprints
+   [Sprint 01](docs/videoSprint/sprint-01.mp4)
+   [Sprint 02](docs/videoSprint/sprint-02.mp4)
+
+4. Retrospective
+   [Pasta - Retrospective](docs/retrospective)
+   
+6. Backlog
+   [Backlog](docs/backlog.md)
+   
+8. Definition Of Done
+   [DoD](docs/dod.md)
