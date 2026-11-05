@@ -10,15 +10,39 @@ const path = require('path');
 const pool = require('./db/pool');
 const authRoutes = require('./routes/authRoutes');
 
+const app = express();
+const porta = process.env.PORT || 3000;
+const producao = process.env.NODE_ENV === 'production';
+
+const origemFrontend =
+    process.env.FRONTEND_ORIGIN || 'http://127.0.0.1:5500';
+
+app.use('/api', (req, res, next) => {
+    const origem = req.get('Origin');
+
+    if (origem && origem !== origemFrontend) {
+        return res.status(403).json({ mensagem: 'Origem não permitida' });
+    }
+
+    if (origem) {
+        res.setHeader('Access-Control-Allow-Origin', origem);
+        res.setHeader('Access-Control-Allow-Credentials', 'true');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        res.setHeader('Vary', 'Origin');
+    }
+
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(204);
+    }
+
+    next();
+});
 
 if(!process.env.SESSION_SECRET) {
     console.error('A variável de ambiente SESSION_SECRET não está definida.');
     process.exit(1);
 }
-
-const app = express();
-const porta = process.env.PORT || 3000;
-const producao = process.env.NODE_ENV === 'production';
 
 if (producao) {
     app.set('trust proxy', 1);

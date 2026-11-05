@@ -8,7 +8,6 @@
 const container = document.getElementById('container');
 const registerBtn = document.getElementById('register');
 const loginBtn = document.getElementById('login');
-
 registerBtn.addEventListener('click', () => container.classList.add('active'));
 loginBtn.addEventListener('click', () => container.classList.remove('active'));
 
@@ -146,27 +145,28 @@ loginForm.addEventListener('submit', async (e) => {
 
   const cpf = apenasDigitos(loginForm.cpf.value);
   const senha = loginForm.senha.value;
-
   const submitBtn = loginForm.querySelector('button[type="submit"]');
+
   setCarregando(submitBtn, true, 'Entrar', 'Entrando...');
 
   try {
-    const data = await autenticarUsuario({ cpf, senha });
+    const { response, data } = await window.apiAuth('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cpf, senha }),
+    });
 
-    if (data.success) {
-      // Guarda só id e nome — nunca senha nem CPF
-      localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
-
-      // Volta para a página que o usuário tentou abrir (ex.: avaliacao.html)
-      const destino = sessionStorage.getItem('voltarPara') || 'index.html';
-      sessionStorage.removeItem('voltarPara');
-      window.location.href = destino;
-    } else {
-      alert(data.error);
+    if (!response.ok) {
+      alert(data.mensagem || 'Ocorreu um erro. Tente novamente.');
+      return;
     }
+
+    const destino = sessionStorage.getItem('voltarPara') || 'index.html';
+    sessionStorage.removeItem('voltarPara');
+    window.location.href = destino;
   } catch (error) {
-    alert('Ocorreu um erro. Tente novamente.');
-    console.error(error);
+    console.error('Erro ao comunicar com o servidor:', error);
+    alert('Ocorreu um erro ao comunicar com o servidor. Tente novamente.');
   } finally {
     setCarregando(submitBtn, false, 'Entrar', 'Entrando...');
   }
