@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação - Regras</title>
+
+    <!-- Guarda: exige login. Precisa ser o primeiro script do head -->
+    <script src="./src/js/guarda.js"></script>
+
+    <link rel="stylesheet" href="src/css/avaliacao.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="body">
+    <!-- Header -->
+    <header id="header">
+        <div class="logo">
+            <a href="index.html" class="title-primary">Dog</a><a href="index.html" class="title-secondary">School</a>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </button>
+
+        <nav class="nav-bar" id="nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="index.html#sobre-section">Sobre</a></li>
+                <li><a href="tema.html">Tema</a></li>
+                <li><a href="avaliacao.html">Avaliação</a></li>
+                <li><a href="certificados.html">Certificados</a></li>
+            </ul>
+        </nav>
+
+        <div class="login-container">
+            <a href="acesso.html" class="btnLogin-popup">Login</a>
+        </div>
+    </header>
+
+    <main class="main" id="main">
+        <div class="sub_titulo">
+            <h2>Regras da Avaliação</h2>
+        </div>
+
+        <section class="main__regras">
+            <div class="div__regra">
+                <h3 class="regra__h3">Estrutura e Formato das Questões:</h3>
+                <ul class="regra__ul">
+                    <li class="regra__li"><span class="regra__span">Total de questões:</span> A avaliação é composta por exatamente 12 temas, com uma única questão por tema.</li>
+                    <li class="regra__li"><span class="regra__span">Seleção aleatória:</span> Cada questão é sorteada aleatoriamente a partir de um banco contendo 4 questões para cada tema.</li>
+                    <li class="regra__li"><span class="regra__span">Formato objetivo:</span> Todas as questões são de múltipla escolha, contendo 4 alternativas (A, B, C e D).</li>
+                    <li class="regra__li"><span class="regra__span">Única resposta:</span> Apenas uma alternativa estará correta por questão.</li>
+                    <li class="regra__li"><span class="regra__span">Elementos visuais:</span> Toda questão possui obrigatoriamente uma imagem ilustrativa ou de análise.</li>
+                </ul>
+            </div>
+            <div class="div__regra">
+                <h3 class="regra__h3">Tempo e Pontuação:</h3>
+                <ul class="regra__ul">
+                    <li class="regra__li"><span class="regra__span">Cronômetro regressivo:</span> Cada questão possui um limite rigoroso de 150 segundos para resposta.</li>
+                    <li class="regra__li"><span class="regra__span">Encerramento por tempo:</span> Se o tempo esgotar, a questão é considerada incorreta automaticamente.</li>
+                    <li class="regra__li"><span class="regra__span">Feedback imediato:</span> O sistema exibe a alternativa correta logo após a resposta ou estouro do tempo.</li>
+                    <li class="regra__li"><span class="regra__span">Média para aprovação:</span> É necessário obter um aproveitamento igual ou superior a 65% para ser aprovado.</li>
+                </ul>
+            </div>
+            <div class="div__regra">
+                <h3 class="regra__h3">Fluxo e Interrupções:</h3>
+                <ul class="regra__ul">
+                    <li class="regra__li"><span class="regra__span">Tentativa única:</span> Cada tema pode ser respondido apenas uma única vez por avaliação.</li>
+                    <li class="regra__li"><span class="regra__span">Interrupção voluntária:</span> O candidato pode optar por salvar e encerrar a sessão após qualquer resposta para retomar depois.</li>
+                    <li class="regra__li"><span class="regra__span">Penalidade por queda:</span> Perdas de conexão, fechamento do navegador ou saídas forçadas invalidam a questão atual, marcando-a como incorreta.</li>
+                    <li class="regra__li"><span class="regra__span">Histórico e Emissão:</span> Todas as avaliações são salvas no histórico. Os aprovados recebem um certificado eletrônico validável por QR Code.</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="main__btn_questao">
+            <a href="questao.html" class="btn__avaliacao">Começar Avaliação</a>
+        </div>
+    </main>
+
+    <script src="./src/js/sessao.js"></script>
+    <script src="./src/js/avaliacao.js"></script>
+</body>
+</html>

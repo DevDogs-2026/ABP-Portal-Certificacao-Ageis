@@ -1,0 +1,39 @@
+Questão 9: Quem é responsável por maximizar o valor do produto?
+
+A) Scrum Master.
+
+B) Desenvolvedor.
+
+C) Product Owner.
+
+D) Cliente.
+
+Questão 10: Qual é a principal responsabilidade do Scrum Master?
+
+A) Estabelecer o Scrum e ajudar a equipe a utilizá-lo corretamente.
+
+B) Desenvolver todo o código.
+
+C) Aprovar todas as funcionalidades.
+
+D) Controlar individualmente cada funcionário.
+
+Questão 11: Quem é responsável por criar um Incremento utilizável a cada Sprint?
+
+A) Cliente.
+
+B) Gerente financeiro.
+
+C) Product Owner exclusivamente.
+
+D) Developers.
+
+Questão 12: Quais são as três responsabilidades principais dentro de um Scrum Team?
+
+A) Gerente, Analista e Cliente.
+
+B) Product Owner, Scrum Master e Developers.
+
+C) Diretor, Coordenador e Supervisor.
+
+D) Programador, Designer e Testador.

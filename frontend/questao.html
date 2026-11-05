@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela Questão</title>
+    <link rel="stylesheet" href="src/css/questao.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet">
+    <script src="./src/js/guarda.js"></script>
+</head>
+<body class="body">
+    <header class="header" id="header">
+        <div class="header__tema">
+            <p class="header__tema_p">Tema <span class="header__tema_span" id="tema">3</span> de 12</p>
+        </div>
+        <div class="header__tempo">
+            <p class="header__tempo_p">Tempo: </p>
+            <span class="header__tempo_span" id="tempo">150s</span>
+        </div>
+    </header>
+    <main class="main" id="main">
+        <section class="main__questao">
+            <div class="main__questao_enunciado">
+                <p class="main__questao_texto" id="questao-texto">Qual é o papel responsável por remover os impedimentos e barreiras que bloqueiam o progresso da equipe?</p>
+            </div>
+            <div class="main__questao_imagem">
+                <img src="./src/images/questao.jpg" alt="Imagem para auxiliar na resposta" class="main__questao_img">
+            </div>
+        </section>
+        <section class="main__alternativas">
+            <div class="main__alternativa_div" id="alternativa-a">
+                <p class="main__alternativa">A</p>
+                <span class="main__alternativa_span"></span>
+                <p class="main__alternativa_texto">Product Owner</p>
+            </div>
+            <div class="main__alternativa_div" id="alternativa-b">
+                <p class="main__alternativa">B</p>
+                <span class="main__alternativa_span"></span>
+                <p class="main__alternativa_texto">Scrum Master</p>
+            </div>
+            <div class="main__alternativa_div" id="alternativa-c">
+                <p class="main__alternativa">C</p>
+                <span class="main__alternativa_span"></span>
+                <p class="main__alternativa_texto">Developers</p>
+            </div>
+            <div class="main__alternativa_div" id="alternativa-d">
+                <p class="main__alternativa">D</p>
+                <span class="main__alternativa_span"></span>
+                <p class="main__alternativa_texto">Stakeholders</p>
+            </div>
+        </section>
+        <div class="main__botao_off"  id="btn-confirma">
+            <button class="main__btn">Confirmar</button>
+        </div>
+    </main>
+    <div class="limite__tempo_div_off" id="limite-tempo">
+        <div>
+            <p class="limite_tempo_text">Acabou o Tempo!!!</p>
+        </div>
+        <div>
+            <a href="#"><button class="limite_tempo_btn" id="proxima-questao">Continuar</button></a>
+            <a href="index.html"><button class="limite_tempo_btn" id="pausar-certificado">Pausar</button></a>
+        </div>
+    </div>
+    <div class="continuar__pausar_div_off" id="cont-pausa">
+        <div>
+            <p class="cont__paus_text">Clique no botão <span>Continuar</span> para ir ao próximo tema</p>
+            <p class="cont__paus_text">Ou</p>
+            <p class="cont__paus_text">Clique no botão <span>Pausar</span> para pausar e sair da certificação</p>
+        </div>
+        <div>
+            <a href="#"><button class="cont__paus_btn" id="proxima-questao">Continuar</button></a>
+            <a href="index.html"><button class="cont__paus_btn" id="pausar-certificado">Pausar</button></a>
+        </div>
+    </div>
+    <script src="./src/js/questao.js"></script>
+</body>
+</html>

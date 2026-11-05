@@ -1,0 +1,39 @@
+Questão 5: O que é Scrum?
+
+A) Uma linguagem de programação.
+
+B) Um software de gerenciamento.
+
+C) Um framework ágil para desenvolver e entregar produtos complexos.
+
+D) Um banco de dados.
+
+Questão 6: Como são chamados os ciclos de trabalho no Scrum?
+
+A) Sprints.
+
+B) Etapas fixas.
+
+C) Processos.
+
+D) Módulos.
+
+Questão 7: Qual é a duração máxima de uma Sprint?
+
+A) 3 meses.
+
+B) 2 meses.
+
+C) 6 semanas.
+
+D) 1 mês.
+
+Questão 8: Qual é um dos principais pilares do Scrum?
+
+A) Hierarquia.
+
+B) Transparência.
+
+C) Burocracia.
+
+D) Centralização.

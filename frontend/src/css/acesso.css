@@ -1,0 +1,428 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+:root {
+--color-primary: #3A66FF;
+--color-secondary: #7A33CC;
+--color-background: #F5F7FC;
+--color-surface: #FFFFFF;
+--color-text: #18233D;
+--color-success: #16804A;
+--color-error: #C53D47;
+}
+
+body{
+    background: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* era height: 100vh, que corta o conteúdo no celular */
+    padding: 16px;
+    gap: 16px;
+}
+
+.container{
+    background-color: var(--color-surface);
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.forgot {
+    color: var(--color-primary);
+    transition: 0.2s;
+    padding: 10px 0;
+}
+
+.forgot:hover {
+    color: var(--color-text);
+}
+
+.container button{
+    background-color: var(--color-primary);
+    color: white;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.container button:hover {
+    background-color: #2646b9;
+    transition: 0.4s;
+}
+
+.container button.hidden{
+    background-color: transparent;
+    border-color: white;
+    transition: 0.6s;
+}
+
+.container button.hidden:hover{
+    background-color: var(--color-surface);
+    border-color: var(--color-text);
+    color: var(--color-text);
+    transition: 0.4s;
+}
+
+.container form{
+    background-color: var(--color-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 20px;
+}
+
+.input-icon {
+    position: relative;
+    width: 100%;
+}
+
+.input-icon img {
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    width: 18px;
+    height: 18px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.container .input-icon input {
+    background-color: #EDE7FF;
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px 10px 42px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+.form-container{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in{
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.container.active .sign-in{
+    transform: translateX(100%);
+}
+
+.sign-up{
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.active .sign-up{
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+@keyframes move{
+    0%, 49.99%{
+        opacity: 0;
+        z-index: 1;
+    }
+    50%, 100%{
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.toggle-container{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 99;
+}
+
+.container.active .toggle-container{
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+.toggle{
+    background: linear-gradient(to right, var(--color-primary),  var(--color-secondary) );
+    color: white;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.container.active .toggle{
+    transform: translateX(50%);
+}
+
+.toggle-panel{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 30px;
+    text-align: center;
+    top: 0;
+    transition: all 0.6s ease-in-out;
+}
+
+.toggle-left{
+    transform: translateX(-200%);
+}
+
+.container.active .toggle-left{
+    transform: translateX(0);
+}
+
+.toggle-right{
+    right: 0;
+}
+
+.container.active .toggle-right{
+    transform: translateX(200%);
+}
+
+.btn-home {
+    position: absolute;
+    z-index: 100;
+    top: 2rem;
+    left: 3rem;
+}
+
+.button-voltar {
+    display: flex;
+    color: #000;
+    text-decoration: none;
+}
+
+@media (min-width: 1920px) {
+    .container {
+        width: 1400px;
+        min-height: 780px;
+        border-radius: 40px;
+    }
+ 
+    .form-title {
+        font-size: 42px;
+        margin-bottom: 28px;
+    }
+ 
+    .container form {
+        padding: 0 70px;
+    }
+ 
+    .container .input-icon input {
+        font-size: 22px;
+        padding: 18px 20px 18px 62px;
+        border-radius: 12px;
+        margin: 12px 0;
+    }
+ 
+    .input-icon img {
+        width: 28px;
+        height: 28px;
+        left: 20px;
+    }
+ 
+    .container button {
+        font-size: 20px;
+        padding: 18px 70px;
+        border-radius: 12px;
+        min-height: 60px;
+        margin-top: 18px;
+    }
+ 
+    .forgot {
+        font-size: 20px;
+        padding: 16px 0;
+    }
+ 
+    .toggle-panel h1 {
+        font-size: 44px;
+    }
+ 
+    .toggle-panel p {
+        font-size: 22px;
+        line-height: 1.5;
+    }
+ 
+    .btn-home {
+        top: 3rem;
+        left: 4rem;
+    }
+ 
+    .button-voltar {
+        font-size: 22px;
+    }
+ 
+    .container button:focus-visible,
+    .container a:focus-visible {
+        outline-width: 5px;
+    }
+}
+
+@media (max-width: 640px) {
+    body {
+        justify-content: flex-start;
+        padding: 12px;
+    }
+ 
+    .btn-home {
+        top: 14px;              /* o nav fica dentro do .container, então continua absoluto */
+        left: 18px;
+    }
+ 
+    .container {
+        width: 100%;
+        min-height: 700px;
+        border-radius: 22px;
+    }
+ 
+    /* Formulários ocupam a largura toda */
+    .form-container {
+        width: 100%;
+        height: 66%;
+        left: 0;
+    }
+ 
+    .sign-in,
+    .sign-up {
+        top: 0;
+    }
+ 
+    .container.active .sign-in,
+    .container.active .sign-up {
+        transform: none;
+        top: 34%;               /* desce para abrir espaço ao painel */
+    }
+ 
+    .container form {
+        padding: 12px 24px;
+        overflow-y: auto;
+    }
+ 
+    .form-title {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+ 
+    /* 16px evita o zoom automático do iPhone ao tocar no campo */
+    .container .input-icon input {
+        font-size: 16px;
+        padding: 12px 15px 12px 42px;
+    }
+ 
+    .container button {
+        font-size: 14px;
+        padding: 12px 40px;
+        min-height: 44px;       /* alvo de toque confortável */
+    }
+ 
+    .forgot {
+        font-size: 14px;
+        padding: 12px 0;
+    }
+ 
+    /* Painel de troca (Entrar / Cadastrar) vira faixa horizontal */
+    .toggle-container {
+        left: 0;
+        top: 66%;
+        width: 100%;
+        height: 34%;
+        border-radius: 100px 100px 0 0;
+    }
+ 
+    .container.active .toggle-container {
+        transform: none;
+        top: 0;
+        border-radius: 0 0 100px 100px;
+    }
+ 
+    .toggle {
+        left: 0;
+        top: -100%;
+        width: 100%;
+        height: 200%;
+    }
+ 
+    .container.active .toggle {
+        transform: translateY(50%);
+    }
+ 
+    .toggle-panel {
+        width: 100%;
+        height: 50%;
+        padding: 0 24px;
+    }
+ 
+    .toggle-panel h1 {
+        font-size: 20px;
+    }
+ 
+    .toggle-panel p {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+ 
+    .toggle-left {
+        top: 0;
+        transform: translateY(-200%);
+    }
+ 
+    .container.active .toggle-left {
+        transform: translateY(0);
+    }
+ 
+    .toggle-right {
+        top: auto;
+        bottom: 0;
+        right: auto;
+    }
+ 
+    .container.active .toggle-right {
+        transform: translateY(200%);
+    }
+}
