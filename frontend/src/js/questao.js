@@ -14,7 +14,7 @@ const alternativas = [
 ];
 
 /* ---------- Cronômetro ---------- */
-const TEMPO_TOTAL = 5; // segundos por questão
+const TEMPO_TOTAL = 150; // segundos por questão
 let tempoRestante = TEMPO_TOTAL;
 let encerrada = false;   // true quando a questão já foi confirmada ou o tempo acabou
 
@@ -66,11 +66,31 @@ alternativas.forEach((alt) => {
 
 /* ---------- Confirmar: tela de Continuar / Pausar ---------- */
 btn.addEventListener("click", () => {
-    if (encerrada) return;
+  if (encerrada) return;
+  encerrada = true;
+  clearInterval(cronometro); // Para o cronômetro ao confirmar
 
-    encerrada = true;
-    clearInterval(cronometro); // para o cronômetro ao confirmar
+  /* Encontra qual alternativa o usuário selecionou */
+  const alternativaSelecionada = alternativas.find(alt => 
+    alt.classList.contains("main__alternativa_selecionada")
+  );
 
+  const alternativaCorreta = document.getElementById("alternativa-b");
+
+  if (alternativaSelecionada) {
+    alternativaSelecionada.classList.remove("main__alternativa_selecionada");
+
+    /* Valida se o usuário acertou ou errou e aplica as cores */
+    if (alternativaSelecionada === alternativaCorreta) {
+      alternativaSelecionada.classList.add("main__alternativa_certo");
+    } else {
+      alternativaSelecionada.classList.add("main__alternativa_errado");
+      alternativaCorreta.classList.add("main__alternativa_certo"); // Mostra a certa
+    }
+  }
+
+  /* Aguarda 6,5 segundos (6500 milissegundos) com feedback visual antes de abrir a tela de Pausa/Continuar */
+  setTimeout(() => {
     contPausa.classList.remove("continuar__pausar_div_off");
     contPausa.classList.add("continuar__pausar_div");
     header.classList.remove("header");
@@ -78,7 +98,9 @@ btn.addEventListener("click", () => {
     main.classList.add("desfoque");
     btn.classList.remove("main__botao");
     btn.classList.add("main__botao_off");
+  }, 6500); 
 });
+
 
 /* ---------- Botões das telas (a ação ainda vai ser implementada) ---------- */
 // Tela "Acabou o Tempo"
