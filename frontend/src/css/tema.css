@@ -214,22 +214,16 @@ button.btnLogin-popup {
     font-size: 1.4rem;
 }
 
-/* ---------- Linha e rodapé ---------- */
-.hr-1 {
-    min-width: 100rem;
-    opacity: 55%;
-}
-
 footer {
     color: var(--color-text);
     max-height: 400px;
-    height: 100%;
     width: 100%;
     margin: 0 auto;
     text-align: center;
     padding: 2.5em 0;
     box-sizing: border-box;
     position: relative;
+    border-top: solid 1px var(--color-secondary);
 }
 
 /* ---------- Hambúrguer (ainda sem função) ---------- */
@@ -312,9 +306,7 @@ footer {
 
     /* Footer */
     footer p {
-        color: var(--color-text);
         padding: 0;
-        opacity: 0.25;
     }
 }
 
@@ -425,7 +417,7 @@ footer {
 
     /* Estudo */
     .estudo {
-        padding: 5em 1.5em 3em;
+        padding: 25% 1.5em 3em;
     }
     .seta {
         width: 8px;
@@ -436,5 +428,11 @@ footer {
     }
     .texto-explicativo p {
         font-size: 1rem;
+    }
+    /* Footer */
+    footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
