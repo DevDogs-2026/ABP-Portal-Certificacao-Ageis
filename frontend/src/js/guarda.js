@@ -1,21 +1,25 @@
-(function () {
-    var CHAVE = 'usuarioLogado';     // mesma chave do sessao.js
-    var PAGINA_LOGIN = 'acesso.html';
+// Confere a sessão antes de mostrar uma página privada e redireciona se necessário.
+(async function protegerPagina() {
+  document.documentElement.style.visibility = 'hidden';
 
-    // Esconde a página até confirmar o login (evita "piscar" o conteúdo)
-    document.documentElement.style.visibility = 'hidden';
+  try {
+    const { response } = await window.apiAuth('/me');
 
-    var logado = false;
-    try {
-        logado = !!JSON.parse(localStorage.getItem(CHAVE));
-    } catch (e) {}
-
-    if (!logado) {
-        // Guarda a página pedida para voltar depois do login
-        var pagina = location.pathname.split('/').pop() || 'avaliacao.html';
-        sessionStorage.setItem('voltarPara', pagina);
-        location.replace(PAGINA_LOGIN);
-    } else {
-        document.documentElement.style.visibility = 'visible';
+    if (response.status === 401) {
+      const pagina = window.location.pathname.split('/').pop() || 'avaliacao.html';
+      sessionStorage.setItem('voltarPara', pagina);
+      window.location.replace('acesso.html');
+      return;
     }
+
+    if (!response.ok) {
+      throw new Error('O servidor não conseguiu verificar sua sessão.');
+    }
+
+    document.documentElement.style.visibility = 'visible';
+  } catch (error) {
+    console.error('Erro ao verificar a sessão da página:', error);
+    alert('Não foi possível verificar sua sessão. Entre novamente.');
+    window.location.replace('acesso.html');
+  }
 })();

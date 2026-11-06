@@ -1,6 +1,7 @@
 const LIMITE_APROVACAO = 65;
 const TOTAL_QUESTOES = 12;
 
+// Valida a pontuação e determina o aproveitamento e a aprovação da tentativa.
 function calcularResultados(acertos, totalQuestoes = TOTAL_QUESTOES) {
 
     if(!Number.isInteger(totalQuestoes) || totalQuestoes <= 0) {

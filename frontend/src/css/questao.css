@@ -125,6 +125,28 @@
     height: 30rem;
 }
 
+.main__questao_img[hidden] {
+    display: none;
+}
+
+#erro-avaliacao {
+    position: fixed;
+    z-index: 4;
+    right: 2%;
+    bottom: 1rem;
+    left: 2%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--color-error);
+    color: var(--color-surface);
+    font-weight: var(--bold);
+    text-align: center;
+}
+
+#erro-avaliacao[hidden] {
+    display: none;
+}
+
 /* Main Alternativas */
 .main__alternativas {
     position: absolute;
