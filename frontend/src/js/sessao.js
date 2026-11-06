@@ -1,3 +1,4 @@
+// Consulta a sessão no servidor e valida a estrutura do usuário autenticado.
 async function consultarUsuarioLogado() {
   const { response, data } = await window.apiAuth('/me');
 
@@ -12,6 +13,7 @@ async function consultarUsuarioLogado() {
   return data.usuario;
 }
 
+// Encerra a sessão no servidor antes de voltar à página inicial.
 async function sair() {
   try {
     const { response, data } = await window.apiAuth('/logout', {
@@ -29,6 +31,7 @@ async function sair() {
   }
 }
 
+// Confere a sessão de uma página privada e guarda o destino do redirecionamento.
 async function exigirLogin() {
   try {
     const usuario = await consultarUsuarioLogado();
@@ -46,6 +49,7 @@ async function exigirLogin() {
   }
 }
 
+// Exibe o nome do candidato e a ação de sair quando existe uma sessão ativa.
 async function atualizarHeader() {
   const area = document.querySelector('.login-container');
   if (!area) return;

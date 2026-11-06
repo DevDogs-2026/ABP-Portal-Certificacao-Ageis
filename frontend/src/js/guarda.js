@@ -1,4 +1,5 @@
-(async function () {
+// Confere a sessão antes de mostrar uma página privada e redireciona se necessário.
+(async function protegerPagina() {
   document.documentElement.style.visibility = 'hidden';
 
   try {

@@ -6,6 +6,8 @@
     <meta name="description" content="Resultado da sua avaliação de metodologias ágeis.">
     <title>Resultado da avaliação | Dog School</title>
     <link rel="stylesheet" href="src/css/resultado.css">
+    <script src="src/js/api.js"></script>
+    <script src="src/js/guarda.js"></script>
 </head>
 <body>
     <header class="cabecalho">
@@ -28,30 +30,31 @@
             <div class="resultado-principal">
                 <div
                     class="grafico-aproveitamento"
+                    id="grafico-aproveitamento"
                     role="img"
-                    aria-label="Aproveitamento: 66,67 por cento"
-                    style="--percentual: 66.67%"
+                    aria-label="Carregando aproveitamento"
+                    style="--percentual: 0%"
                 >
                     <div class="grafico-centro">
                         <span class="icone-capelo" aria-hidden="true">✦</span>
-                        <strong id="percentual">66,67%</strong>
+                    <strong id="percentual">--%</strong>
                         <span>Aproveitamento</span>
                     </div>
                 </div>
 
                 <div class="situacao-container">
                     <div
-                        class="situacao resultado-aprovado"
+                        class="situacao"
                         id="situacao"
                         role="status"
                         aria-live="polite"
                     >
-                        <span class="indicador" aria-hidden="true">✓</span>
-                        <span id="texto-situacao">Aprovado</span>
+                        <span class="indicador" id="indicador-situacao" aria-hidden="true">…</span>
+                        <span id="texto-situacao">Carregando</span>
                     </div>
 
                     <p class="mensagem" id="mensagem-resultado">
-                        Parabéns! Você alcançou o aproveitamento necessário.
+                        Estamos buscando o resultado desta tentativa.
                     </p>
                 </div>
             </div>
@@ -60,7 +63,7 @@
                 <div class="dado dado-acertos">
                     <span class="dado-icone" aria-hidden="true">◎</span>
                     <span class="dado-conteudo">
-                        <strong class="dado-valor" id="acertos">8</strong>
+                        <strong class="dado-valor" id="acertos">—</strong>
                         <span class="dado-rotulo">Acertos</span>
                     </span>
                 </div>
@@ -68,7 +71,7 @@
                 <div class="dado dado-erros">
                     <span class="dado-icone" aria-hidden="true">×</span>
                     <span class="dado-conteudo">
-                        <strong class="dado-valor" id="erros">4</strong>
+                        <strong class="dado-valor" id="erros">—</strong>
                         <span class="dado-rotulo">Erros</span>
                     </span>
                 </div>
@@ -76,7 +79,7 @@
                 <div class="dado dado-questoes">
                     <span class="dado-icone" aria-hidden="true">▤</span>
                     <span class="dado-conteudo">
-                        <strong class="dado-valor" id="total-questoes">12</strong>
+                        <strong class="dado-valor" id="total-questoes">—</strong>
                         <span class="dado-rotulo">Questões</span>
                     </span>
                 </div>
@@ -91,7 +94,11 @@
                     <span aria-hidden="true">⌂</span>
                     Voltar ao início
                 </a>
+                <a class="botao botao-contorno" href="progresso.html">
+                    Ver progresso e histórico
+                </a>
             </div>
+            <p class="erro-resultado" id="erro-resultado" role="alert" hidden></p>
         </section>
     </main>
 

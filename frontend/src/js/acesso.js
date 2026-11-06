@@ -8,12 +8,17 @@
 const container = document.getElementById('container');
 const registerBtn = document.getElementById('register');
 const loginBtn = document.getElementById('login');
+
+// Alterna o painel do formulário para o modo de cadastro.
 registerBtn.addEventListener('click', () => container.classList.add('active'));
+// Alterna o painel do formulário para o modo de login.
 loginBtn.addEventListener('click', () => container.classList.remove('active'));
 
 // ---------- Utilidades ----------
+// Remove a pontuação para enviar o CPF no formato esperado pela API.
 const apenasDigitos = (txt) => txt.replace(/\D/g, '');
 
+// Confere os dígitos verificadores do CPF antes do envio ao servidor.
 function cpfValido(cpf) {
   if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
 
@@ -31,6 +36,7 @@ function cpfValido(cpf) {
 // Guarda um hash da senha (SHA-256) em vez da senha em texto puro.
 // Isso é só um quebra-galho para testes: no back-end de verdade usar
 // bcrypt ou argon2 com salt, de preferencia o bcrypt.
+// Gera um hash SHA-256 temporário para o cadastro de demonstração no navegador.
 async function hashSenha(senha) {
   const bytes = new TextEncoder().encode(senha);
   const buffer = await crypto.subtle.digest('SHA-256', bytes);
@@ -39,6 +45,7 @@ async function hashSenha(senha) {
     .join('');
 }
 
+// Bloqueia o botão durante o envio do formulário e informa a etapa atual.
 function setCarregando(botao, carregando, textoNormal, textoCarregando) {
   botao.disabled = carregando;
   botao.textContent = carregando ? textoCarregando : textoNormal;
@@ -47,6 +54,7 @@ function setCarregando(botao, carregando, textoNormal, textoCarregando) {
 // ---------- ARMAZENAMENTO TEMPORÁRIO (substituir pelo back-end depois) ----------
 const CHAVE_USUARIOS = 'usuarios';
 
+// Lê a lista de cadastros usada apenas pelo fluxo temporário de cadastro.
 function lerUsuarios() {
   try {
     return JSON.parse(localStorage.getItem(CHAVE_USUARIOS)) || [];
@@ -55,10 +63,12 @@ function lerUsuarios() {
   }
 }
 
+// Persiste a lista temporária de cadastros do formulário de demonstração.
 function salvarUsuarios(lista) {
   localStorage.setItem(CHAVE_USUARIOS, JSON.stringify(lista));
 }
 
+// Registra um candidato no armazenamento temporário enquanto não há rota de cadastro.
 async function cadastrarUsuario({ nome, email, cpf, senha }) {
   const usuarios = lerUsuarios();
 
@@ -81,6 +91,7 @@ async function cadastrarUsuario({ nome, email, cpf, senha }) {
   return { success: true, message: 'Cadastro realizado com sucesso! Faça login.' };
 }
 
+// Autentica o usuário no armazenamento temporário utilizado pelo cadastro de demonstração.
 async function autenticarUsuario({ cpf, senha }) {
   const usuario = lerUsuarios().find((u) => u.cpf === cpf);
 
@@ -100,7 +111,7 @@ async function autenticarUsuario({ cpf, senha }) {
 const signupForm = document.getElementById('signupForm');
 const loginForm = document.getElementById('loginForm');
 
-// Cadastro
+// Valida e processa o cadastro temporário, que ainda não possui rota no backend.
 signupForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -139,7 +150,7 @@ signupForm.addEventListener('submit', async (e) => {
   }
 });
 
-// Login
+// Envia as credenciais à API e redireciona após a criação da sessão no servidor.
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 

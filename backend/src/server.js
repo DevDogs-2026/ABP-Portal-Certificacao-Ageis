@@ -9,6 +9,7 @@ const pgSession = require('connect-pg-simple')(session);
 const path = require('path');
 const pool = require('./db/pool');
 const authRoutes = require('./routes/authRoutes');
+const assessmentRoutes = require('./routes/assessmentRoutes');
 
 const app = express();
 const porta = process.env.PORT || 3000;
@@ -17,7 +18,8 @@ const producao = process.env.NODE_ENV === 'production';
 const origemFrontend =
     process.env.FRONTEND_ORIGIN || 'http://127.0.0.1:5500';
 
-app.use('/api', (req, res, next) => {
+// Permite chamadas com cookie somente da origem configurada para o frontend.
+function liberarOrigemFrontend(req, res, next) {
     const origem = req.get('Origin');
 
     if (origem && origem !== origemFrontend) {
@@ -37,7 +39,9 @@ app.use('/api', (req, res, next) => {
     }
 
     next();
-});
+}
+
+app.use('/api', liberarOrigemFrontend);
 
 if(!process.env.SESSION_SECRET) {
     console.error('A variável de ambiente SESSION_SECRET não está definida.');
@@ -69,13 +73,22 @@ app.use(session({
 }));
 
 app.use('/api/auth', authRoutes);
+app.use('/api/assessments', assessmentRoutes);
 app.use(express.static(path.resolve(__dirname, '../frontend/build')));
 
-app.use((error, req, res, next) => {
+// Registra erros do servidor e retorna mensagens genéricas para falhas internas.
+function tratarErroServidor(error, req, res, next) {
     console.error(error);
-    res.status(500).json({ mensagem: 'Erro interno do servidor' });
-});
+    const status = Number.isInteger(error.status) && error.status >= 400 && error.status < 500
+        ? error.status
+        : 500;
+    const mensagem = status === 500 ? 'Erro interno do servidor' : error.message;
+    res.status(status).json({ mensagem });
+}
 
+app.use(tratarErroServidor);
+
+// Verifica o acesso ao banco antes de iniciar o servidor HTTP.
 async function iniciarServidor() {
     await pool.query('SELECT 1'); // Testa a conexão com o banco de dados
     

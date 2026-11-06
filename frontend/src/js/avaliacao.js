@@ -13,3 +13,31 @@ hamburger.addEventListener('click', () => {
 window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 50);
 });
+
+const botaoIniciar = document.getElementById('iniciar-avaliacao');
+const mensagemInicio = document.getElementById('mensagem-inicio');
+
+// Cria ou retoma uma tentativa autenticada antes de abrir a primeira questão.
+async function iniciarAvaliacao() {
+    botaoIniciar.disabled = true;
+    mensagemInicio.hidden = true;
+
+    try {
+        const { response, data } = await window.apiRequest('/assessments/attempts', {
+            method: 'POST',
+        });
+
+        if (!response.ok) {
+            throw new Error(data.mensagem || 'Não foi possível iniciar a avaliação.');
+        }
+
+        window.location.href = `questao.html?attemptId=${data.idTentativa}`;
+    } catch (error) {
+        console.error('Erro ao iniciar a avaliação:', error);
+        mensagemInicio.textContent = error.message;
+        mensagemInicio.hidden = false;
+        botaoIniciar.disabled = false;
+    }
+}
+
+botaoIniciar.addEventListener('click', iniciarAvaliacao);

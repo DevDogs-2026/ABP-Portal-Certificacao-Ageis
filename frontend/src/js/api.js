@@ -1,5 +1,6 @@
-window.apiAuth = async function (rota, opcoes = {}) {
-  const response = await fetch(`http://127.0.0.1:3000/api/auth${rota}`, {
+// Faz uma chamada à API com o cookie de sessão e devolve status e corpo da resposta.
+window.apiRequest = async function (rota, opcoes = {}) {
+  const response = await fetch(`http://127.0.0.1:3000/api${rota}`, {
     ...opcoes,
     credentials: 'include',
     headers: {
@@ -20,4 +21,9 @@ window.apiAuth = async function (rota, opcoes = {}) {
   }
 
   return { response, data };
+};
+
+// Encaminha chamadas de autenticação pelo helper compartilhado da API.
+window.apiAuth = function (rota, opcoes = {}) {
+  return window.apiRequest(`/auth${rota}`, opcoes);
 };

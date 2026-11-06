@@ -26,10 +26,12 @@
     <main class="main" id="main">
         <section class="main__questao">
             <div class="main__questao_enunciado">
-                <p class="main__questao_texto" id="questao-texto">Qual é o papel responsável por remover os impedimentos e barreiras que bloqueiam o progresso da equipe?</p>
+                <p class="main__questao_texto" id="questao-texto" aria-live="polite">
+                    Carregando questão...
+                </p>
             </div>
             <div class="main__questao_imagem">
-                <img src="./src/images/questao.jpg" alt="Imagem para auxiliar na resposta" class="main__questao_img">
+                <img src="./src/images/leitura/questao.jpg" alt="" class="main__questao_img" hidden>
             </div>
         </section>
         <section class="main__alternativas">
@@ -55,16 +57,17 @@
             </div>
         </section>
         <div class="main__botao_off"  id="btn-confirma">
-            <button class="main__btn">Confirmar</button>
+            <button class="main__btn" type="button" disabled>Confirmar</button>
         </div>
+        <p id="erro-avaliacao" role="alert" hidden></p>
     </main>
     <div class="limite__tempo_div_off" id="limite-tempo">
         <div>
             <p class="limite_tempo_text">Acabou o Tempo!!!</p>
         </div>
         <div>
-            <a href="#"><button class="limite_tempo_btn" id="proxima-questao">Continuar</button></a>
-            <a href="index.html"><button class="limite_tempo_btn" id="pausar-certificado">Pausar</button></a>
+            <button class="limite_tempo_btn" id="proxima-questao-tempo" type="button">Continuar</button>
+            <button class="limite_tempo_btn" id="pausar-certificado-tempo" type="button">Ver progresso</button>
         </div>
     </div>
     <div class="continuar__pausar_div_off" id="cont-pausa">
@@ -74,8 +77,8 @@
             <p class="cont__paus_text">Clique no botão <span>Pausar</span> para pausar e sair da certificação</p>
         </div>
         <div>
-            <a href="#"><button class="cont__paus_btn" id="proxima-questao">Continuar</button></a>
-            <a href="index.html"><button class="cont__paus_btn" id="pausar-certificado">Pausar</button></a>
+            <button class="cont__paus_btn" id="proxima-questao" type="button">Continuar</button>
+            <button class="cont__paus_btn" id="pausar-certificado" type="button">Ver progresso</button>
         </div>
     </div>
     <script src="./src/js/questao.js"></script>
