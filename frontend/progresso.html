@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Acompanhe o progresso e o histórico das suas avaliações.">
+    <title>Progresso e histórico | Dog School</title>
+    <link rel="stylesheet" href="src/css/progresso.css">
+    <script src="src/js/api.js"></script>
+    <script src="src/js/guarda.js"></script>
+</head>
+<body>
+    <header class="cabecalho">
+        <a class="logo" href="index.html">Dog School</a>
+        <nav aria-label="Navegação principal">
+            <a href="index.html">Início</a>
+            <a href="tema.html">Estudos</a>
+            <a href="avaliacao.html">Avaliação</a>
+        </nav>
+        <div class="login-container">
+            <a href="acesso.html" class="botao-login">Login</a>
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <section class="intro" aria-labelledby="titulo-progresso">
+            <p class="sobretitulo">ÁREA DO CANDIDATO</p>
+            <h1 id="titulo-progresso">Seu progresso</h1>
+            <p>Acompanhe suas tentativas, resultados e avaliações em andamento.</p>
+        </section>
+
+        <p id="estado-progresso" class="estado" role="status" aria-live="polite">
+            Carregando seu histórico...
+        </p>
+        <p id="erro-progresso" class="erro" role="alert" hidden></p>
+
+        <section id="resumo-progresso" class="resumo" aria-label="Resumo do progresso" hidden>
+            <article class="cartao-metrica">
+                <span>Avaliações concluídas</span>
+                <strong id="total-concluidas">0</strong>
+            </article>
+            <article class="cartao-metrica">
+                <span>Melhor aproveitamento</span>
+                <strong id="melhor-aproveitamento">—</strong>
+            </article>
+            <article class="cartao-metrica">
+                <span>Questões respondidas na tentativa atual</span>
+                <strong id="questoes-respondidas">0 / 12</strong>
+            </article>
+            <div class="progresso-atual">
+                <div class="progresso-legenda">
+                    <span>Progresso da tentativa em andamento</span>
+                    <strong id="percentual-progresso">0%</strong>
+                </div>
+                <div
+                    class="barra-progresso"
+                    id="barra-progresso"
+                    role="progressbar"
+                    aria-label="Progresso da avaliação em andamento"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                >
+                    <span id="barra-preenchida"></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="historico" aria-labelledby="titulo-historico">
+            <div class="titulo-secao">
+                <div>
+                    <p class="sobretitulo">SUAS AVALIAÇÕES</p>
+                    <h2 id="titulo-historico">Histórico de tentativas</h2>
+                </div>
+                <button class="botao botao-principal" id="iniciar-avaliacao" type="button">
+                    Iniciar avaliação
+                </button>
+            </div>
+
+            <p id="sem-historico" class="estado-vazio" hidden>
+                Você ainda não iniciou uma avaliação. Quando fizer isso, suas tentativas aparecerão aqui.
+            </p>
+            <ol id="lista-tentativas" class="lista-tentativas"></ol>
+        </section>
+    </main>
+
+    <script src="src/js/sessao.js"></script>
+    <script src="src/js/progresso.js"></script>
+</body>
+</html>

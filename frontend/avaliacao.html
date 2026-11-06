@@ -6,6 +6,7 @@
     <title>Avaliação - Regras</title>
 
     <!-- Guarda: exige login. Precisa ser o primeiro script do head -->
+    <script src="./src/js/api.js"></script>
     <script src="./src/js/guarda.js"></script>
 
     <link rel="stylesheet" href="src/css/avaliacao.css">
@@ -34,6 +35,7 @@
                 <li><a href="index.html#sobre-section">Sobre</a></li>
                 <li><a href="tema.html">Tema</a></li>
                 <li><a href="avaliacao.html">Avaliação</a></li>
+                <li><a href="progresso.html">Progresso</a></li>
                 <li><a href="certificados.html">Certificados</a></li>
             </ul>
         </nav>
@@ -80,7 +82,10 @@
         </section>
 
         <div class="main__btn_questao">
-            <a href="questao.html" class="btn__avaliacao">Começar Avaliação</a>
+            <button type="button" class="btn__avaliacao" id="iniciar-avaliacao">
+                Começar Avaliação
+            </button>
+            <p id="mensagem-inicio" role="alert" hidden></p>
         </div>
     </main>
 

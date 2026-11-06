@@ -232,11 +232,16 @@ button.btnLogin-popup {
 /* Botão para Avaliação */
 .main__btn_questao {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
     justify-content: center;
     margin: 5rem 0;
 }
 
 .btn__avaliacao {
+    font-family: inherit;
+    cursor: pointer;
     background-color: var(--color-success);
     color: var(--color-surface);
     font-weight: var(--medium);
@@ -250,6 +255,16 @@ button.btnLogin-popup {
 
 .btn__avaliacao:hover {
     opacity: 0.8;
+}
+
+#mensagem-inicio {
+    color: #a71930;
+    font-weight: 700;
+    text-align: center;
+}
+
+#mensagem-inicio[hidden] {
+    display: none;
 }
 
 @media (max-width: 1280px) {
