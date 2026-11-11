@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://scrum-chi.vercel.app/">
     <link rel="stylesheet" href="src/css/tema.css">
+    <meta name="description" content="DogSchool: estude Metodologia Ágil e Scrum, faça a avaliação e conquiste seus certificados.">
     <title>Dog School</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -17,19 +16,18 @@
             <a href="index.html" class="title-primary">Dog</a><a href="index.html" class="title-secondary">School</a>
         </div>
 
-        <button class="hamburger" id="hamburger">
+        <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-controls="nav" aria-expanded="false">
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
         </button>
 
-        <nav class="nav-bar" id="nav">
+        <nav class="nav-bar" id="nav" aria-label="Menu principal">
             <ul>
                 <li><a href="index.html">Início</a></li>
                 <li><a href="index.html#sobre-section">Sobre</a></li>
                 <li><a href="tema.html">Tema</a></li>
                 <li><a href="avaliacao.html">Avaliação</a></li>
-                <li><a href="progresso.html">Progresso</a></li>
                 <li><a href="certificados.html">Certificados</a></li>
             </ul>
         </nav>
@@ -41,7 +39,7 @@
 
     <!-- Section 01 - Tópicos -->
      
-    <section class="estudo" id="estudo">
+    <section class="estudo" id="estudo" aria-label="Temas para estudo">
         <div class="acordeao">
 
             <!-- Fundamentos da Agilidade -->
@@ -257,7 +255,6 @@
         <p>&copy; 2026 Metodologia Ágil. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="src/js/api.js"></script>
     <script src="src/js/sessao.js"></script>
     <script src="src/js/tema.js"></script>
 </body>
