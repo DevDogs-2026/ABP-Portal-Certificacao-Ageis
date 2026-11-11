@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url('/src/fonts/files/PlusJakartaSans-Variable-latin.woff') format('woff');
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,11 +17,12 @@
 }
 
 :root {
---color-primary: #3A66FF;
+--color-primary: #0038FA;
 --color-secondary: #7A33CC;
 --color-background: #F5F7FC;
 --color-surface: #FFFFFF;
 --color-text: #18233D;
+--color-text-other: #F5F7FC;
 --color-success: #16804A;
 --color-error: #C53D47;
 --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -337,18 +346,15 @@ button.btnLogin-popup {
 }
 
 .title {
-    color: #fff;
+    color: var(--color-surface);
     font-size: 26px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 40px;
-    background: var(--color-surface);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .text-box {
-    color: var(--color-surface);
+    color: var(--color-text-other);
     font-size: larger;
 }
 
@@ -471,10 +477,10 @@ footer {
     }
     .title {
         margin-bottom: 10px;
-        color: var(--color-background);
+        color: var(--color-text-other);
     }
     .text-box {
-        color: var(--color-text);
+        color: var(--color-text-other);
     }
     footer div p {
         color: var(--color-text);
