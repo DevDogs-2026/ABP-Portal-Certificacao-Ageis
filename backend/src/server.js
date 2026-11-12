@@ -10,6 +10,8 @@ const path = require('path');
 const pool = require('./db/pool');
 const authRoutes = require('./routes/authRoutes');
 const assessmentRoutes = require('./routes/assessmentRoutes');
+const certificateRoutes = require('./routes/certificateRoutes');
+const validarSegredoSessao = require('./services/validarSegredoSessao');
 
 const app = express();
 const porta = process.env.PORT || 3000;
@@ -43,8 +45,8 @@ function liberarOrigemFrontend(req, res, next) {
 
 app.use('/api', liberarOrigemFrontend);
 
-if(!process.env.SESSION_SECRET) {
-    console.error('A variável de ambiente SESSION_SECRET não está definida.');
+if (!validarSegredoSessao(process.env.SESSION_SECRET)) {
+    console.error('SESSION_SECRET deve ter pelo menos 32 bytes e não pode ser um valor de exemplo.');
     process.exit(1);
 }
 
@@ -74,6 +76,7 @@ app.use(session({
 
 app.use('/api/auth', authRoutes);
 app.use('/api/assessments', assessmentRoutes);
+app.use('/api/certificates', certificateRoutes);
 app.use(express.static(path.resolve(__dirname, '../frontend/build')));
 
 // Registra erros do servidor e retorna mensagens genéricas para falhas internas.

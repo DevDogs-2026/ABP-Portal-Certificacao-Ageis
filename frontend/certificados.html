@@ -82,20 +82,8 @@
           <div class="estado" id="estado-bloqueado" hidden>
             <h2>Seu certificado ainda não está disponível</h2>
             <p id="texto-progresso">
-              Conclua 100% do curso para liberar o certificado.
+              Conclua uma avaliação com pelo menos 65% de acertos para liberar o certificado.
             </p>
-            <div
-              class="barra"
-              role="progressbar"
-              aria-labelledby="texto-progresso"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              aria-valuenow="0"
-              aria-valuetext="0% concluído"
-              id="barra"
-            >
-              <span class="barra-preenchida" id="barra-preenchida"></span>
-            </div>
             <a href="index.html" class="botao">Continuar o curso</a>
           </div>
 
@@ -155,11 +143,6 @@
                   Certificamos que <span id="cert-nome"></span><br />
                   concluiu o curso online <span id="cert-curso"></span>
                 </p>
-                <p class="cert-cpf">
-                  Inscrito sob o número do CPF;<br />
-                  <span id="cert-cpf"></span>
-                </p>
-
                 <div class="cert-dados">
                   <div class="cert-qr">
                     <div
@@ -170,10 +153,6 @@
                     ></div>
                     <strong>Validação online</strong>
                     <small>QR CODE — validar certificado</small>
-                  </div>
-                  <div class="cert-celula">
-                    <span>Email:</span>
-                    <span id="cert-email"></span>
                   </div>
                   <div class="cert-celula">
                     <span>Nota final: <span id="cert-nota"></span></span>
@@ -229,8 +208,8 @@
                 type="text"
                 id="codigo"
                 name="codigo"
-                placeholder="Ex.: MA-7K2P-9XQ4"
-                maxlength="14"
+                placeholder="Ex.: MA-89ABCDEF-01234567-89ABCDEF-01234567"
+                maxlength="38"
                 autocomplete="off"
                 autocapitalize="characters"
                 spellcheck="false"
@@ -254,6 +233,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="src/js/api.js"></script>
     <script src="src/js/certificados.js"></script>
   </body>
 </html>

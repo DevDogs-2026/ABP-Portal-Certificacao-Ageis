@@ -113,3 +113,6 @@ CREATE INDEX IF NOT EXISTS idx_tentativa_candidato_data
 
 CREATE INDEX IF NOT EXISTS idx_progresso_tentativa
     ON progresso (id_tentativa);
+
+CREATE UNIQUE INDEX IF NOT EXISTS uq_certificado_resultado
+    ON certificado (id_resultado);
