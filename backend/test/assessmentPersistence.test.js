@@ -154,6 +154,8 @@ test('retoma somente a tentativa em andamento do mesmo candidato', async () => {
     assert.equal(respostaNova.retomada, false);
     assert.equal(insercoesProgresso.length, 12);
     assert.ok(insercoesProgresso.every(([, , idTentativa]) => idTentativa === 100));
+    assert.equal(new Set(insercoesProgresso.map(([idQuestao]) => idQuestao)).size, 12);
+    assert.equal(new Set(insercoesProgresso.map(([, idTema]) => idTema)).size, 12);
 });
 
 test('não permite consultar a tentativa pertencente a outro candidato', async () => {
