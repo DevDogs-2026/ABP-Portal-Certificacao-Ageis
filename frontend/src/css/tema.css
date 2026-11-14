@@ -210,6 +210,7 @@ button.btnLogin-popup {
     font-size: 0.95rem;
     font-weight: 300;
     line-height: 1.6;
+    cursor: default;
 }
 
 .conteudo p {
@@ -222,15 +223,23 @@ button.btnLogin-popup {
     font-size: 1.4rem;
 }
 
+.texto-explicativo img {
+    width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 2rem;
+}
+
 footer {
     color: var(--color-text);
     max-height: 400px;
+    height: 100%;
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    padding: 2.5em 0;
+    padding: 1em 0;
     box-sizing: border-box;
-    position: relative;
     border-top: solid 1px var(--color-secondary);
 }
 
@@ -311,6 +320,9 @@ footer {
     .texto-explicativo p {
         font-size: 1.3rem;
     }
+    .texto-explicativo img {
+        border-radius: 1.6rem;
+    }
 
     /* Footer */
     footer p {
@@ -381,6 +393,9 @@ footer {
     .texto-explicativo p {
         font-size: 1.2rem;
     }
+    .texto-explicativo img {
+        border-radius: 1.4rem;
+    }
 }
 
 /* ---------- Mobile ---------- */
@@ -436,6 +451,9 @@ footer {
     }
     .texto-explicativo p {
         font-size: 1rem;
+    }
+    .texto-explicativo img {
+        border-radius: 0.8rem;
     }
     /* Footer */
     footer {
