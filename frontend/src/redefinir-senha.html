@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Redefinir senha</title>
+    <link rel="stylesheet" href="css/esqueci-senha.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form id="resetForm">
+                <h1 class="title">Redefinir senha</h1>
+
+                <div class="input-icon">
+                    <img src="images/icons/lock-icon.svg" alt="" aria-hidden="true">
+                    <input
+                        type="password"
+                        name="senha"
+                        placeholder="Nova senha"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+                </div>
+
+                <div class="input-icon">
+                    <img src="images/icons/lock-icon.svg" alt="" aria-hidden="true">
+                    <input
+                        type="password"
+                        name="confirmacaoSenha"
+                        placeholder="Confirme a nova senha"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+                </div>
+
+                <p id="mensagem" role="status" aria-live="polite"></p>
+                <button type="submit">Salvar nova senha</button>
+            </form>
+        </div>
+
+        <a href="../acesso.html" class="button-voltar">Voltar ao login</a>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/redefinir-senha.js"></script>
+</body>
+</html>

@@ -1,8 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const { rateLimit } = require('express-rate-limit');
+const { createHash } = require('node:crypto');
 const pool = require('../db/pool');
-
+const { criarTokenRedefinicao } = require('../utils/tokenresetasenha');
+const { enviarEmailRedefinicao } = require('../services/emailredefinicao');
 const router = express.Router();
 
 const limitarTentativasLogin = rateLimit({
@@ -12,6 +14,161 @@ const limitarTentativasLogin = rateLimit({
     legacyHeaders: false, // Desativa os cabeçalhos `X-RateLimit-*`
     message: 'Muitas tentativas de login. Por favor, tente novamente mais tarde.'
 });
+
+const limitarSolicitacaoRedefinicao = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        mensagem: 'Muitas solicitações. Tente novamente mais tarde.',
+    },
+});
+
+const limitarRedefinicaoSenha = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 5,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+        mensagem: 'Muitas tentativas. Tente novamente mais tarde.',
+    },
+});
+
+router.post(
+    '/solicitar-redefinicao',
+    limitarSolicitacaoRedefinicao,
+    async (req, res, next) => {
+        const respostaGenerica = {
+            mensagem: 'Se o e-mail estiver cadastrado, você receberá instruções para redefinir sua senha.',
+        };
+
+        try {
+            const email = typeof req.body?.email === 'string'
+                ? req.body.email.trim().toLowerCase()
+                : '';
+
+            if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                return res.status(400).json({ mensagem: 'E-mail inválido.' });
+            }
+
+            const consulta = await pool.query(
+                `SELECT id_candidato, email
+                 FROM candidato
+                 WHERE LOWER(email) = $1`,
+                [email]
+            );
+
+            const candidato = consulta.rows[0];
+
+            if (candidato) {
+                const { token, tokenHash } = criarTokenRedefinicao();
+
+                await pool.query(
+                    `DELETE FROM token_redefinicao_senha
+                     WHERE id_candidato = $1`,
+                    [candidato.id_candidato]
+                );
+
+                await pool.query(
+                    `INSERT INTO token_redefinicao_senha
+                        (id_candidato, token_hash, expira_em)
+                     VALUES ($1, $2, CURRENT_TIMESTAMP + INTERVAL '30 minutes')`,
+                    [candidato.id_candidato, tokenHash]
+                );
+
+                try {
+                    await enviarEmailRedefinicao(candidato.email, token);
+                } catch (error) {
+                    console.error('Falha ao enviar e-mail de redefinição:', error.code || error.name);
+                }
+            }
+
+            return res.status(202).json(respostaGenerica);
+        } catch (error) {
+            next(error);
+        }
+    }
+);
+
+router.post(
+    '/redefinir-senha',
+    limitarRedefinicaoSenha,
+    async (req, res, next) => {
+        const { token, senha } = req.body ?? {};
+
+        if (
+            typeof token !== 'string' ||
+            !/^[a-f0-9]{64}$/i.test(token) ||
+            typeof senha !== 'string' ||
+            senha.length < 6 ||
+            Buffer.byteLength(senha, 'utf8') > 72
+        ) {
+            return res.status(400).json({
+                mensagem: 'Token ou senha inválidos.',
+            });
+        }
+
+        const tokenHash = createHash('sha256')
+            .update(token, 'utf8')
+            .digest('hex');
+
+        let client;
+
+        try {
+            client = await pool.connect();
+            await client.query('BEGIN');
+
+            const consulta = await client.query(
+                `SELECT id_token, id_candidato
+                 FROM token_redefinicao_senha
+                 WHERE token_hash = $1
+                   AND expira_em > CURRENT_TIMESTAMP
+                   AND usado_em IS NULL
+                 FOR UPDATE`,
+                [tokenHash]
+            );
+
+            const registroToken = consulta.rows[0];
+
+            if (!registroToken) {
+                await client.query('ROLLBACK');
+                return res.status(400).json({
+                    mensagem: 'Token inválido ou expirado.',
+                });
+            }
+
+            const senhaHash = await bcrypt.hash(senha, 10);
+
+            await client.query(
+                `UPDATE candidato
+                 SET senha_hash = $1
+                 WHERE id_candidato = $2`,
+                [senhaHash, registroToken.id_candidato]
+            );
+
+            await client.query(
+                `UPDATE token_redefinicao_senha
+                 SET usado_em = CURRENT_TIMESTAMP
+                 WHERE id_token = $1`,
+                [registroToken.id_token]
+            );
+
+            await client.query('COMMIT');
+
+            return res.json({
+                mensagem: 'Senha redefinida com sucesso.',
+            });
+        } catch (error) {
+            if (client) {
+                await client.query('ROLLBACK');
+            }
+            return next(error);
+        } finally {
+            client?.release();
+        }
+    }
+);
 
 router.post('/login', limitarTentativasLogin, async (req, res, next) => {
     try {

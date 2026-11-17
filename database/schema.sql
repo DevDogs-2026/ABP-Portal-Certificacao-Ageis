@@ -113,3 +113,16 @@ CREATE INDEX IF NOT EXISTS idx_tentativa_candidato_data
 
 CREATE INDEX IF NOT EXISTS idx_progresso_tentativa
     ON progresso (id_tentativa);
+
+
+CREATE TABLE IF NOT EXISTS token_redefinicao_senha (
+    id_token SERIAL PRIMARY KEY,
+    id_candidato INTEGER NOT NULL REFERENCES candidato(id_candidato) ON DELETE CASCADE,
+    token_hash VARCHAR(255) NOT NULL,
+    expira_em TIMESTAMP NOT NULL,
+    usado_em TIMESTAMP NULL,
+    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_token_redefinicao_hash
+    ON token_redefinicao_senha (token_hash);
