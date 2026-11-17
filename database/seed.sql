@@ -30,303 +30,363 @@ INSERT INTO tema (nome_tema) VALUES ('Boas Práticas em Projetos Ágeis')
 ON CONFLICT (nome_tema) DO NOTHING;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é o principal objetivo das metodologias ágeis?' FROM tema WHERE nome_tema = 'Fundamentos da Agilidade'
+SELECT id_tema, 'Por que o modelo tradicional de gestão gera frustração quando ocorrem mudanças?' FROM tema WHERE nome_tema = 'Fundamentos da Agilidade'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Eliminar completamente o planejamento.'),
-    ('B', 'Entregar valor continuamente e adaptar-se às mudanças.'),
-    ('C', 'Aumentar a documentação dos projetos.'),
-    ('D', 'Evitar a participação do cliente.')
+    ('A', 'Porque não usa programas de computador modernos.'),
+    ('B', 'Porque tenta planejar tudo com antecedência e resiste a mudanças.'),
+    ('C', 'Porque não tem gerentes para cobrar regras rígidas.'),
+    ('D', 'Porque as tarefas são feitas de forma muito lenta.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Fundamentos da Agilidade' AND q.enunciado = 'Qual é o principal objetivo das metodologias ágeis?'
+WHERE t.nome_tema = 'Fundamentos da Agilidade' AND q.enunciado = 'Por que o modelo tradicional de gestão gera frustração quando ocorrem mudanças?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Quantos valores fundamentais possui o Manifesto Ágil?' FROM tema WHERE nome_tema = 'Fundamentos da Agilidade'
+SELECT id_tema, 'De acordo com o Manifesto Ágil, o que deve ser priorizado para garantir o sucesso de um projeto?' FROM tema WHERE nome_tema = 'Fundamentos da Agilidade'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', '3'),
-    ('B', '5'),
-    ('C', '4'),
-    ('D', '6')
+    ('A', 'O cumprimento rígido de regras e uso de contratos inflexíveis.'),
+    ('B', 'A escrita de longas documentações antes de começar o trabalho.'),
+    ('C', 'As pessoas e suas interações, além da entrega de produtos funcionais.'),
+    ('D', 'O seguimento cego de um plano montado meses atrás.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Fundamentos da Agilidade' AND q.enunciado = 'Quantos valores fundamentais possui o Manifesto Ágil?'
+WHERE t.nome_tema = 'Fundamentos da Agilidade' AND q.enunciado = 'De acordo com o Manifesto Ágil, o que deve ser priorizado para garantir o sucesso de um projeto?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual das alternativas representa um valor do Manifesto Ágil?' FROM tema WHERE nome_tema = 'Fundamentos da Agilidade'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Indivíduos e interações mais que processos e ferramentas.'),
-    ('B', 'Seguir um plano mais que responder a mudanças.'),
-    ('C', 'Documentação abrangente mais que software funcionando.'),
-    ('D', 'Negociação de contratos mais que colaboração com o cliente.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Fundamentos da Agilidade' AND q.enunciado = 'Qual das alternativas representa um valor do Manifesto Ágil?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Uma característica importante das equipes ágeis é:' FROM tema WHERE nome_tema = 'Fundamentos da Agilidade'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Trabalhar sem comunicação.'),
-    ('B', 'Depender exclusivamente do gerente.'),
-    ('C', 'Evitar alterações durante o projeto.'),
-    ('D', 'Colaborar e adaptar-se às necessidades.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Fundamentos da Agilidade' AND q.enunciado = 'Uma característica importante das equipes ágeis é:'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'O que é Scrum?' FROM tema WHERE nome_tema = 'Introdução ao Scrum'
+SELECT id_tema, 'Qual é o maior benefício de adotar uma equipe multidisciplinar e auto-organizável na cultura ágil?' FROM tema WHERE nome_tema = 'Fundamentos da Agilidade'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Uma linguagem de programação.'),
-    ('B', 'Um software de gerenciamento.'),
-    ('C', 'Um framework ágil para desenvolver e entregar produtos complexos.'),
-    ('D', 'Um banco de dados.')
+    ('A', 'Ter um gerente controlando cada tarefa individualmente.'),
+    ('B', 'Esconder os erros para evitar que o time mude de rota.'),
+    ('C', 'Assumir a responsabilidade coletiva para entregar valor contínuo ao usuário.'),
+    ('D', 'Focar apenas em ferramentas de software sem olhar para a realidade.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Introdução ao Scrum' AND q.enunciado = 'O que é Scrum?'
+WHERE t.nome_tema = 'Fundamentos da Agilidade' AND q.enunciado = 'Qual é o maior benefício de adotar uma equipe multidisciplinar e auto-organizável na cultura ágil?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Como são chamados os ciclos de trabalho no Scrum?' FROM tema WHERE nome_tema = 'Introdução ao Scrum'
+SELECT id_tema, 'Na cultura ágil, como muda o papel das lideranças corporativas em comparação ao modelo tradicional?' FROM tema WHERE nome_tema = 'Fundamentos da Agilidade'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Sprints.'),
-    ('B', 'Etapas fixas.'),
-    ('C', 'Processos.'),
-    ('D', 'Módulos.')
+    ('A', 'O líder passa a cobrar prazos de forma ainda mais rígida e burocrática.'),
+    ('B', 'O gestor centraliza todas as decisões diárias para evitar erros da equipe.'),
+    ('C', 'O líder vira um facilitador que remove barreiras e dá autonomia para a ponta.'),
+    ('D', 'O papel do chefe continua igual, mudando apenas o nome do cargos.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Introdução ao Scrum' AND q.enunciado = 'Como são chamados os ciclos de trabalho no Scrum?'
+WHERE t.nome_tema = 'Fundamentos da Agilidade' AND q.enunciado = 'Na cultura ágil, como muda o papel das lideranças corporativas em comparação ao modelo tradicional?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a duração máxima de uma Sprint?' FROM tema WHERE nome_tema = 'Introdução ao Scrum'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', '3 meses.'),
-    ('B', '2 meses.'),
-    ('C', '6 semanas.'),
-    ('D', '1 mês.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Introdução ao Scrum' AND q.enunciado = 'Qual é a duração máxima de uma Sprint?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é um dos principais pilares do Scrum?' FROM tema WHERE nome_tema = 'Introdução ao Scrum'
+SELECT id_tema, 'Qual é a principal proposta do Scrum para lidar com a impossibilidade de prever tudo no início de um projeto?' FROM tema WHERE nome_tema = 'Introdução ao Scrum'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Hierarquia.'),
-    ('B', 'Transparência.'),
-    ('C', 'Burocracia.'),
-    ('D', 'Centralização.')
+    ('A', 'Utilizar um manual rígido de regras para evitar desvios no plano original.'),
+    ('B', 'Trabalhar em ciclos curtos, avaliar os resultados e ajustar a rota continuamente.'),
+    ('C', 'Planejar detalhadamente cada etapa antes de mostrar o produto ao usuário.'),
+    ('D', 'Adotar uma lista fixa de ferramentas obrigatórias para acelerar o desenvolvimento.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Introdução ao Scrum' AND q.enunciado = 'Qual é um dos principais pilares do Scrum?'
+WHERE t.nome_tema = 'Introdução ao Scrum' AND q.enunciado = 'Qual é a principal proposta do Scrum para lidar com a impossibilidade de prever tudo no início de um projeto?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Quem é responsável por maximizar o valor do produto?' FROM tema WHERE nome_tema = 'Papéis do Scrum'
+SELECT id_tema, 'O que sustenta e permite o funcionamento real dos três pilares do Scrum no ambiente de trabalho?' FROM tema WHERE nome_tema = 'Introdução ao Scrum'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Scrum Master.'),
-    ('B', 'Desenvolvedor.'),
-    ('C', 'Product Owner.'),
-    ('D', 'Cliente.')
+    ('A', 'O uso obrigatório de ferramentas rígidas de controle de tarefas.'),
+    ('B', 'A punição imediata de qualquer falha cometida pela equipe.'),
+    ('C', 'Os valores do Scrum, que constroem um ambiente baseado na confiança.'),
+    ('D', 'A documentação detalhada de todos os erros e acertos em relatórios.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Papéis do Scrum' AND q.enunciado = 'Quem é responsável por maximizar o valor do produto?'
+WHERE t.nome_tema = 'Introdução ao Scrum' AND q.enunciado = 'O que sustenta e permite o funcionamento real dos três pilares do Scrum no ambiente de trabalho?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a principal responsabilidade do Scrum Master?' FROM tema WHERE nome_tema = 'Papéis do Scrum'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Estabelecer o Scrum e ajudar a equipe a utilizá-lo corretamente.'),
-    ('B', 'Desenvolver todo o código.'),
-    ('C', 'Aprovar todas as funcionalidades.'),
-    ('D', 'Controlar individualmente cada funcionário.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Papéis do Scrum' AND q.enunciado = 'Qual é a principal responsabilidade do Scrum Master?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Quem é responsável por criar um Incremento utilizável a cada Sprint?' FROM tema WHERE nome_tema = 'Papéis do Scrum'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Cliente.'),
-    ('B', 'Gerente financeiro.'),
-    ('C', 'Product Owner exclusivamente.'),
-    ('D', 'Developers.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Papéis do Scrum' AND q.enunciado = 'Quem é responsável por criar um Incremento utilizável a cada Sprint?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Quais são as três responsabilidades principais dentro de um Scrum Team?' FROM tema WHERE nome_tema = 'Papéis do Scrum'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Gerente, Analista e Cliente.'),
-    ('B', 'Product Owner, Scrum Master e Developers.'),
-    ('C', 'Diretor, Coordenador e Supervisor.'),
-    ('D', 'Programador, Designer e Testador.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Papéis do Scrum' AND q.enunciado = 'Quais são as três responsabilidades principais dentro de um Scrum Team?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual evento é utilizado para planejar o trabalho da Sprint?' FROM tema WHERE nome_tema = 'Eventos do Scrum'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Sprint Review.'),
-    ('B', 'Daily Scrum.'),
-    ('C', 'Sprint Retrospective.'),
-    ('D', 'Sprint Planning.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Eventos do Scrum' AND q.enunciado = 'Qual evento é utilizado para planejar o trabalho da Sprint?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é o tempo máximo de duração da Daily Scrum?' FROM tema WHERE nome_tema = 'Eventos do Scrum'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', '15 minutos.'),
-    ('B', '30 minutos.'),
-    ('C', '1 hora.'),
-    ('D', '2 horas.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Eventos do Scrum' AND q.enunciado = 'Qual é o tempo máximo de duração da Daily Scrum?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é o principal objetivo da Sprint Review?' FROM tema WHERE nome_tema = 'Eventos do Scrum'
+SELECT id_tema, 'Como se divide a responsabilidade pelo resultado final do produto?' FROM tema WHERE nome_tema = 'Introdução ao Scrum'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Avaliar individualmente os funcionários.'),
-    ('B', 'Definir salários da equipe.'),
-    ('C', 'Inspecionar o resultado da Sprint e discutir adaptações futuras.'),
-    ('D', 'Substituir o planejamento da Sprint.')
+    ('A', 'É exclusiva do Product Owner, pois ele gerencia o Product Backlog.'),
+    ('B', 'É centralizada no Scrum Master, que atua como o chefe que dita as tarefas.'),
+    ('C', 'É compartilhada em conjunto por toda a equipe, pois não existe hierarquia interna.'),
+    ('D', 'É repassada apenas aos Developers, já que eles criam a parte funcional.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Eventos do Scrum' AND q.enunciado = 'Qual é o principal objetivo da Sprint Review?'
+WHERE t.nome_tema = 'Introdução ao Scrum' AND q.enunciado = 'Como se divide a responsabilidade pelo resultado final do produto?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'O que acontece durante a Sprint Retrospective?' FROM tema WHERE nome_tema = 'Eventos do Scrum'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'O cliente realiza o pagamento.'),
-    ('B', 'A equipe identifica maneiras de melhorar sua qualidade e eficácia.'),
-    ('C', 'O projeto é obrigatoriamente encerrado.'),
-    ('D', 'Todos os requisitos são descartados.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Eventos do Scrum' AND q.enunciado = 'O que acontece durante a Sprint Retrospective?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Quais são os três artefatos oficiais do Scrum?' FROM tema WHERE nome_tema = 'Artefatos Scrum'
+SELECT id_tema, 'Qual evento serve para o time se alinhar diariamente em uma conversa rápida de quinze minutos?' FROM tema WHERE nome_tema = 'Introdução ao Scrum'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Product Backlog, Sprint Backlog e Increment.'),
-    ('B', 'Kanban, Daily Scrum e Sprint Planning.'),
-    ('C', 'Cronograma, Relatório e Contrato.'),
-    ('D', 'Sprint Review, Daily Scrum e Retrospective.')
+    ('A', 'Daily Scrum.'),
+    ('B', 'O Planejamento da Sprint.'),
+    ('C', 'A Retrospectiva da Sprint.'),
+    ('D', 'Sprint Review.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Artefatos Scrum' AND q.enunciado = 'Quais são os três artefatos oficiais do Scrum?'
+WHERE t.nome_tema = 'Introdução ao Scrum' AND q.enunciado = 'Qual evento serve para o time se alinhar diariamente em uma conversa rápida de quinze minutos?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'O que representa o Product Backlog?' FROM tema WHERE nome_tema = 'Artefatos Scrum'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Uma lista de funcionários.'),
-    ('B', 'Um relatório financeiro.'),
-    ('C', 'Um histórico de reuniões.'),
-    ('D', 'Uma lista ordenada do que é necessário para melhorar o produto.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Artefatos Scrum' AND q.enunciado = 'O que representa o Product Backlog?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'O Sprint Backlog contém:' FROM tema WHERE nome_tema = 'Artefatos Scrum'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Apenas os problemas encontrados.'),
-    ('B', 'O objetivo da Sprint, os itens selecionados e o plano de entrega.'),
-    ('C', 'Somente as tarefas concluídas.'),
-    ('D', 'Todas as funcionalidades de projetos futuros.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Artefatos Scrum' AND q.enunciado = 'O Sprint Backlog contém:'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'O que é um Increment no Scrum?' FROM tema WHERE nome_tema = 'Artefatos Scrum'
+SELECT id_tema, 'Como funciona a estrutura de decisão dentro de uma Equipe Scrum?' FROM tema WHERE nome_tema = 'Papéis do Scrum'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Uma reunião semanal.'),
-    ('B', 'Um documento de planejamento.'),
-    ('C', 'Uma parte utilizável do produto que atende à Definition of Done.'),
-    ('D', 'Uma lista de requisitos não aprovados.')
+    ('A', 'Um chefe dá ordens aos subordinados.'),
+    ('B', 'Depende de autorização de gerentes externos.'),
+    ('C', 'Todos trabalham no mesmo nível e com autogestão.'),
+    ('D', 'Toda a responsabilidade fica com uma única pessoa.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Artefatos Scrum' AND q.enunciado = 'O que é um Increment no Scrum?'
+WHERE t.nome_tema = 'Papéis do Scrum' AND q.enunciado = 'Como funciona a estrutura de decisão dentro de uma Equipe Scrum?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual é o papel responsável por remover os impedimentos e barreiras que bloqueiam o progresso da equipe?' FROM tema WHERE nome_tema = 'Papéis do Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Product Owner.'),
+    ('B', 'Scrum Master.'),
+    ('C', 'Developers.'),
+    ('D', 'Stakeholders.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Papéis do Scrum' AND q.enunciado = 'Qual é o papel responsável por remover os impedimentos e barreiras que bloqueiam o progresso da equipe?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'De quem é a responsabilidade pelo sucesso ou fracasso de um projeto no Scrum?' FROM tema WHERE nome_tema = 'Papéis do Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Apenas do Product Owner, que define o que deve ser feito.'),
+    ('B', 'Do Scrum Master, que atua como o líder do time.'),
+    ('C', 'Dos Developers, que criam e entregam o produto.'),
+    ('D', 'De toda a equipe Scrum em conjunto, sem culpados únicos.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Papéis do Scrum' AND q.enunciado = 'De quem é a responsabilidade pelo sucesso ou fracasso de um projeto no Scrum?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'O que acontece com uma equipe Scrum quando as fronteiras de responsabilidade de cada papel não são respeitadas?' FROM tema WHERE nome_tema = 'Papéis do Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'O time ganha mais velocidade porque todos fazem o trabalho de todo mundo.'),
+    ('B', 'A autonomia técnica é destruída ou o alinhamento com o negócio se perde.'),
+    ('C', 'O Scrum Master passa a atuar como o chefe absoluto para ditar as regras.'),
+    ('D', 'O projeto avança mais rápido por causa do aumento da microgestão.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Papéis do Scrum' AND q.enunciado = 'O que acontece com uma equipe Scrum quando as fronteiras de responsabilidade de cada papel não são respeitadas?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'No framework Scrum, qual é a principal característica e o papel da Sprint?' FROM tema WHERE nome_tema = 'Eventos do Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Dura de 6 a 12 meses e serve para mudar as metas do produto a cada dia.'),
+    ('B', 'É uma reunião improvisada que ocorre sempre que o cliente solicita uma mudança.'),
+    ('C', 'Tem duração fixa de 1 a 4 semanas e funciona como um contêiner para os outros eventos do Scrum.'),
+    ('D', 'É um evento opcional que dura apenas alguns minutos e substitui a necessidade de planejar o trabalho.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Eventos do Scrum' AND q.enunciado = 'No framework Scrum, qual é a principal característica e o papel da Sprint?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual é o objetivo da Daily Scrum segundo a Imagem?' FROM tema WHERE nome_tema = 'Eventos do Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Definir as entregas de toda a Sprint.'),
+    ('B', 'Alinhar o progresso diário e achar obstáculos em 15 minutos.'),
+    ('C', 'Entregar o produto pronto ao cliente.'),
+    ('D', 'Avaliar o trabalho individual da equipe.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Eventos do Scrum' AND q.enunciado = 'Qual é o objetivo da Daily Scrum segundo a Imagem?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'O que o time faz durante a Sprint Retrospective?' FROM tema WHERE nome_tema = 'Eventos do Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Apresenta o produto pronto para os clientes.'),
+    ('B', 'Define as tarefas para as próximas 24 horas.'),
+    ('C', 'Analisa como foi o trabalho em equipe e busca melhorias práticas.'),
+    ('D', 'Escolhe os diretores que vão participar da próxima Sprint.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Eventos do Scrum' AND q.enunciado = 'O que o time faz durante a Sprint Retrospective?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual é o principal benefício de definir um timebox para os eventos do Scrum?' FROM tema WHERE nome_tema = 'Eventos do Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Permitir que as reuniões durem horas até que todos os assuntos paralelos sejam resolvidos.'),
+    ('B', 'Gerar foco, disciplina e objetividade, evitando o excesso de reuniões improdutivas.'),
+    ('C', 'Aumentar o número de reuniões diárias para melhorar o controle da empresa.'),
+    ('D', 'Eliminar a necessidade de definir um objetivo coletivo para a equipe.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Eventos do Scrum' AND q.enunciado = 'Qual é o principal benefício de definir um timebox para os eventos do Scrum?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'O que os Artefatos do Scrum realmente representam?' FROM tema WHERE nome_tema = 'Artefatos Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Documentos burocráticos usados apenas para prestar contas à diretoria.'),
+    ('B', 'O trabalho ou valor gerado pela equipe, trazendo visibilidade total ao projeto.'),
+    ('C', 'Relatórios secretos criados pelo gestor ao final de cada ano.'),
+    ('D', 'Regras rígidas que impedem a equipe de mudar o plano do projeto.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Artefatos Scrum' AND q.enunciado = 'O que os Artefatos do Scrum realmente representam?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual é a principal diferença entre os compromissos do Product Backlog e do Sprint Backlog?' FROM tema WHERE nome_tema = 'Artefatos Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'O Product Backlog foca no curto prazo, enquanto o Sprint Backlog foca no longo prazo.'),
+    ('B', 'O Product Backlog tem a Meta do Produto, e o Sprint Backlog tem a Meta da Sprint.'),
+    ('C', 'O Product Backlog é gerenciado pelos Developers, e o Sprint Backlog é criado pelo cliente.'),
+    ('D', 'O Product Backlog nunca muda, enquanto o Sprint Backlog muda todos os anos.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Artefatos Scrum' AND q.enunciado = 'Qual é a principal diferença entre os compromissos do Product Backlog e do Sprint Backlog?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual é a função da Definição de Concluído (Definition of Done)?' FROM tema WHERE nome_tema = 'Artefatos Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Servir como uma régua de qualidade para garantir que o trabalho está realmente finalizado e pronto para uso.'),
+    ('B', 'Listar todas as tarefas futuras que ainda não começaram.'),
+    ('C', 'Substituir o Incremento ao final de cada Sprint.'),
+    ('D', 'Definir o orçamento total aprovado pelos diretores do projeto.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Artefatos Scrum' AND q.enunciado = 'Qual é a função da Definição de Concluído (Definition of Done)?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'O que acontece quando os artefatos do Scrum funcionam como radiadores de informação?' FROM tema WHERE nome_tema = 'Artefatos Scrum'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Apenas o CEO tem acesso ao andamento do projeto.'),
+    ('B', 'O time precisa fazer relatórios escritos todos os dias para explicar o trabalho.'),
+    ('C', 'Qualquer pessoa vê as prioridades e o progresso na hora, evitando reuniões longas de prestação de contas.'),
+    ('D', 'As informações do projeto ficam escondidas até o final do ano.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Artefatos Scrum' AND q.enunciado = 'O que acontece quando os artefatos do Scrum funcionam como radiadores de informação?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual é o principal objetivo da Gestão do Product Backlog em projetos ágeis?' FROM tema WHERE nome_tema = 'Gestão do Product Backlog'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Organizar e priorizar as tarefas continuamente, em equipe, para entregar mais valor ao cliente e ao negócio.'),
+    ('B', 'Criar uma lista fixa de tarefas que não muda durante o projeto.'),
+    ('C', 'Anotar todas as ideias sem definir prioridades ou ouvir a equipe.'),
+    ('D', 'Deixar apenas o time técnico escolher as prioridades, enquanto o Product Owner só acompanha.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Gestão do Product Backlog' AND q.enunciado = 'Qual é o principal objetivo da Gestão do Product Backlog em projetos ágeis?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual é o objetivo do refinamento do Product Backlog e o significado do acrônimo DEEP?' FROM tema WHERE nome_tema = 'Gestão do Product Backlog'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Agrupar tarefas e manter prioridades fixas durante o projeto.'),
+    ('B', 'Detalhar todos os itens desde o início, sem alterações posteriores.'),
+    ('C', 'Dividir itens complexos em partes menores e manter o backlog Detalhado, Estimado, Evolutivo e Priorizado.'),
+    ('D', 'Eliminar itens antigos e planejar apenas a Sprint atual.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Gestão do Product Backlog' AND q.enunciado = 'Qual é o objetivo do refinamento do Product Backlog e o significado do acrônimo DEEP?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual é o principal papel da priorização na Gestão do Product Backlog?' FROM tema WHERE nome_tema = 'Gestão do Product Backlog'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Organizar tarefas por ordem de criação, mantendo prioridades fixas.'),
+    ('B', 'Equilibrar valor financeiro, satisfação do usuário e esforço técnico, garantindo entregas sustentáveis.'),
+    ('C', 'Priorizar apenas os itens mais fáceis de desenvolver, reduzindo o trabalho da equipe.'),
+    ('D', 'Transferir ao time técnico a responsabilidade de definir todas as prioridades do produto.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Gestão do Product Backlog' AND q.enunciado = 'Qual é o principal papel da priorização na Gestão do Product Backlog?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Por que o Product Backlog deve ser constantemente atualizado?' FROM tema WHERE nome_tema = 'Gestão do Product Backlog'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Para manter todas as ideias iniciais, evitando descartar funcionalidades planejadas.'),
+    ('B', 'Para impedir mudanças nas prioridades durante o desenvolvimento do produto.'),
+    ('C', 'Para adaptar-se às mudanças do negócio e dos usuários, descartando itens que não geram mais valor.'),
+    ('D', 'Para garantir que todas as funcionalidades sejam desenvolvidas, independentemente de sua utilidade.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Gestão do Product Backlog' AND q.enunciado = 'Por que o Product Backlog deve ser constantemente atualizado?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
@@ -507,66 +567,6 @@ CROSS JOIN (VALUES
     ('D', 'Visualizar o fluxo de trabalho, identificar acúmulos de tarefas e antecipar possíveis atrasos.')
 ) AS opcoes(letra, texto)
 WHERE t.nome_tema = 'Métricas Ágeis' AND q.enunciado = 'Para que serve o Cumulative Flow Diagram (CFD) na análise das métricas ágeis?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Quem é responsável pela gestão eficaz do Product Backlog?' FROM tema WHERE nome_tema = 'Gestão do Product Backlog'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Scrum Master.'),
-    ('B', 'Cliente.'),
-    ('C', 'Product Owner.'),
-    ('D', 'Gerente de recursos humanos.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Gestão do Product Backlog' AND q.enunciado = 'Quem é responsável pela gestão eficaz do Product Backlog?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'O que significa realizar o refinamento do Product Backlog?' FROM tema WHERE nome_tema = 'Gestão do Product Backlog'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Detalhar e dividir itens para melhorar seu entendimento.'),
-    ('B', 'Excluir todas as tarefas antigas.'),
-    ('C', 'Encerrar automaticamente a Sprint.'),
-    ('D', 'Substituir os desenvolvedores.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Gestão do Product Backlog' AND q.enunciado = 'O que significa realizar o refinamento do Product Backlog?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual característica é importante para um Product Backlog eficiente?' FROM tema WHERE nome_tema = 'Gestão do Product Backlog'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Nunca sofrer alterações.'),
-    ('B', 'Ser conhecido apenas pelo gerente.'),
-    ('C', 'Conter exclusivamente tarefas concluídas.'),
-    ('D', 'Ser transparente, ordenado e continuamente atualizado.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Gestão do Product Backlog' AND q.enunciado = 'Qual característica é importante para um Product Backlog eficiente?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual fator pode influenciar a ordenação dos itens do Product Backlog?' FROM tema WHERE nome_tema = 'Gestão do Product Backlog'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'A ordem alfabética dos desenvolvedores.'),
-    ('B', 'O valor de negócio, os riscos e as dependências.'),
-    ('C', 'A quantidade de reuniões realizadas.'),
-    ('D', 'A preferência pessoal do Scrum Master.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Gestão do Product Backlog' AND q.enunciado = 'Qual fator pode influenciar a ordenação dos itens do Product Backlog?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
