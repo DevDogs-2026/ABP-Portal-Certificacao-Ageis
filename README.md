@@ -46,6 +46,8 @@ O projeto integra os conhecimentos do semestre abordando do design à infraestru
 3. Acesse o portal em `http://localhost:8080`. O frontend encaminha as chamadas `/api` ao backend; o PostgreSQL é inicializado com o esquema e as questões do projeto.
 4. Para encerrar os serviços, execute `docker compose down`. Os dados permanecem no volume `postgres_data`; use `docker compose down -v` somente quando quiser apagar esse banco local.
 
+O Compose constrói imagens separadas para o frontend Nginx e para a API Node.js. Ao alterar arquivos do frontend ou backend, execute novamente `docker compose up --build` para aplicar as mudanças.
+
 ## Execução local da avaliação
 
 1. Copie `.env.example` para `.env` e `backend/.env.example` para `backend/.env`, preenchendo uma senha local do PostgreSQL e um segredo de sessão exclusivo gerado com o comando acima.
