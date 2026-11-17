@@ -1,0 +1,9 @@
+.git
+.vscode
+**/node_modules
+**/.env
+**/.env.*
+docs
+Figma
+Diagramas
+modelagem banco
