@@ -390,363 +390,363 @@ WHERE t.nome_tema = 'Gestão do Product Backlog' AND q.enunciado = 'Por que o Pr
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é o principal objetivo do Kanban dentro de uma equipe de trabalho?' FROM tema WHERE nome_tema = 'Kanban'
+SELECT id_tema, 'Em comparação ao Scrum, a abordagem de implementação do método Kanban é caracterizada como flexível e evolucionária porque se fundamenta na prática de:' FROM tema WHERE nome_tema = 'Kanban'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Estabelecer ciclos fixos de desenvolvimento chamados Sprints.'),
-    ('B', 'Otimizar o fluxo de trabalho, identificar gargalos e reduzir desperdícios de tempo.'),
-    ('C', 'Definir cargos e funções obrigatórias para todos os integrantes da equipe.'),
-    ('D', 'Aumentar a quantidade de tarefas iniciadas simultaneamente.')
+    ('A', 'Exigir Sprints e papéis predefinidos.'),
+    ('B', 'Começar com o processo atual e buscar melhorias contínuas.'),
+    ('C', 'Substituir todo o fluxo por um modelo padrão.'),
+    ('D', 'Ignorar o processo atual no primeiro dia.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Kanban' AND q.enunciado = 'Qual é o principal objetivo do Kanban dentro de uma equipe de trabalho?'
+WHERE t.nome_tema = 'Kanban' AND q.enunciado = 'Em comparação ao Scrum, a abordagem de implementação do método Kanban é caracterizada como flexível e evolucionária porque se fundamenta na prática de:'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a importância da visualização do fluxo de trabalho e da limitação do WIP no Kanban?' FROM tema WHERE nome_tema = 'Kanban'
+SELECT id_tema, 'A prática guiada pela máxima "pare de começar e comece a terminar", que aumenta a eficiência da equipe ao impedir que várias tarefas sejam abertas simultaneamente sem conclusão, é conhecida como:' FROM tema WHERE nome_tema = 'Kanban'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Permitir que cada funcionário trabalhe isoladamente, sem depender dos demais.'),
-    ('B', 'Organizar as tarefas apenas depois que elas forem concluídas.'),
-    ('C', 'Facilitar a visualização das etapas e incentivar a equipe a terminar tarefas antes de iniciar novas.'),
-    ('D', 'Eliminar a necessidade de acompanhar o andamento das atividades.')
+    ('A', 'Visualização do fluxo.'),
+    ('B', 'Mapeamento de etapas.'),
+    ('C', 'Limitar o Trabalho em Progresso (WIP).'),
+    ('D', 'Criar políticas explícitas.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Kanban' AND q.enunciado = 'Qual é a importância da visualização do fluxo de trabalho e da limitação do WIP no Kanban?'
+WHERE t.nome_tema = 'Kanban' AND q.enunciado = 'A prática guiada pela máxima "pare de começar e comece a terminar", que aumenta a eficiência da equipe ao impedir que várias tarefas sejam abertas simultaneamente sem conclusão, é conhecida como:'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'O que acontece quando o Kanban utiliza um sistema puxado e acompanha métricas como o Lead Time?' FROM tema WHERE nome_tema = 'Kanban'
+SELECT id_tema, 'Limitar o trabalho em andamento (WIP) serve para controlar quantas tarefas são feitas ao mesmo tempo. Assim, novas tarefas só começam quando a equipe tem espaço livre para fazê-las. Qual é o principal objetivo dessa prática?' FROM tema WHERE nome_tema = 'Kanban'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Criar ciclos fixos obrigatórios (Sprints).'),
+    ('B', 'Parar de medir os resultados.'),
+    ('C', 'Controlar o ritmo das tarefas conforme a capacidade da equipe.'),
+    ('D', 'Aumentar o número de tarefas feitas ao mesmo tempo.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Kanban' AND q.enunciado = 'Limitar o trabalho em andamento (WIP) serve para controlar quantas tarefas são feitas ao mesmo tempo. Assim, novas tarefas só começam quando a equipe tem espaço livre para fazê-las. Qual é o principal objetivo dessa prática?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'O limite de WIP ajuda a mostrar onde o trabalho está travando. Quando uma etapa atinge o limite máximo, novas tarefas ficam bloqueadas e a equipe se une para resolver o acúmulo. Qual é o principal resultado dessa prática?' FROM tema WHERE nome_tema = 'Kanban'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'As tarefas são distribuídas sem considerar a capacidade da equipe.'),
-    ('B', 'O trabalho só entra no fluxo quando existe capacidade disponível, permitindo entregas mais previsíveis.'),
-    ('C', 'A equipe precisa concluir todas as tarefas ao mesmo tempo.'),
-    ('D', 'O Lead Time determina quantos funcionários devem participar de cada atividade.')
+    ('A', 'Deixar cada etapa ter tarefas sem limite.'),
+    ('B', 'Incentivar a equipe a colaborar e destravar o fluxo.'),
+    ('C', 'Evitar que as pessoas conversem entre si.'),
+    ('D', 'Focar apenas no trabalho individual.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Kanban' AND q.enunciado = 'O que acontece quando o Kanban utiliza um sistema puxado e acompanha métricas como o Lead Time?'
+WHERE t.nome_tema = 'Kanban' AND q.enunciado = 'O limite de WIP ajuda a mostrar onde o trabalho está travando. Quando uma etapa atinge o limite máximo, novas tarefas ficam bloqueadas e a equipe se une para resolver o acúmulo. Qual é o principal resultado dessa prática?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a consequência de estabelecer um limite de WIP na coluna "Em Teste" quando ela já atingiu sua capacidade máxima?' FROM tema WHERE nome_tema = 'Kanban'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'A equipe continua desenvolvendo novas tarefas normalmente.'),
-    ('B', 'As tarefas acumuladas são automaticamente removidas do sistema.'),
-    ('C', 'Os desenvolvedores são incentivados a colaborar nos testes para liberar espaço no fluxo.'),
-    ('D', 'O gerente precisa aumentar obrigatoriamente o número de funcionários.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Kanban' AND q.enunciado = 'Qual é a consequência de estabelecer um limite de WIP na coluna "Em Teste" quando ela já atingiu sua capacidade máxima?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a principal diferença entre o Planejamento Ágil e os modelos tradicionais de planejamento?' FROM tema WHERE nome_tema = 'Planejamento Ágil'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'O Planejamento Ágil exige que todos os detalhes do projeto sejam definidos antes do início.'),
-    ('B', 'O Planejamento Ágil elimina a necessidade de estabelecer objetivos para o projeto.'),
-    ('C', 'O Planejamento Ágil trata o planejamento como uma atividade contínua, permitindo adaptações conforme surgem mudanças.'),
-    ('D', 'O Planejamento Ágil utiliza documentos rígidos que não podem ser modificados durante o projeto.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Planejamento Ágil' AND q.enunciado = 'Qual é a principal diferença entre o Planejamento Ágil e os modelos tradicionais de planejamento?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a função da Cebola do Planejamento Ágil (Agile Planning Onion)?' FROM tema WHERE nome_tema = 'Planejamento Ágil'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Dividir o planejamento em camadas que representam diferentes horizontes de tempo, do longo ao curtíssimo prazo.'),
-    ('B', 'Organizar os funcionários de acordo com seus níveis de experiência.'),
-    ('C', 'Determinar exclusivamente o orçamento necessário para cada Sprint.'),
-    ('D', 'Substituir o planejamento diário por um planejamento anual.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Planejamento Ágil' AND q.enunciado = 'Qual é a função da Cebola do Planejamento Ágil (Agile Planning Onion)?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Como o uso de estimativas ágeis e da medição da velocidade da equipe contribui para o Planejamento Ágil?' FROM tema WHERE nome_tema = 'Planejamento Ágil'
+SELECT id_tema, 'Em comparação aos modelos tradicionais, qual é a principal diferença na abordagem do Planejamento Ágil?' FROM tema WHERE nome_tema = 'Planejamento Ágil'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Impede que o projeto sofra alterações durante seu desenvolvimento.'),
-    ('B', 'Permite estabelecer prazos com base em dados reais, mantendo a flexibilidade para mudanças e inovações.'),
-    ('C', 'Garante que todas as tarefas sejam concluídas exatamente no mesmo período.'),
-    ('D', 'Elimina a necessidade de acompanhar os resultados de cada ciclo.')
+    ('A', 'Tentar antecipar e detalhar cada etapa de projetos longos logo no início.'),
+    ('B', 'Tratar o planejamento como uma atividade contínua, aceitando a incerteza e focando na adaptação.'),
+    ('C', 'Criar documentos estáticos e rígidos que não sofrem alterações ao longo do projeto.'),
+    ('D', 'Eliminar completamente qualquer forma de planejamento para focar apenas na execução aleatória.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Planejamento Ágil' AND q.enunciado = 'Como o uso de estimativas ágeis e da medição da velocidade da equipe contribui para o Planejamento Ágil?'
+WHERE t.nome_tema = 'Planejamento Ágil' AND q.enunciado = 'Em comparação aos modelos tradicionais, qual é a principal diferença na abordagem do Planejamento Ágil?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'No Planejamento Ágil, como o Roadmap é utilizado em relação às entregas futuras?' FROM tema WHERE nome_tema = 'Planejamento Ágil'
+SELECT id_tema, 'No modelo da "Cebola do Planejamento Ágil", qual é a relação entre o horizonte de tempo e o nível de detalhe do plano?' FROM tema WHERE nome_tema = 'Planejamento Ágil'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Distante = detalhado.'),
+    ('B', 'Próximo = abstrato.'),
+    ('C', 'Distante = abstrato; Próximo = detalhado.'),
+    ('D', 'Mesma profundidade.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Planejamento Ágil' AND q.enunciado = 'No modelo da "Cebola do Planejamento Ágil", qual é a relação entre o horizonte de tempo e o nível de detalhe do plano?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'No Planejamento Ágil, a capacidade da equipe de recalcular o percurso diante de obstáculos ou oportunidades sem perder o objetivo final assemelha-se ao funcionamento de um GPS porque o time:' FROM tema WHERE nome_tema = 'Planejamento Ágil'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Segue um cronograma fixo e imutável desde o início.'),
+    ('B', 'Toma decisões com base em dados reais e mede sua velocidade a cada ciclo.'),
+    ('C', 'Elimina qualquer estimativa de esforço ou previsão de prazos.'),
+    ('D', 'Engessa a inovação para cumprir rigorosamente o plano original.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Planejamento Ágil' AND q.enunciado = 'No Planejamento Ágil, a capacidade da equipe de recalcular o percurso diante de obstáculos ou oportunidades sem perder o objetivo final assemelha-se ao funcionamento de um GPS porque o time:'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'No Planejamento Ágil, como a visão de futuro e as entregas de médio prazo são tratadas em comparação aos métodos tradicionais?' FROM tema WHERE nome_tema = 'Planejamento Ágil'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Como uma profecia inflexível e imutável.'),
+    ('B', 'Evitando olhar para o futuro ou criar Roadmaps.'),
+    ('C', 'Como uma hipótese testada e detalhada gradualmente.'),
+    ('D', 'Substituindo o Roadmap por cronogramas rígidos.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Planejamento Ágil' AND q.enunciado = 'No Planejamento Ágil, como a visão de futuro e as entregas de médio prazo são tratadas em comparação aos métodos tradicionais?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual métrica mede o tempo total desde o momento em que um pedido nasce até ser entregue ao cliente, e qual ferramenta visual ajuda a ver instantaneamente se o trabalho está acumulando em alguma etapa?' FROM tema WHERE nome_tema = 'Métricas Ágeis'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Como um documento definitivo que não permite alterações nas entregas.'),
-    ('B', 'Como uma ferramenta utilizada apenas para organizar as tarefas diárias.'),
-    ('C', 'Como uma forma de substituir as reuniões de planejamento das Sprints.'),
-    ('D', 'Como uma projeção de médio prazo, cujos detalhes são ajustados conforme o momento das entregas se aproxima.')
+    ('A', 'Cycle Time e Gráfico de Burndown.'),
+    ('B', 'Velocidade e Cycle Time.'),
+    ('C', 'Vazão Throughput e Gráfico de Burndown.'),
+    ('D', 'Lead Time e Diagrama de Fluxo Cumulativo (CFD).')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Planejamento Ágil' AND q.enunciado = 'No Planejamento Ágil, como o Roadmap é utilizado em relação às entregas futuras?'
+WHERE t.nome_tema = 'Métricas Ágeis' AND q.enunciado = 'Qual métrica mede o tempo total desde o momento em que um pedido nasce até ser entregue ao cliente, e qual ferramenta visual ajuda a ver instantaneamente se o trabalho está acumulando em alguma etapa?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é o principal objetivo das Métricas Ágeis dentro de uma equipe?' FROM tema WHERE nome_tema = 'Métricas Ágeis'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Vigiar individualmente os funcionários e controlar as horas trabalhadas.'),
-    ('B', 'Punir os integrantes que não conseguem concluir suas tarefas rapidamente.'),
-    ('C', 'Fornecer dados reais para avaliar o fluxo de trabalho e promover melhorias contínuas.'),
-    ('D', 'Aumentar a quantidade de tarefas iniciadas durante cada ciclo.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Métricas Ágeis' AND q.enunciado = 'Qual é o principal objetivo das Métricas Ágeis dentro de uma equipe?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a diferença entre Lead Time e Cycle Time nas Métricas Ágeis?' FROM tema WHERE nome_tema = 'Métricas Ágeis'
+SELECT id_tema, 'Qual é o principal benefício das métricas ágeis e como o sucesso deve ser medido?' FROM tema WHERE nome_tema = 'Métricas Ágeis'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Lead Time mede as horas trabalhadas, enquanto Cycle Time mede os custos do projeto.'),
-    ('B', 'Lead Time mede o tempo desde o nascimento do pedido até a entrega, enquanto Cycle Time mede o tempo desde o início efetivo do trabalho até sua conclusão.'),
-    ('C', 'Lead Time mede a quantidade de funcionários, enquanto Cycle Time mede a quantidade de reuniões.'),
-    ('D', 'Ambos medem exclusivamente o número de tarefas concluídas durante uma Sprint.')
+    ('A', 'Contar horas trabalhadas para avaliar a equipe.'),
+    ('B', 'Identificar gargalos pelo histórico real e medir o sucesso pelo valor entregue ao usuário.'),
+    ('C', 'Estabelecer metas punitivas baseadas no volume de tarefas iniciadas.'),
+    ('D', 'Substituir dados reais por estimativas baseadas em desejos da gestão.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Métricas Ágeis' AND q.enunciado = 'Qual é a diferença entre Lead Time e Cycle Time nas Métricas Ágeis?'
+WHERE t.nome_tema = 'Métricas Ágeis' AND q.enunciado = 'Qual é o principal benefício das métricas ágeis e como o sucesso deve ser medido?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a principal finalidade de utilizar métricas ágeis, como ferramentas de transparência e tomada de decisões?' FROM tema WHERE nome_tema = 'Métricas Ágeis'
+SELECT id_tema, 'Na análise de métricas ágeis, qual é a principal função do Cumulative Flow Diagram (CFD)?' FROM tema WHERE nome_tema = 'Métricas Ágeis'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Identificar problemas no processo, melhorar estimativas e acompanhar o valor entregue ao cliente.'),
-    ('B', 'Substituir todas as reuniões da equipe por relatórios automáticos.'),
-    ('C', 'Avaliar exclusivamente o desempenho individual de cada funcionário.'),
-    ('D', 'Garantir que todas as tarefas sejam iniciadas ao mesmo tempo.')
+    ('A', 'Identificar acúmulos de demandas paradas e prever atrasos antecipadamente.'),
+    ('B', 'Medir a produtividade individual por horas trabalhadas.'),
+    ('C', 'Manter um número fixo de tarefas concluídas por dia em cada etapa.'),
+    ('D', 'Eliminar a necessidade de acompanhar o progresso após o início do ciclo.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Métricas Ágeis' AND q.enunciado = 'Qual é a principal finalidade de utilizar métricas ágeis, como ferramentas de transparência e tomada de decisões?'
+WHERE t.nome_tema = 'Métricas Ágeis' AND q.enunciado = 'Na análise de métricas ágeis, qual é a principal função do Cumulative Flow Diagram (CFD)?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Para que serve o Cumulative Flow Diagram (CFD) na análise das métricas ágeis?' FROM tema WHERE nome_tema = 'Métricas Ágeis'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Calcular o salário dos integrantes da equipe com base na produtividade.'),
-    ('B', 'Determinar quantas horas cada funcionário precisa trabalhar diariamente.'),
-    ('C', 'Organizar os integrantes conforme suas funções dentro do projeto.'),
-    ('D', 'Visualizar o fluxo de trabalho, identificar acúmulos de tarefas e antecipar possíveis atrasos.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Métricas Ágeis' AND q.enunciado = 'Para que serve o Cumulative Flow Diagram (CFD) na análise das métricas ágeis?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é o principal foco da metodologia Extreme Programming (XP) no desenvolvimento de software?' FROM tema WHERE nome_tema = 'Extreme Programming (XP)'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Organizar exclusivamente reuniões e distribuir tarefas entre os funcionários.'),
-    ('B', 'Priorizar a documentação extensa antes de iniciar qualquer desenvolvimento.'),
-    ('C', 'Concentrar-se na excelência técnica e na qualidade do software, permitindo adaptações às mudanças de requisitos.'),
-    ('D', 'Evitar alterações no código depois que o desenvolvimento começa.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Extreme Programming (XP)' AND q.enunciado = 'Qual é o principal foco da metodologia Extreme Programming (XP) no desenvolvimento de software?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Quais são os cinco valores essenciais do Extreme Programming (XP)?' FROM tema WHERE nome_tema = 'Extreme Programming (XP)'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Comunicação, simplicidade, feedback, coragem e respeito.'),
-    ('B', 'Planejamento, organização, liderança, produtividade e controle.'),
-    ('C', 'Qualidade, velocidade, documentação, hierarquia e segurança.'),
-    ('D', 'Comunicação, competitividade, planejamento, inovação e disciplina.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Extreme Programming (XP)' AND q.enunciado = 'Quais são os cinco valores essenciais do Extreme Programming (XP)?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a principal característica das práticas de Integração Contínua (CI) e design simples no XP?' FROM tema WHERE nome_tema = 'Extreme Programming (XP)'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Desenvolver todo o sistema antes de realizar os primeiros testes.'),
-    ('B', 'Evitar alterações frequentes no código para diminuir os riscos.'),
-    ('C', 'Criar funcionalidades futuras antecipadamente para evitar novos desenvolvimentos.'),
-    ('D', 'Integrar e testar alterações frequentemente, desenvolvendo apenas o necessário para o momento atual.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Extreme Programming (XP)' AND q.enunciado = 'Qual é a principal característica das práticas de Integração Contínua (CI) e design simples no XP?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Como a prática do design simples contribui para o desenvolvimento de software no XP?' FROM tema WHERE nome_tema = 'Extreme Programming (XP)'
+SELECT id_tema, 'Diferente dos modelos tradicionais, qual é o objetivo principal de utilizar Métricas Ágeis em um time?' FROM tema WHERE nome_tema = 'Métricas Ágeis'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Incentiva a criação de arquiteturas complexas para prever todas as funcionalidades futuras.'),
-    ('B', 'Busca resolver os problemas atuais com soluções simples e elegantes, evitando complexidade desnecessária.'),
-    ('C', 'Elimina a necessidade de testes automatizados durante o desenvolvimento.'),
-    ('D', 'Impede que o sistema receba novas funcionalidades depois de concluído.')
+    ('A', 'Vigiar o time e contar horas de trabalho na mesa.'),
+    ('B', 'Acompanhar a saúde do fluxo e o valor entregue para gerar melhoria contínua.'),
+    ('C', 'Identificar colaboradores lentos para aplicar punições.'),
+    ('D', 'Eliminar indicadores e gerenciar o projeto com base em palpites.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Extreme Programming (XP)' AND q.enunciado = 'Como a prática do design simples contribui para o desenvolvimento de software no XP?'
+WHERE t.nome_tema = 'Métricas Ágeis' AND q.enunciado = 'Diferente dos modelos tradicionais, qual é o objetivo principal de utilizar Métricas Ágeis em um time?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é o principal papel das ferramentas utilizadas pelas equipes ágeis?' FROM tema WHERE nome_tema = 'Ferramentas para Equipes Ágeis'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Substituir a comunicação entre os integrantes por processos automatizados.'),
-    ('B', 'Tornar uma empresa ágil automaticamente após a aquisição de softwares especializados.'),
-    ('C', 'Controlar individualmente o desempenho dos funcionários.'),
-    ('D', 'Apoiar a colaboração, centralizar informações e proporcionar transparência ao fluxo de trabalho.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Ferramentas para Equipes Ágeis' AND q.enunciado = 'Qual é o principal papel das ferramentas utilizadas pelas equipes ágeis?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a principal diferença entre as ferramentas de gestão de fluxo e as ferramentas de colaboração visual?' FROM tema WHERE nome_tema = 'Ferramentas para Equipes Ágeis'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'As ferramentas de gestão organizam tarefas, Backlogs e métricas, enquanto as de colaboração visual facilitam reuniões, ideias e atividades em grupo.'),
-    ('B', 'As ferramentas de gestão são utilizadas exclusivamente para comunicação, enquanto as visuais servem para controlar horários.'),
-    ('C', 'Ambas possuem a mesma finalidade e são utilizadas apenas para desenvolver códigos.'),
-    ('D', 'As ferramentas visuais substituem completamente o planejamento e a gestão das tarefas.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Ferramentas para Equipes Ágeis' AND q.enunciado = 'Qual é a principal diferença entre as ferramentas de gestão de fluxo e as ferramentas de colaboração visual?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual característica é fundamental para escolher e utilizar uma boa ferramenta ágil?' FROM tema WHERE nome_tema = 'Ferramentas para Equipes Ágeis'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Possuir o maior número possível de funcionalidades e campos obrigatórios.'),
-    ('B', 'Exigir atualizações constantes e processos burocráticos para registrar tarefas.'),
-    ('C', 'Ser simples, fácil de atualizar e representar fielmente a realidade do trabalho da equipe.'),
-    ('D', 'Impedir alterações no fluxo de trabalho depois que o projeto começar.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Ferramentas para Equipes Ágeis' AND q.enunciado = 'Qual característica é fundamental para escolher e utilizar uma boa ferramenta ágil?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Por que o excesso de customização em ferramentas como Jira e Azure DevOps pode prejudicar uma equipe ágil?' FROM tema WHERE nome_tema = 'Ferramentas para Equipes Ágeis'
+SELECT id_tema, 'Qual é o foco principal da metodologia Extreme Programming (XP) em comparação a frameworks de gestão de processo como o Scrum?' FROM tema WHERE nome_tema = 'Extreme Programming (XP)'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Porque impede que os funcionários tenham acesso às informações do projeto.'),
-    ('B', 'Porque cria burocracias e obrigações excessivas, fazendo com que a equipe perca mais tempo alimentando o sistema do que colaborando.'),
-    ('C', 'Porque elimina automaticamente todas as funcionalidades de gestão do software.'),
-    ('D', 'Porque impede a utilização de métricas como Lead Time e Burndown.')
+    ('A', 'Organizar a comunicação gerencial e eliminar a necessidade de testes de código.'),
+    ('B', 'Focar intensamente na excelência técnica e na engenharia de software, levando boas práticas ao limite.'),
+    ('C', 'Priorizar a burocracia e o cumprimento rígido de planos de longo prazo.'),
+    ('D', 'Reduzir a frequência de testes para acelerar a entrega inicial do sistema.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Ferramentas para Equipes Ágeis' AND q.enunciado = 'Por que o excesso de customização em ferramentas como Jira e Azure DevOps pode prejudicar uma equipe ágil?'
+WHERE t.nome_tema = 'Extreme Programming (XP)' AND q.enunciado = 'Qual é o foco principal da metodologia Extreme Programming (XP) em comparação a frameworks de gestão de processo como o Scrum?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é o principal objetivo de adotar boas práticas em projetos ágeis?' FROM tema WHERE nome_tema = 'Boas Práticas em Projetos Ágeis'
+SELECT id_tema, 'No XP, como atuam o TDD e a Programação em Par?' FROM tema WHERE nome_tema = 'Extreme Programming (XP)'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Seguir rigidamente um manual, sem permitir adaptações durante o projeto.'),
-    ('B', 'Utilizar os nomes e eventos do Scrum, mesmo mantendo métodos tradicionais de trabalho.'),
-    ('C', 'Desenvolver hábitos de disciplina, transparência e melhoria contínua, garantindo que a equipe realmente trabalhe de forma ágil.'),
-    ('D', 'Priorizar a quantidade de tarefas realizadas, independentemente da qualidade das entregas.')
+    ('A', 'O TDD cria testes após a entrega, e a Programação em Par divide o time em turnos.'),
+    ('B', 'O TDD foca na documentação manual, e a Programação em Par separa os desenvolvedores em salas distintas.'),
+    ('C', 'O TDD escreve o teste antes do código para evitar erros, e a Programação em Par une dois programadores na mesma máquina para detalhe e visão geral.'),
+    ('D', 'O TDD elimina validações automatizadas, e a Programação em Par impõe cronogramas rígidos.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Boas Práticas em Projetos Ágeis' AND q.enunciado = 'Qual é o principal objetivo de adotar boas práticas em projetos ágeis?'
+WHERE t.nome_tema = 'Extreme Programming (XP)' AND q.enunciado = 'No XP, como atuam o TDD e a Programação em Par?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Qual é a finalidade do critério INVEST e das definições DoR e DoD em projetos ágeis?' FROM tema WHERE nome_tema = 'Boas Práticas em Projetos Ágeis'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'O INVEST avalia o desempenho individual, enquanto DoR e DoD controlam os horários da equipe.'),
-    ('B', 'O INVEST ajuda a garantir a qualidade das Histórias de Usuário, o DoR verifica se o trabalho está pronto para começar e o DoD estabelece os critérios para considerar uma entrega concluída.'),
-    ('C', 'O INVEST organiza as reuniões, enquanto DoR e DoD determinam a duração das Sprints.'),
-    ('D', 'O INVEST define o orçamento do projeto, enquanto DoR e DoD substituem o Product Backlog.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Boas Práticas em Projetos Ágeis' AND q.enunciado = 'Qual é a finalidade do critério INVEST e das definições DoR e DoD em projetos ágeis?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'Por que o refinamento do Backlog, o ritmo sustentável e a segurança psicológica são importantes para uma equipe ágil?' FROM tema WHERE nome_tema = 'Boas Práticas em Projetos Ágeis'
-ON CONFLICT (id_tema, enunciado) DO NOTHING;
-INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
-SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
-FROM questao q JOIN tema t ON t.id_tema = q.id_tema
-CROSS JOIN (VALUES
-    ('A', 'Porque permitem eliminar todas as reuniões e impedir que ocorram erros durante o desenvolvimento.'),
-    ('B', 'Porque garantem que os integrantes trabalhem sempre sob pressão para aumentar a produtividade.'),
-    ('C', 'Porque substituem a necessidade de planejamento e acompanhamento das tarefas.'),
-    ('D', 'Porque melhoram a organização do trabalho, evitam sobrecargas e permitem que os integrantes identifiquem problemas sem medo de punições.')
-) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Boas Práticas em Projetos Ágeis' AND q.enunciado = 'Por que o refinamento do Backlog, o ritmo sustentável e a segurança psicológica são importantes para uma equipe ágil?'
-ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
-
-INSERT INTO questao (id_tema, enunciado)
-SELECT id_tema, 'O que pode acontecer quando uma equipe inicia uma tarefa sem que ela atenda aos critérios mínimos da Definição de Pronto (DoR)?' FROM tema WHERE nome_tema = 'Boas Práticas em Projetos Ágeis'
+SELECT id_tema, 'No XP, qual é o propósito da Integração Contínua (CI) e do design simples?' FROM tema WHERE nome_tema = 'Extreme Programming (XP)'
 ON CONFLICT (id_tema, enunciado) DO NOTHING;
 INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
 SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
 FROM questao q JOIN tema t ON t.id_tema = q.id_tema
 CROSS JOIN (VALUES
-    ('A', 'Podem surgir dúvidas, impedimentos técnicos e atrasos durante a Sprint, prejudicando o fluxo de trabalho.'),
-    ('B', 'A tarefa será concluída automaticamente com maior qualidade.'),
-    ('C', 'O tempo de desenvolvimento será reduzido obrigatoriamente.'),
-    ('D', 'A equipe não precisará realizar reuniões de alinhamento durante a Sprint.')
+    ('A', 'Unificar alterações e testes várias vezes ao dia e criar apenas o necessário para o momento atual.'),
+    ('B', 'Isolar o código de cada desenvolvedor por longos períodos e planejar todas as funcionalidades futuras de uma só vez.'),
+    ('C', 'Priorizar entregas rápidas ignorando testes automatizados e maximizar a complexidade inicial do sistema.'),
+    ('D', 'Substituir o ritmo de trabalho sustentável por jornadas extensas focadas em documentação estática.')
 ) AS opcoes(letra, texto)
-WHERE t.nome_tema = 'Boas Práticas em Projetos Ágeis' AND q.enunciado = 'O que pode acontecer quando uma equipe inicia uma tarefa sem que ela atenda aos critérios mínimos da Definição de Pronto (DoR)?'
+WHERE t.nome_tema = 'Extreme Programming (XP)' AND q.enunciado = 'No XP, qual é o propósito da Integração Contínua (CI) e do design simples?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'No Extreme Programming (XP), como o design simples lida com a arquitetura do software?' FROM tema WHERE nome_tema = 'Extreme Programming (XP)'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Cria arquiteturas complexas prevendo demandas futuras.'),
+    ('B', 'Resolve o problema atual com simplicidade, usando testes para evoluir depois.'),
+    ('C', 'Elimina testes automatizados ao priorizar estruturas rígidas de longo prazo.'),
+    ('D', 'Substitui o código funcional por planejamentos burocráticos.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Extreme Programming (XP)' AND q.enunciado = 'No Extreme Programming (XP), como o design simples lida com a arquitetura do software?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual é o papel adequado das ferramentas de software no contexto das equipes ágeis?' FROM tema WHERE nome_tema = 'Ferramentas para Equipes Ágeis'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Servir como ponto de partida principal para transformar a empresa em ágil imediatamente.'),
+    ('B', 'Atuar como meio facilitador para potencializar a colaboração, dar transparência e conectar equipes.'),
+    ('C', 'Substituir a necessidade de interações humanas por automações rígidas de processos.'),
+    ('D', 'Garantir a agilidade da organização apenas por meio da aquisição de licenças sofisticadas.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Ferramentas para Equipes Ágeis' AND q.enunciado = 'Qual é o papel adequado das ferramentas de software no contexto das equipes ágeis?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'De acordo com o infográfico, como as ferramentas ágeis se dividem para apoiar a equipe?' FROM tema WHERE nome_tema = 'Ferramentas para Equipes Ágeis'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Em código (GitHub/GitLab) para o backlog e editores de texto para retrospectivas.'),
+    ('B', 'Em comunicação (Slack/Teams) para substituir o Kanban e quadros físicos para o Burndown.'),
+    ('C', 'Em gestão de fluxo (Jira/Trello) para métricas e WIP, e colaboração visual (Miro/Mural) para quadros e retrospectivas.'),
+    ('D', 'Em automação de servidores para eliminar a necessidade de acompanhamento de progresso.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Ferramentas para Equipes Ágeis' AND q.enunciado = 'De acordo com o infográfico, como as ferramentas ágeis se dividem para apoiar a equipe?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Segundo as boas práticas no uso de ferramentas ágeis, a principal função dessas tecnologias deve ser?' FROM tema WHERE nome_tema = 'Ferramentas para Equipes Ágeis'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Refletir com simplicidade a realidade do time e focar na entrega de valor.'),
+    ('B', 'Impor processos burocráticos para detalhar o tempo da equipe.'),
+    ('C', 'Preservar o isolamento das informações entre os setores.'),
+    ('D', 'Priorizar o preenchimento de campos em detrimento da adaptação.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Ferramentas para Equipes Ágeis' AND q.enunciado = 'Segundo as boas práticas no uso de ferramentas ágeis, a principal função dessas tecnologias deve ser?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'De acordo com a imagem, o que acontece quando há excesso de configuração nas ferramentas ágeis?' FROM tema WHERE nome_tema = 'Ferramentas para Equipes Ágeis'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Aumenta a velocidade de entrega com processos obrigatórios.'),
+    ('D', 'Melhora a colaboração direta e elimina reuniões de alinhamento.'),
+    ('C', 'Garante a entrega de valor ao substituir o Kanban por formulários.'),
+    ('D', 'Gera burocracia e drena a energia do time, que passa a focar apenas em alimentar o sistema.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Ferramentas para Equipes Ágeis' AND q.enunciado = 'De acordo com a imagem, o que acontece quando há excesso de configuração nas ferramentas ágeis?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Sobre a transição para metodologias ágeis, assinale a alternativa que representa a verdadeira essência da agilidade:' FROM tema WHERE nome_tema = 'Boas Práticas em Projetos Ágeis'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'D'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Seguir manuais rigorosamente, focando mais na forma do que na adaptação.'),
+    ('B', 'Eliminar padrões de qualidade para acelerar as entregas do time.'),
+    ('C', 'Usar termos ágeis apenas para manter o modelo tradicional de gestão.'),
+    ('D', 'Cultivar disciplina, transparência e melhoria contínua na equipe.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Boas Práticas em Projetos Ágeis' AND q.enunciado = 'Sobre a transição para metodologias ágeis, assinale a alternativa que representa a verdadeira essência da agilidade:'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'No fluxo de trabalho ágil, qual é a função das definições DoR (Definition of Ready) e DoD (Definition of Done)?' FROM tema WHERE nome_tema = 'Boas Práticas em Projetos Ágeis'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'A'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'DoR evita o início de tarefas confusas e DoD garante a qualidade da entrega final.'),
+    ('B', 'DoR e DoD são listas idênticas usadas apenas para duplicar o controle de qualidade.'),
+    ('C', 'DoR serve para aprovação do cliente e DoD para estimar o tempo de desenvolvimento.'),
+    ('D', 'DoR valida histórias técnicas e DoD define o que entra no Backlog.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Boas Práticas em Projetos Ágeis' AND q.enunciado = 'No fluxo de trabalho ágil, qual é a função das definições DoR (Definition of Ready) e DoD (Definition of Done)?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'No âmbito da liderança e sustentabilidade em equipes ágeis, qual é o papel da segurança psicológica e do refinamento contínuo?' FROM tema WHERE nome_tema = 'Boas Práticas em Projetos Ágeis'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'B'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'Impor metas individuais rígidas para evitar erros e punir falhas nas retrospectivas.'),
+    ('B', 'Garantir um ambiente seguro para o time aprender com falhas e manter reuniões de planejamento eficientes.'),
+    ('C', 'Eliminar o refinamento do backlog para tornar o planejamento da Sprint o mais longo possível.'),
+    ('D', 'Focar no aumento do esforço individual, independentemente do valor gerado para o cliente.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Boas Práticas em Projetos Ágeis' AND q.enunciado = 'No âmbito da liderança e sustentabilidade em equipes ágeis, qual é o papel da segurança psicológica e do refinamento contínuo?'
+ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
+
+INSERT INTO questao (id_tema, enunciado)
+SELECT id_tema, 'Qual é a consequência apontada para a equipe quando se decide iniciar um item de backlog que não atende aos critérios mínimos de DoR (Definition of Ready)?' FROM tema WHERE nome_tema = 'Boas Práticas em Projetos Ágeis'
+ON CONFLICT (id_tema, enunciado) DO NOTHING;
+INSERT INTO alternativa (id_questao, letra, texto_alternativa, correta)
+SELECT q.id_questao, opcoes.letra, opcoes.texto, opcoes.letra = 'C'
+FROM questao q JOIN tema t ON t.id_tema = q.id_tema
+CROSS JOIN (VALUES
+    ('A', 'O aumento imediato da transparência e a eliminação de reuniões de emergência.'),
+    ('B', 'O pagamento de um preço alto no meio da Sprint, com atrasos e impedimentos técnicos.'),
+    ('C', 'A automatização do processo de testes e o fim do retrabalho na entrega final.'),
+    ('D', 'A melhoria contínua do fluxo de valor sem afetar o foco dos desenvolvedores.')
+) AS opcoes(letra, texto)
+WHERE t.nome_tema = 'Boas Práticas em Projetos Ágeis' AND q.enunciado = 'Qual é a consequência apontada para a equipe quando se decide iniciar um item de backlog que não atende aos critérios mínimos de DoR (Definition of Ready)?'
 ON CONFLICT (id_questao, letra) DO UPDATE SET texto_alternativa = EXCLUDED.texto_alternativa, correta = EXCLUDED.correta;
 
 COMMIT;
