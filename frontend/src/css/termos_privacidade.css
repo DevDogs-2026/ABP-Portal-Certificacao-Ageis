@@ -1,0 +1,101 @@
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 700,600,500,400,300;
+    font-display: swap;
+    src: url('/src/fonts/files/PlusJakartaSans-Variable-latin.woff') format('woff');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+:root {
+    --color-primary: #0038FA;
+    --color-secondary: #7A33CC;
+    --color-background: #F5F7FC;
+    --color-surface: #FFFFFF;
+    --color-text: #18233D;
+    --color-success: #16804A;
+    --color-error: #C53D47;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --light: 300;
+    --regular: 400;
+    --medium: 500;
+    --semi-bold: 600;
+    --bold: 700;
+}
+
+body {
+  line-height: 1.65;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  color: #1f2430;
+  background: #fff;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: #2b4fd8;
+  margin-bottom: 4px;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin-top: 28px;
+  color: #2b4fd8;
+}
+
+.meta {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.aviso {
+  background: #fff6db;
+  border: 1px solid #f4b942;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+a {
+  color: #2b4fd8;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.voltar {
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  body {
+    background: #14161c;
+    color: #e8eaf0;
+  }
+  h1,
+  h2,
+  a {
+    color: #8aa2ff;
+  }
+  .aviso {
+    background: #2a2410;
+    color: #f3e3b0;
+  }
+  .meta {
+    color: #9aa;
+  }
+  
+}

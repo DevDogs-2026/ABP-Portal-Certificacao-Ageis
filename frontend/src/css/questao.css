@@ -1,18 +1,29 @@
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 700,600,500,400,300;
+    font-display: swap;
+    src: url('/src/fonts/files/PlusJakartaSans-Variable-latin.woff') format('woff');
+}
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 :root {
-    --color-primary: #3A66FF;
+    --color-primary: #0038FA;
     --color-secondary: #7A33CC;
     --color-background: #F5F7FC;
     --color-surface: #FFFFFF;
     --color-text: #18233D;
     --color-success: #16804A;
     --color-error: #C53D47;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
     --light: 300;
     --regular: 400;
@@ -90,27 +101,29 @@
     background-color: var(--color-surface);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     position: absolute;
     top: 0;
     right: 15%;
     left: 15%;
     width: 70%;
-    height: 40rem;
+    min-height: 28rem;
+    max-height: 40rem;
     gap: 1rem;
     border-radius: 1.625rem;
 }
 
 .main__questao_enunciado {
     width: 90%;
-    height: 6rem;
-    margin-top: 2rem;
+    min-height: 6rem;
+    max-height: 10rem;
+    margin-top: 1rem;
 }
 
 .main__questao_texto {
     color: var(--color-text);
-    font-weight: bold;
+    font-weight: var(--bold);
     font-size: 1.25rem;
 }
 
@@ -121,36 +134,15 @@
 }
 
 .main__questao_img {
-    width: 90%;
+    width: 100%;
     height: 30rem;
-}
-
-.main__questao_img[hidden] {
-    display: none;
-}
-
-#erro-avaliacao {
-    position: fixed;
-    z-index: 4;
-    right: 2%;
-    bottom: 1rem;
-    left: 2%;
-    padding: 12px 16px;
-    border-radius: 12px;
-    background: var(--color-error);
-    color: var(--color-surface);
-    font-weight: var(--bold);
-    text-align: center;
-}
-
-#erro-avaliacao[hidden] {
-    display: none;
+    border-radius: 1.6rem;
 }
 
 /* Main Alternativas */
 .main__alternativas {
     position: absolute;
-    top: 42rem;
+    top: 40rem;
     right: 15%;
     left: 15%;
     width: 70%;
@@ -167,7 +159,8 @@
     align-items: center;
     cursor: pointer;
     width: 100%;
-    height: 65px;
+    min-height: 65px;
+    max-height: 120px;
     border-radius: 26px;
     border: solid transparent 3px;
 }
@@ -184,17 +177,11 @@
     border: solid var(--color-text) 3px;
     transition: all 0.6s;
 }
-.main__alternativa_selecionada .main__alternativa_span {
-    background-color: var(--color-primary);
-}
 
 .main__alternativa_certo {
     background-color: var(--color-success);
     border: solid var(--color-success) 3px;
     transition: all 0.6s;
-}
-.main__alternativa_certo .main__alternativa_span {
-    background-color: var(--color-success);
 }
 
 .main__alternativa_errado {
@@ -202,28 +189,18 @@
     border: solid var(--color-error) 3px;
     transition: all 0.6s;
 }
-.main__alternativa_errado .main__alternativa_span {
-    background-color: var(--color-error);
-}
 
 .main__alternativa {
+    text-transform: uppercase;
     font-weight: var(--medium);
     font-size: 1.5rem;
-    margin-left: 20px;
-}
-
-.main__alternativa_span {
-    width: 20px;
-    height: 20px;
-    border: solid var(--color-text) 2px;
-    border-radius: 50%;
-    margin-left: 24px;
+    margin-left: 10px;
 }
 
 .main__alternativa_texto {
     font-weight: var(--regular);
     font-size: 1.5rem;
-    margin-left: 44px;
+    margin-left: 10px;
 }
 
 /* Botão para Confirma a alternativa*/
@@ -266,10 +243,11 @@
     gap: 6rem;
     align-items: center;
     width: 70%;
-    height: 500px;
+    min-height: 70%;
     border-radius: 20px;
     position: fixed;
-    top: 20%;
+    top: 15%;
+    bottom: 15%;
     right: 15%;
     left: 15%;
 }
@@ -393,7 +371,6 @@
         right: 10%;
         left: 10%;
         width: 80%;
-        height: 35rem;
     }
     .main__questao_img {
         min-width: 90%;
@@ -405,6 +382,14 @@
         right: 10%;
         left: 10%;
         width: 80%;
+    }
+    .main__alternativa {
+        font-size: 1.3rem;
+        margin-left: 7px;
+    }
+    .main__alternativa_texto {
+        font-size: 1.1rem;
+        margin-left: 7px;
     }
     /* Main Botão de confirmar */
     .main__btn {
@@ -457,10 +442,9 @@
         right: 5%;
         left: 5%;
         width: 90%;
-        height: 28rem;
     }
     .main__questao_enunciado {
-        margin-top: 1rem;
+        margin-top: 0.2rem;
     }
     .main__questao_texto {
         font-size: 1.1rem;
@@ -468,6 +452,7 @@
     .main__questao_img {
         min-width: 90%;
         height: 16rem;
+        border-radius: 1rem;
     }
     /* Main Alternativa */
     .main__alternativas {
@@ -476,19 +461,18 @@
         left: 5%;
         width: 90%;
     }
-    .main__alternativa {
-        font-size: 1.2rem;
-        margin-left: 20px;
+    .main__alternativa_div {
+        border-radius: 16px;
     }
-    .main__alternativa_span {
-        width: 15px;
-        height: 15px;
+    .main__alternativa {
+        font-size: 1rem;
+        margin-left: 5px;
+    }
+    .main__alternativa_texto {
+        font-size: 0.8rem;
+        margin-left: 5px;
     }
     /* Main Botão de confirmar */
-    .main__alternativa_texto {
-        font-size: 1.2rem;
-        margin-left: 20px;
-    }
     .main__btn {
         font-size: 1.2rem;
         padding: 0.4rem 1rem;
@@ -522,7 +506,7 @@
         text-align: center;
         font-family: var(--fonte-01);
         font-weight: var(--medium);
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     .continuar__pausar_div div:nth-child(2) {
         flex-direction: column;
@@ -531,7 +515,7 @@
         width: 90%;
     }
     .cont__paus_btn {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         width: 180px;
         height: 50px;
     }
