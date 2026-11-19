@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliação - Regras</title>
-
-    <!-- Guarda: exige login. Precisa ser o primeiro script do head -->
-    <script src="./src/js/api.js"></script>
-    <script src="./src/js/guarda.js"></script>
-
+    <meta name="description" content="DogSchool: estude Metodologia Ágil e Scrum, faça a avaliação e conquiste seus certificados.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="shortcut icon" href="./src/images/icons/dogschool.ico" type="image/x-icon">
     <link rel="stylesheet" href="src/css/avaliacao.css">
-    <link rel="stylesheet" href="src/css/visual-refresh.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&display=swap" rel="stylesheet">
+    <!-- Guarda: exige login. Precisa ser o primeiro script do head -->
+    <script src="./src/js/guarda.js"></script>
+    <title>Avaliação - Regras</title>
 </head>
 <body class="body">
     <!-- Header -->
@@ -34,10 +28,9 @@
             <ul>
                 <li><a href="index.html">Início</a></li>
                 <li><a href="index.html#sobre-section">Sobre</a></li>
-                <li><a href="tema.html">Tema</a></li>
+                <li><a href="estudos.html">Estudos</a></li>
                 <li><a href="avaliacao.html">Avaliação</a></li>
-                <li><a href="progresso.html">Progresso</a></li>
-                <li><a href="certificados.html">Certificados</a></li>
+                <li><a href="perfil.html">Perfil</a></li>
             </ul>
         </nav>
 
@@ -83,10 +76,7 @@
         </section>
 
         <div class="main__btn_questao">
-            <button type="button" class="btn__avaliacao" id="iniciar-avaliacao">
-                Começar Avaliação
-            </button>
-            <p id="mensagem-inicio" role="alert" hidden></p>
+            <a href="questao.html" class="btn__avaliacao">Começar Avaliação</a>
         </div>
     </main>
 

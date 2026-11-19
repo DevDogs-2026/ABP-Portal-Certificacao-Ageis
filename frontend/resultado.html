@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Resultado da sua avaliação de metodologias ágeis.">
-    <title>Resultado da avaliação | Dog School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="shortcut icon" href="./src/images/icons/dogschool.ico" type="image/x-icon">
     <link rel="stylesheet" href="src/css/resultado.css">
-    <link rel="stylesheet" href="src/css/visual-refresh.css">
-    <script src="src/js/api.js"></script>
-    <script src="src/js/guarda.js"></script>
+    <title>Resultado da avaliação | Dog School</title>
 </head>
 <body>
     <header class="cabecalho">
@@ -31,31 +30,30 @@
             <div class="resultado-principal">
                 <div
                     class="grafico-aproveitamento"
-                    id="grafico-aproveitamento"
                     role="img"
-                    aria-label="Carregando aproveitamento"
-                    style="--percentual: 0%"
+                    aria-label="Aproveitamento: 66,67 por cento"
+                    style="--percentual: 66.67%"
                 >
                     <div class="grafico-centro">
                         <span class="icone-capelo" aria-hidden="true">✦</span>
-                    <strong id="percentual">--%</strong>
+                        <strong id="percentual">66,67%</strong>
                         <span>Aproveitamento</span>
                     </div>
                 </div>
 
                 <div class="situacao-container">
                     <div
-                        class="situacao"
+                        class="situacao resultado-aprovado"
                         id="situacao"
                         role="status"
                         aria-live="polite"
                     >
-                        <span class="indicador" id="indicador-situacao" aria-hidden="true">…</span>
-                        <span id="texto-situacao">Carregando</span>
+                        <span class="indicador" aria-hidden="true">✓</span>
+                        <span id="texto-situacao">Aprovado</span>
                     </div>
 
                     <p class="mensagem" id="mensagem-resultado">
-                        Estamos buscando o resultado desta tentativa.
+                        Parabéns! Você alcançou o aproveitamento necessário.
                     </p>
                 </div>
             </div>
@@ -64,7 +62,7 @@
                 <div class="dado dado-acertos">
                     <span class="dado-icone" aria-hidden="true">◎</span>
                     <span class="dado-conteudo">
-                        <strong class="dado-valor" id="acertos">—</strong>
+                        <strong class="dado-valor" id="acertos">8</strong>
                         <span class="dado-rotulo">Acertos</span>
                     </span>
                 </div>
@@ -72,7 +70,7 @@
                 <div class="dado dado-erros">
                     <span class="dado-icone" aria-hidden="true">×</span>
                     <span class="dado-conteudo">
-                        <strong class="dado-valor" id="erros">—</strong>
+                        <strong class="dado-valor" id="erros">4</strong>
                         <span class="dado-rotulo">Erros</span>
                     </span>
                 </div>
@@ -80,7 +78,7 @@
                 <div class="dado dado-questoes">
                     <span class="dado-icone" aria-hidden="true">▤</span>
                     <span class="dado-conteudo">
-                        <strong class="dado-valor" id="total-questoes">—</strong>
+                        <strong class="dado-valor" id="total-questoes">12</strong>
                         <span class="dado-rotulo">Questões</span>
                     </span>
                 </div>
@@ -95,11 +93,7 @@
                     <span aria-hidden="true">⌂</span>
                     Voltar ao início
                 </a>
-                <a class="botao botao-contorno" href="progresso.html">
-                    Ver progresso e histórico
-                </a>
             </div>
-            <p class="erro-resultado" id="erro-resultado" role="alert" hidden></p>
         </section>
     </main>
 
