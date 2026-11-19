@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Metodologia Ágil</title>
-    <link rel="stylesheet" href="src/css/acesso.css"/>
     <meta name="description" content="DogSchool: estude Metodologia Ágil e Scrum, faça a avaliação e conquiste seus certificados.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="shortcut icon" href="./src/images/icons/dogschool.ico" type="image/x-icon">
+    <link rel="stylesheet" href="src/css/acesso.css"/>
+    <title>Login para Acesso</title>
 </head>
 <body>
     <div class="container" id="container">
         
         <nav class="btn-home">
-            <a href="index.html" class="button-voltar"><img src="src/images/icons/seta-icon.png" class="icone-voltar" alt="Home">Home</a>
+            <a href="index.html" class="button-voltar"><i class="icone-voltar fa-solid fa-angle-left"></i>Home</a>
         </nav>
 
         <!-- Cadastro -->
@@ -19,22 +21,22 @@
             <form id="signupForm" method="post">
                 <h1 class="form-title">Criar Conta</h1>
                 <div class="input-icon">
-                    <img src="src/images/icons/profile-icon.svg" alt="icone-profile" aria-hidden="true">
+                    <i class="fa-regular fa-circle-user"></i>
                     <label for="cad-nome" class="sr-only">Nome completo</label>
                     <input type="text" id="cad-nome" name="nome" placeholder="Nome Completo" autocomplete="name" required>
                 </div>
                     <div class="input-icon">
-                        <img src="src/images/icons/mail-icon.svg" alt="icone-email" aria-hidden="true">
+                        <i class="fa-regular fa-envelope"></i>
                         <label for="cad-email" class="sr-only">E-mail</label>
                         <input type="email" id="cad-email" name="email" placeholder="Email" autocomplete="email" required>
                     </div>
                     <div class="input-icon">
-                        <img src="src/images/icons/cpf-icon.svg" alt="icone-card" aria-hidden="true">
+                        <i class="fa-regular fa-address-card"></i>
                         <label for="cad-cpf" class="sr-only">CPF</label>
                         <input type="text" id="cad-cpf" name="cpf" placeholder="CPF" inputmode="numeric" required>
                     </div>
                     <div class="input-icon">
-                        <img src="src/images/icons/lock-icon.svg" alt="icone-cadeado" aria-hidden="true">
+                        <i class="fa-solid fa-unlock-keyhole"></i>
                         <label for="cad-senha" class="sr-only">Senha</label>
                         <input type="password" id="cad-senha" name="senha" placeholder="Senha" autocomplete="new-password" required>
                     </div>
@@ -54,12 +56,12 @@
             <form id="loginForm" method="post">
                 <h1 class="form-title">Entrar na Conta</h1>
                 <div class="input-icon">
-                    <img src="src/images/icons/cpf-icon.svg" alt="icone-card" aria-hidden="true">
+                    <i class="fa-regular fa-address-card"></i>
                     <label for="login-cpf" class="sr-only">CPF</label>
                     <input type="text" id="login-cpf" name="cpf" placeholder="CPF" inputmode="numeric" required>
                 </div>
                 <div class="input-icon">
-                    <img src="src/images/icons/lock-icon.svg" alt="icone-cadeado" aria-hidden="true">
+                    <i class="fa-solid fa-unlock-keyhole"></i>
                     <label for="login-senha" class="sr-only">Senha</label>
                     <input type="password" id="login-senha" name="senha" placeholder="Senha" autocomplete="current-password" required>
                 </div>
@@ -84,7 +86,7 @@
             </div>
         </div>
     </div>
-
+    <!-- <script src="src/js/api.js"></script> -->
     <script src="src/js/acesso.js"></script>
 </body>
 </html>
