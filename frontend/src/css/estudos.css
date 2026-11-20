@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Plus Jakarta Sans';
     font-style: normal;
-    font-weight: 800;
+    font-weight: 700,600,500,400,300;
     font-display: swap;
     src: url('/src/fonts/files/PlusJakartaSans-Variable-latin.woff') format('woff');
 }
@@ -24,6 +24,12 @@
     --color-success: #16804A;
     --color-error: #C53D47;
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --light: 300;
+    --regular: 400;
+    --medium: 500;
+    --semi-bold: 600;
+    --bold: 700;
 }
 
 /* ---------- Header ---------- */
@@ -34,7 +40,7 @@ body {
 .logo {
     position: relative;
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: var(--bold);
     padding: 0.3em clamp(0.5em, calc(16.4vw - 180px), 3em);
 }
 
@@ -74,7 +80,7 @@ header.scrolled {
 .nav-bar {
     display: flex;
     align-items: center;
-    font-weight: 200;
+    font-weight: var(--light);
 }
 
 .nav-bar ul {
@@ -87,7 +93,8 @@ header.scrolled {
     position: relative;          /* sempre, não só no hover */
     display: inline-block;       /* padding e bottom passam a funcionar direito */
     color: var(--color-text);
-    font-size: 1rem;
+    font-weight: var(--bold);
+    font-size: 1.3rem;
     padding: 10px 22px;
     border-radius: 50px;
     margin: 0 4px;
@@ -166,6 +173,7 @@ button.btnLogin-popup {
     margin-bottom: 6px;
     overflow: hidden;
     height: auto;
+    scroll-margin-top: 110px; /* altura do header + um respiro */
 }
 
 /* o botão com o título do tópico */
@@ -179,7 +187,7 @@ button.btnLogin-popup {
     background: none;
     color: var(--color-surface);
     font-size: 1.8rem;
-    font-weight: 600;
+    font-weight: var(--semi-bold);
     text-align: left;
     cursor: pointer;
 }
@@ -208,7 +216,7 @@ button.btnLogin-popup {
 .conteudo {
     padding: 8px 20px 24px;
     font-size: 0.95rem;
-    font-weight: 300;
+    font-weight: var(--light);
     line-height: 1.6;
     cursor: default;
 }
@@ -219,13 +227,12 @@ button.btnLogin-popup {
 
 .texto-explicativo p {
     color: var(--color-surface);
-    font-weight: 400;
+    font-weight: var(--regular);
     font-size: 1.4rem;
 }
 
 .texto-explicativo img {
     width: 100%;
-    height: auto;
     margin-top: 1rem;
     margin-bottom: 1.5rem;
     border-radius: 2rem;
@@ -234,12 +241,12 @@ button.btnLogin-popup {
 footer {
     color: var(--color-text);
     max-height: 400px;
-    height: 100%;
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    padding: 1em 0;
+    padding: 2.5em 0;
     box-sizing: border-box;
+    position: relative;
     border-top: solid 1px var(--color-secondary);
 }
 
@@ -289,7 +296,7 @@ footer {
     }
     .logo {
         font-size: 2.2rem;
-        font-weight: 700;
+        font-weight: var(--bold);
         padding: 0.2rem 2rem;
     }
     .nav-bar ul {
@@ -442,6 +449,9 @@ footer {
     .estudo {
         padding: 25% 1.5em 3em;
     }
+    .item {
+    scroll-margin-top: 90px;
+}
     .seta {
         width: 8px;
         height: 8px;
