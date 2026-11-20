@@ -1,26 +1,35 @@
 @font-face {
     font-family: 'Plus Jakarta Sans';
     font-style: normal;
-    font-weight: 200 800;
+    font-weight: 700,600,500,400,300;
     font-display: swap;
     src: url('/src/fonts/files/PlusJakartaSans-Variable-latin.woff') format('woff');
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
+    list-style: none;
+    text-decoration: none;
     box-sizing: border-box;
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 :root {
---color-primary: #0038FA;
---color-secondary: #7A33CC;
---color-background: #F5F7FC;
---color-surface: #FFFFFF;
---color-text: #18233D;
---color-success: #16804A;
---color-error: #C53D47;
+    --color-primary: #0038FA;
+    --color-secondary: #7A33CC;
+    --color-background: #F5F7FC;
+    --color-surface: #FFFFFF;
+    --color-text: #18233D;
+    --color-success: #16804A;
+    --color-error: #C53D47;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --light: 300;
+    --regular: 400;
+    --medium: 500;
+    --semi-bold: 600;
+    --bold: 700;
 }
 
 body{
@@ -34,9 +43,31 @@ body{
     gap: 16px;
 }
 
+.btn-home {
+    position: absolute;
+    z-index: 100;
+    top: 2rem;
+    left: 3rem;
+}
+
+.button-voltar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: var(--bold);
+    font-size: 1.3rem;
+    transition: color 0.6s;
+}
+
+.container.active .button-voltar {
+    color: var(--color-background);
+}
+
 .title {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: var(--bold);
     color: var(--color-text);
     margin-bottom: 20px;
 }
@@ -59,7 +90,7 @@ body{
     padding: 10px 45px;
     border: 1px solid transparent;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: var(--semi-bold);
     letter-spacing: 0.5px;
     margin-top: 10px;
     cursor: pointer;
@@ -87,7 +118,8 @@ body{
     width: 100%;
 }
 
-.input-icon img {
+.input-icon i {
+    color: var(--color-primary);
     position: absolute;
     top: 50%;
     left: 14px;
@@ -119,7 +151,9 @@ body{
 .button-voltar {
     position: absolute;
     top: 5rem;
-    z-index: 999;
+    font-weight: var(--bold);
+    font-size: 1.3rem;
+    z-index: 4;
     display: flex;
     margin-left: 3.5rem;
     margin-top: -2.2rem;
@@ -165,7 +199,7 @@ body{
         width: 100%;
     }
 
-    .input-icon img {
+    .input-icon i {
         width: 1.2rem;
         height: 1.2rem;
     }
@@ -189,7 +223,7 @@ body{
         margin-top: 0.5rem;
     }
 
-    .input-icon img {
+    .input-icon i {
         width: 1rem;
         height: 1rem;
     }
