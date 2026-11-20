@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 700,600,500,400,300;
+    font-display: swap;
+    src: url('/src/fonts/files/PlusJakartaSans-Variable-latin.woff') format('woff');
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,11 +13,10 @@
     text-decoration: none;
     box-sizing: border-box;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    color: var(--color-text);
 }
 
 :root {
-    --color-primary: #3A66FF;
+    --color-primary: #0038FA;
     --color-secondary: #7A33CC;
     --color-background: #F5F7FC;
     --color-surface: #FFFFFF;
@@ -17,12 +24,12 @@
     --color-success: #16804A;
     --color-error: #C53D47;
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
     --light: 300;
     --regular: 400;
     --medium: 500;
     --semi-bold: 600;
     --bold: 700;
-    --bolder: 900;
 }
 
 body {
@@ -32,7 +39,7 @@ body {
 .logo {
     position: relative;
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: var(--bold);
     padding: 0.3em clamp(0.5em, calc(16.4vw - 180px), 3em);
 }
 
@@ -72,7 +79,7 @@ header.scrolled {
 .nav-bar {
     display: flex;
     align-items: center;
-    font-weight: 200;
+    font-weight: var(--light);
 }
 
 .nav-bar ul {
@@ -85,8 +92,8 @@ header.scrolled {
     position: relative;          /* sempre, não só no hover */
     display: inline-block;       /* padding e bottom passam a funcionar direito */
     color: var(--color-text);
-    font-weight: bold;
-    font-size: 1rem;
+    font-weight: var(--bold);
+    font-size: 1.3rem;
     padding: 10px 22px;
     border-radius: 50px;
     margin: 0 4px;
@@ -116,7 +123,7 @@ header.scrolled {
     display: inline-block;
     color: var(--color-secondary);
     font-size: 1rem;
-    font-weight: var(--bolder);
+    font-weight: var(--bold);
     padding: 12px 40px;
     border-radius: 25px;
     border: 2px solid var(--color-secondary);
@@ -183,14 +190,15 @@ button.btnLogin-popup {
 
 /* Sub-Titulo */
 .sub_titulo {
+    cursor: default;
     display: flex;
     justify-content: center;
     margin: 2rem 0;
 }
 
 .sub_titulo h2 {
-    background-color: var(--color-surface);
     color: var(--color-text);
+    text-wrap: noWrap;
     font-size: 2.2rem;
     padding: 1rem;
     border-radius: 18px;
@@ -232,16 +240,11 @@ button.btnLogin-popup {
 /* Botão para Avaliação */
 .main__btn_questao {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
     justify-content: center;
     margin: 5rem 0;
 }
 
 .btn__avaliacao {
-    font-family: inherit;
-    cursor: pointer;
     background-color: var(--color-success);
     color: var(--color-surface);
     font-weight: var(--medium);
@@ -280,7 +283,6 @@ button.btnLogin-popup {
     }
     .logo {
         font-size: 2.2rem;
-        font-weight: 700;
         padding: 0.2rem 2rem;
     }
     .nav-bar ul {
