@@ -240,3 +240,22 @@ body{
         font-size: 1.3rem;
     }
 }
+
+/* Recuperação por e-mail: mantém a identidade visual sem deslocar o formulário. */
+.container.recovery { display: flex; align-items: center; justify-content: center; min-height: 420px; overflow: visible; }
+.container.recovery .btn-home { top: 18px; left: 22px; position: absolute; }
+.container.recovery .button-voltar { position: static; margin: 0; font-size: .95rem; }
+.container.recovery .form-container { position: static; width: 100%; height: auto; margin: 0; display: flex; justify-content: center; }
+.container.recovery form { min-height: 350px; width: min(100%, 450px); padding: 68px 24px 30px; gap: 10px; }
+.container.recovery .title { text-align: center; margin: 0; }
+.container.recovery .ajuda { text-align: center; font-size: .91rem; line-height: 1.5; color: #475569; }
+.container.recovery input { width: 100%; padding: 12px 14px; font-size: 1rem; }
+.container.recovery button { width: 100%; font-size: 1rem; }
+.container.recovery button:disabled { cursor: not-allowed; opacity: .65; }
+.container.recovery .aviso { font-size: .90rem; line-height: 1.5; text-align: center; color: var(--color-success); min-height: 1.5em; }
+.container.recovery .aviso.erro { color: var(--color-error); }
+.container.recovery .link-login { font-weight: 700; color: var(--color-primary); text-decoration: underline; }
+@media (max-width: 600px) {
+  .container.recovery { width: 100%; min-height: 420px; }
+  .container.recovery form { padding: 70px 20px 26px; }
+}
