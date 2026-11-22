@@ -15,16 +15,25 @@ window.apiRequest = async function (rota, opcoes = {}) {
 
   const corpo = await response.text();
   let data = {};
+  let respostaInvalida = false;
 
   if (corpo) {
     try {
       data = JSON.parse(corpo);
+      if (!data || typeof data !== 'object' || Array.isArray(data)) {
+        respostaInvalida = true;
+      }
     } catch {
-      data = { mensagem: corpo };
+      respostaInvalida = true;
     }
   }
 
-  return { response, data };
+  // Nunca apresenta HTML bruto do Render/Express para o usuário.
+  if (respostaInvalida) {
+    data = { mensagem: 'Resposta inesperada do servidor. Tente novamente mais tarde.' };
+  }
+
+  return { response, data, respostaInvalida };
 };
 
 // Encaminha chamadas de autenticação pelo helper compartilhado da API.

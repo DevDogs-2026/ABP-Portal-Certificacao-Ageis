@@ -1,58 +1,85 @@
-// ---------- Sessão (só para testes: usa o localStorage) ----------
-const CHAVE_SESSAO = 'usuarioLogado';
+// Sessão do DogSchool: consultar SEMPRE o backend (cookie HttpOnly).
+// Limpa chaves persistidas por versões antigas, inclusive CPFs e dados de cadastro.
+function limparDadosLocaisLegados() {
+  for (const chave of ['usuarios', 'usuarioLogado', 'tentativasLogin']) {
+    try { localStorage.removeItem(chave); } catch {}
+  }
+}
+
+limparDadosLocaisLegados();
+
+// O cache existe apenas na memória da aba; é perdido ao fechar/recarregar a página.
+let usuarioEmMemoria = null;
 
 function usuarioLogado() {
-  try {
-    return JSON.parse(localStorage.getItem(CHAVE_SESSAO));
-  } catch {
+  return usuarioEmMemoria;
+}
+
+async function consultarSessao() {
+  const response = await fetch('/api/auth/me', {
+    credentials: 'include',
+    cache: 'no-store',
+  });
+  if (!response.ok) {
+    usuarioEmMemoria = null;
     return null;
   }
+  const data = await response.json();
+  usuarioEmMemoria = data.usuario || null;
+  return usuarioEmMemoria;
 }
 
-function sair() {
-  localStorage.removeItem(CHAVE_SESSAO);
-  window.location.href = 'index.html';
-}
-
-// Usar nas páginas que exigem login (avaliacao, certificados) que vai ser implementado futuramente
-function exigirLogin() {
-  if (!usuarioLogado()) window.location.href = 'acesso.html';
-}
-
-// Trocar o botão "Login" do header pelo nome e um botão "Sair"
-function atualizarHeader() {
-  const area = document.querySelector('.login-container');
-  const usuario = usuarioLogado();
-  if (!area || !usuario) return;
-
-  const botaoSair = document.createElement('button');
-  botaoSair.className = 'btnLogin-popup';
-  botaoSair.textContent = 'Sair';
-  botaoSair.addEventListener('click', sair);
-
-  area.replaceChildren(botaoSair);
-}
-
-// ---------- Ferramenta de testes (rodar pelo console, em qualquer página) ----------
-// limparDadosDeTeste()                 -> apaga a sessão e todos os cadastros
-// limparDadosDeTeste('seu@email.com')  -> apaga só esse usuário e a sessão
-function limparDadosDeTeste(email) {
-  localStorage.removeItem(CHAVE_SESSAO);
-
-  if (email) {
-    let lista = [];
-    try {
-      lista = JSON.parse(localStorage.getItem('usuarios')) || [];
-    } catch {}
-    const alvo = String(email).trim().toLowerCase();
-    const restantes = lista.filter((u) => u.email !== alvo);
-    localStorage.setItem('usuarios', JSON.stringify(restantes));
-  } else {
-    localStorage.removeItem('usuarios');
+async function sair() {
+  try {
+    const response = await fetch('/api/auth/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
+    if (!response.ok) throw new Error('Falha ao encerrar sessão.');
+    usuarioEmMemoria = null;
+    limparDadosLocaisLegados();
+    window.location.href = 'index.html';
+  } catch (error) {
+    console.error('Erro no logout:', error);
+    alert('Não foi possível sair. Verifique a conexão e tente novamente.');
   }
+}
 
+async function exigirLogin() {
+  try {
+    const usuario = await consultarSessao();
+    if (usuario) return usuario;
+  } catch (error) {
+    console.error('Erro ao consultar sessão:', error);
+  }
+  usuarioEmMemoria = null;
+  window.location.href = 'acesso.html';
+  return null;
+}
+
+async function atualizarHeader() {
+  const area = document.querySelector('.login-container');
+  if (!area) return;
+
+  try {
+    const usuario = await consultarSessao();
+    if (!usuario) return; // Mantém o botão de login do HTML.
+
+    const botaoSair = document.createElement('button');
+    botaoSair.className = 'btnLogin-popup';
+    botaoSair.textContent = 'Sair';
+    botaoSair.addEventListener('click', sair);
+    area.replaceChildren(botaoSair);
+  } catch (error) {
+    usuarioEmMemoria = null;
+    console.error('Erro ao atualizar sessão no cabeçalho:', error);
+  }
+}
+
+// Limpa somente dados legados do navegador; não altera cadastros do PostgreSQL.
+function limparDadosDeTeste(_email) {
+  limparDadosLocaisLegados();
   window.location.reload();
 }
 
 atualizarHeader();
-
