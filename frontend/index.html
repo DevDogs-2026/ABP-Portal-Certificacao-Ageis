@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DogSchool: estude Metodologia Ágil e Scrum, faça a avaliação e conquiste seus certificados.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="shortcut icon" href="./src/images/icons/dogschool.ico" type="image/x-icon">
     <link rel="stylesheet" href="src/css/index.css">
+
     <title>Dog School</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -17,20 +18,19 @@
             <a href="#hero-section" class="title-primary">Dog</a><a href="#hero-section" class="title-secondary">School</a>
         </div>
 
-        <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-controls="nav" aria-expanded="false">
             <span class="line"></span>
             <span class="line"></span>
             <span class="line"></span>
         </button>
 
-        <nav class="nav-bar" id="nav">
+        <nav class="nav-bar" id="nav" aria-label="Menu principal">
             <ul>
                 <li><a href="#hero-section">Início</a></li>
                 <li><a href="#sobre-section">Sobre</a></li>
-                <li><a href="tema.html">Tema</a></li>
+                <li><a href="estudos.html">Estudos</a></li>
                 <li><a href="avaliacao.html">Avaliação</a></li>
-                <li><a href="progresso.html">Progresso</a></li>
-                <li><a href="certificados.html">Certificados</a></li>
+                <li><a href="perfil.html">Perfil</a></li>
             </ul>
         </nav>
 
@@ -38,6 +38,8 @@
             <a href="acesso.html" class="btnLogin-popup">Login</a>
         </div>
     </header>
+
+    <main>
     
 
     <!-- Hero -->
@@ -57,8 +59,8 @@
 
                 <div class="hero-buttons">
                     <a href="acesso.html" class="btn-inscricao">
-                        Inscreva-se
-                        <img class="btn-inscricao-icon" src="src/images/icons/arrow-icon.svg" alt="">
+                        <span class="btn-inscricao-texto">Inscreva-se</span>
+                        <i class="btn-inscricao-icon fa-solid fa-arrow-right-long"></i>
                     </a>
 
                     <a href="#sobre-section" class="btn-saiba">Saiba mais</a>
@@ -67,9 +69,9 @@
     <!-- Arte do hero: logo + círculo + pontos -->
 
         <div class="hero-art">
-            <img class="art-circle" src="src/images/objetos/circulo.svg" alt="">
-            <img class="art-dots" src="src/images/objetos/pontos.svg" alt="">
-            <img class="hero-logo" src="src/images/logo/dogschool-logo-no-background.png" alt="Mascote DogSchool: cachorro com capelo de formatura segurando um diploma">
+            <img class="art-circle" src="./src/images/objetos/circulo.svg" alt="">
+            <img class="art-dots" src="./src/images/objetos/pontos.svg" alt="">
+            <img class="hero-logo" src="./src/images/logo/dogschool-logo-no-background.webp" alt="Mascote DogSchool: cachorro com capelo de formatura segurando um diploma" fetchpriority="high">
         </div>
     </section>
 
@@ -77,16 +79,16 @@
 
     <!-- Section Nº02-->
 
-    <section class="box" id="sobre-section">
+    <section class="box" id="sobre-section" aria-label="Sobre o curso">
 
         <!--Box 1-->
 
         <div class="sobre-box">
-            <div class="title"> Certificação </div>
+            <div class="title"> O que é DogSchool? </div>
                 <div class="bar">
                     <div class="info">
-                        <span class="text-box"> A certificação permite que você comprove que realizou o curso, obteve conhecimento e está apto para seguir carreira com mais um diferencial em seu currículo! <br><br>
-                            No final do curso, será disponibilizado para você um certificado com seu nome, CPF, data de finalização do curso e porcentagem total obtida na avaliação! <br>
+                        <span class="text-box"> A DogSchool é uma plataforma educacional voltada ao ensino de Metodologias Ágeis, práticas utilizadas para organizar projetos, planejar tarefas e melhorar o trabalho em equipe em diferentes áreas profissionais. <br><br>
+                            Nosso principal produto é o Scrum, oferecendo materiais de estudo e avaliações interativas para desenvolver conhecimentos e acompanhar o aprendizado. <br>
                         </span>
                     </div>
                 </div>            
@@ -96,10 +98,11 @@
         <!--Box 2-->
 
         <div class="sobre-box">
-            <div class="title"> Objetivos </div>
+            <div class="title"> Avaliação </div>
                 <div class="bar">
                     <div class="info">
-                        <span class="text-box"> O objetivo deste curso é integrar ao conhecimento do usuário, um modelo de planejamento para melhorar a organização, velocidade de desenvolvimento, senso de prioridades, melhoria no trabalho em equipe. <br>
+                        <span class="text-box"> A DogSchool disponibiliza uma avaliação interativa com 12 questões sobre Metodologias Ágeis, permitindo que o usuário coloque em prática os conhecimentos adquiridos durante os estudos. <br><br>
+                            Ao concluir a avaliação, o participante recebe sua pontuação e pode acompanhar seu desempenho, identificando seus avanços e os pontos que ainda precisam ser aprimorados. <br>
                         </span>
                     </div>
                 </div>
@@ -109,11 +112,11 @@
         <!--Box 3-->
 
         <div class="sobre-box">
-            <div class="title"> Avaliação </div>
+            <div class="title"> Certificação </div>
                 <div class="bar">
                     <div class="info">
-                        <span class="text-box"> A Avaliação ocorre com base na apostila disponível para leitura gratuita neste site.<br><br>
-                            Serão no total de 12 temas sobre SCRUM, onde cada pergunta será sorteada aleatoriamente.
+                        <span class="text-box"> Ao ser aprovado na avaliação de Metodologias Ágeis, o usuário poderá receber um certificado digital que reconhece seus conhecimentos e registra seu desempenho. <br><br>
+                            O certificado apresenta informações sobre a avaliação, como nome do participante, data de conclusão e pontuação obtida, além de um QR Code que permite verificar sua autenticidade. <br>
                         </span>
                     </div>
                 </div>
@@ -126,12 +129,14 @@
 
 <hr class="hr-1">
 
+    </main>
+
     <!--Footer-->
 
     <footer>
         <div class="icons-footer">
             <p>
-                &copy; 2026 Metodologia Ágil. Todos os direitos reservados.
+                &copy; 2026 DogSchool. Todos os direitos reservados.
             </p>
         </div>
     </footer>
