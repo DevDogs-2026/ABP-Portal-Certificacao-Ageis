@@ -65,6 +65,14 @@ async function atualizarHeader() {
     const usuario = await consultarSessao();
     if (!usuario) return; // Mantém o botão de login do HTML.
 
+    // Na página inicial, leva quem já está logado diretamente aos estudos.
+    const botaoPrincipal = document.querySelector('.btn-inscricao');
+    if (botaoPrincipal) {
+      botaoPrincipal.href = 'estudos.html';
+      const textoPrincipal = botaoPrincipal.querySelector('.btn-inscricao-texto');
+      if (textoPrincipal) textoPrincipal.textContent = 'Comece a estudar';
+    }
+
     const botaoSair = document.createElement('button');
     botaoSair.className = 'btnLogin-popup';
     botaoSair.textContent = 'Sair';
