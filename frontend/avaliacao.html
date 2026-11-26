@@ -10,7 +10,6 @@
     <script src="./src/js/guarda.js"></script>
 
     <link rel="stylesheet" href="src/css/avaliacao.css">
-    <link rel="stylesheet" href="src/css/visual-refresh.css">
     <title>Avaliação - Regras</title>
 </head>
 <body class="body">
@@ -70,16 +69,15 @@
                 <h3 class="regra__h3">Fluxo e Interrupções:</h3>
                 <ul class="regra__ul">
                     <li class="regra__li"><span class="regra__span">Tentativa única:</span> Cada tema pode ser respondido apenas uma única vez por avaliação.</li>
-                    <li class="regra__li"><span class="regra__span">Interrupção voluntária:</span> O candidato pode optar por salvar e encerrar a sessão após qualquer resposta para retomar depois.</li>
-                    <li class="regra__li"><span class="regra__span">Penalidade por queda:</span> Perdas de conexão, fechamento do navegador ou saídas forçadas invalidam a questão atual, marcando-a como incorreta.</li>
+                    <li class="regra__li"><span class="regra__span">Interrupção voluntária:</span> Ao sair de uma questão sem confirmar a resposta, seja utilizando a seta Voltar do navegador, atualizando a página (F5) ou fechando a aba, a questão será considerada incorreta. Ao retornar à avaliação, o usuário continuará na próxima questão disponível.</li>
                     <li class="regra__li"><span class="regra__span">Histórico e Emissão:</span> Todas as avaliações são salvas no histórico. Os aprovados recebem um certificado eletrônico validável por QR Code.</li>
                 </ul>
             </div>
         </section>
 
         <div class="main__btn_questao">
-            <button type="button" class="btn__avaliacao" id="iniciar-avaliacao">
-                Começar Avaliação
+            <button type="button" class="btn__avaliacao" id="iniciar-avaliacao" disabled>
+                Verificando...
             </button>
             <p id="mensagem-inicio" role="alert" hidden></p>
         </div>
