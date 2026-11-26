@@ -44,6 +44,38 @@ async function executarTransacao(operacao) {
     }
 }
 
+// Finaliza uma tentativa quando a última questão foi respondida ou encerrada por timeout/interrupção.
+async function finalizarSeCompleta(client, idTentativa) {
+    const totais = await client.query(
+        `SELECT COUNT(*)::integer AS respondidas,
+                COUNT(*) FILTER (WHERE r.acertou)::integer AS acertos
+         FROM resposta_candidato r
+         JOIN progresso p USING (id_progresso)
+         WHERE p.id_tentativa = $1`,
+        [idTentativa]
+    );
+    if (Number(totais.rows[0].respondidas) !== TOTAL_QUESTOES) return null;
+
+    const calculado = calcularResultados(Number(totais.rows[0].acertos), TOTAL_QUESTOES);
+    const salvo = await client.query(
+        `INSERT INTO resultado
+            (id_tentativa, total_acertos, total_questoes,
+             aproveitamento_percentual, nota_final, data_conclusao, aprovado)
+         VALUES ($1, $2, $3, $4, $4, CURRENT_TIMESTAMP, $5)
+         RETURNING id_tentativa, total_questoes, total_acertos,
+                   aproveitamento_percentual, aprovado, data_conclusao`,
+        [idTentativa, calculado.acertos, calculado.totalQuestoes,
+         calculado.percentual, calculado.aprovado]
+    );
+    await client.query(
+        `UPDATE tentativa_certificacao
+         SET status_tentativa = 'concluida', concluida_em = CURRENT_TIMESTAMP
+         WHERE id_tentativa = $1`,
+        [idTentativa]
+    );
+    return formatarResultado(salvo.rows[0]);
+}
+
 // Cria uma tentativa ou informa a tentativa ainda aberta do candidato autenticado.
 async function iniciarTentativa(req, res, next) {
     try {
@@ -56,17 +88,21 @@ async function iniciarTentativa(req, res, next) {
             const existente = await client.query(
                 `SELECT id_tentativa
                  FROM tentativa_certificacao
-                 WHERE id_candidato = $1 AND status_tentativa = 'em_andamento'
+                 WHERE id_candidato = $1 AND status_tentativa IN ('em_andamento', 'pausada')
                  ORDER BY iniciada_em DESC
                  LIMIT 1`,
                 [req.candidato.id]
             );
 
             if (existente.rowCount) {
-                return {
-                    idTentativa: Number(existente.rows[0].id_tentativa),
-                    retomada: true,
-                };
+                const idTentativa = Number(existente.rows[0].id_tentativa);
+                await client.query(
+                    `UPDATE tentativa_certificacao
+                     SET status_tentativa = 'em_andamento'
+                     WHERE id_tentativa = $1 AND status_tentativa = 'pausada'`,
+                    [idTentativa]
+                );
+                return { idTentativa, retomada: true };
             }
 
             const certificacao = await client.query(
@@ -167,7 +203,15 @@ async function obterQuestaoAtual(req, res, next) {
                 return { concluida: true, resultado: formatarResultado(final.rows[0]) };
             }
 
-            const progresso = await client.query(
+            if (tentativa.rows[0].status_tentativa === 'pausada') {
+                await client.query(
+                    `UPDATE tentativa_certificacao SET status_tentativa = 'em_andamento'
+                     WHERE id_tentativa = $1`,
+                    [idTentativa]
+                );
+            }
+
+            let progresso = await client.query(
                 `SELECT p.id_progresso, p.id_questao_sorteada, p.id_tema,
                         p.iniciado_em, t.nome_tema, q.enunciado, q.imagem_url
                  FROM progresso p
@@ -183,6 +227,49 @@ async function obterQuestaoAtual(req, res, next) {
                  FOR UPDATE OF p`,
                 [idTentativa]
             );
+
+            // Se a questão já havia sido aberta antes de uma nova requisição de retomada,
+            // considera-se que houve interrupção (reload, fechamento ou perda de conexão).
+            // A questão é encerrada no servidor e nunca volta a ser apresentada.
+            if (progresso.rowCount && progresso.rows[0].iniciado_em) {
+                const anterior = progresso.rows[0];
+                const tempoDecorrido = await client.query(
+                    `SELECT GREATEST(0, FLOOR(EXTRACT(EPOCH FROM
+                        (CURRENT_TIMESTAMP - iniciado_em)))::integer) AS segundos
+                     FROM progresso WHERE id_progresso = $1`,
+                    [anterior.id_progresso]
+                );
+                const segundos = Number(tempoDecorrido.rows[0].segundos);
+                const expirou = segundos >= TEMPO_POR_QUESTAO;
+                await client.query(
+                    `INSERT INTO resposta_candidato
+                        (id_alternativa_escolhida, id_progresso, inicio_questao,
+                         encerramento_questao, tempo_utilizado_segundos, status_resposta, acertou)
+                     SELECT NULL, id_progresso, iniciado_em, CURRENT_TIMESTAMP, $2, $3, FALSE
+                     FROM progresso WHERE id_progresso = $1`,
+                    [anterior.id_progresso, Math.min(segundos, TEMPO_POR_QUESTAO),
+                     expirou ? 'tempo_esgotado' : 'interrompida']
+                );
+                await client.query(
+                    `UPDATE progresso SET status_tema = 'concluido', encerrado_em = CURRENT_TIMESTAMP
+                     WHERE id_progresso = $1`,
+                    [anterior.id_progresso]
+                );
+                const resultadoFinal = await finalizarSeCompleta(client, idTentativa);
+                if (resultadoFinal) return { concluida: true, resultado: resultadoFinal };
+                progresso = await client.query(
+                    `SELECT p.id_progresso, p.id_questao_sorteada, p.id_tema,
+                            p.iniciado_em, t.nome_tema, q.enunciado, q.imagem_url
+                     FROM progresso p
+                     JOIN tema t ON t.id_tema = p.id_tema
+                     JOIN questao q ON q.id_questao = p.id_questao_sorteada
+                     WHERE p.id_tentativa = $1
+                       AND NOT EXISTS (SELECT 1 FROM resposta_candidato r
+                                       WHERE r.id_progresso = p.id_progresso)
+                     ORDER BY p.id_tema LIMIT 1 FOR UPDATE OF p`,
+                    [idTentativa]
+                );
+            }
 
             if (!progresso.rowCount) {
                 const error = new Error('A tentativa não possui questões pendentes.');
@@ -434,6 +521,89 @@ async function registrarResposta(req, res, next) {
     }
 }
 
+// Interrompe a tentativa e encerra a questão aberta para impedir que seja respondida depois.
+async function interromperTentativa(req, res, next) {
+    const idTentativa = lerIdPositivo(req.params.id);
+    if (!idTentativa) {
+        return res.status(400).json({ mensagem: 'Identificador de tentativa inválido.' });
+    }
+
+    try {
+        const resultado = await executarTransacao(async (client) => {
+            const tentativa = await client.query(
+                `SELECT status_tentativa FROM tentativa_certificacao
+                 WHERE id_tentativa = $1 AND id_candidato = $2 FOR UPDATE`,
+                [idTentativa, req.candidato.id]
+            );
+            if (!tentativa.rowCount) {
+                const error = new Error('Tentativa não encontrada.');
+                error.status = 404;
+                throw error;
+            }
+            if (tentativa.rows[0].status_tentativa === 'concluida') {
+                const error = new Error('A avaliação já foi concluída.');
+                error.status = 409;
+                throw error;
+            }
+            if (tentativa.rows[0].status_tentativa === 'pausada') {
+                return { pausada: true, questaoEncerrada: false, jaPausada: true };
+            }
+
+            const aberta = await client.query(
+                `SELECT p.id_progresso, p.iniciado_em
+                 FROM progresso p
+                 WHERE p.id_tentativa = $1
+                   AND NOT EXISTS (SELECT 1 FROM resposta_candidato r
+                                   WHERE r.id_progresso = p.id_progresso)
+                 ORDER BY p.id_tema LIMIT 1 FOR UPDATE OF p`,
+                [idTentativa]
+            );
+
+            let questaoEncerrada = false;
+            if (aberta.rowCount && aberta.rows[0].iniciado_em) {
+                const atual = aberta.rows[0];
+                const decorrido = await client.query(
+                    `SELECT GREATEST(0, FLOOR(EXTRACT(EPOCH FROM
+                        (CURRENT_TIMESTAMP - iniciado_em)))::integer) AS segundos
+                     FROM progresso WHERE id_progresso = $1`,
+                    [atual.id_progresso]
+                );
+                const segundos = Number(decorrido.rows[0].segundos);
+                const expirou = segundos >= TEMPO_POR_QUESTAO;
+                await client.query(
+                    `INSERT INTO resposta_candidato
+                        (id_alternativa_escolhida, id_progresso, inicio_questao,
+                         encerramento_questao, tempo_utilizado_segundos, status_resposta, acertou)
+                     SELECT NULL, id_progresso, iniciado_em, CURRENT_TIMESTAMP, $2, $3, FALSE
+                     FROM progresso WHERE id_progresso = $1`,
+                    [atual.id_progresso, Math.min(segundos, TEMPO_POR_QUESTAO),
+                     expirou ? 'tempo_esgotado' : 'interrompida']
+                );
+                await client.query(
+                    `UPDATE progresso SET status_tema = 'concluido', encerrado_em = CURRENT_TIMESTAMP
+                     WHERE id_progresso = $1`,
+                    [atual.id_progresso]
+                );
+                questaoEncerrada = true;
+                const resultadoFinal = await finalizarSeCompleta(client, idTentativa);
+                if (resultadoFinal) {
+                    return { pausada: false, concluida: true, questaoEncerrada, resultado: resultadoFinal };
+                }
+            }
+
+            await client.query(
+                `UPDATE tentativa_certificacao SET status_tentativa = 'pausada'
+                 WHERE id_tentativa = $1`,
+                [idTentativa]
+            );
+            return { pausada: true, questaoEncerrada };
+        });
+        return res.json(resultado);
+    } catch (error) {
+        return next(error);
+    }
+}
+
 // Lista somente as tentativas do candidato autenticado para a página de progresso.
 async function listarTentativas(req, res, next) {
     try {
@@ -503,6 +673,7 @@ async function obterResultado(req, res, next) {
 
 router.post('/attempts', iniciarTentativa);
 router.get('/attempts', listarTentativas);
+router.post('/attempts/:id/interrupt', interromperTentativa);
 router.get('/attempts/:id/current', obterQuestaoAtual);
 router.post('/attempts/:id/answers', registrarResposta);
 router.get('/attempts/:id/result', obterResultado);
