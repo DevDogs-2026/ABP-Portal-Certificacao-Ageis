@@ -1,27 +1,15 @@
-// ============================================================
-// Os usuários ficam salvos no localStorage do navegador, só para
-// testar o fluxo. Quando o back-end existir, troque as funções
-// da seção "ARMAZENAMENTO TEMPORÁRIO" por chamadas fetch().
-// ============================================================
-
-// ---------- Alternância entre login e cadastro ----------
+// Alternância entre os painéis de cadastro e login.
 const container = document.getElementById('container');
 const registerBtn = document.getElementById('register');
 const loginBtn = document.getElementById('login');
 
-// Alterna o painel do formulário para o modo de cadastro.
-registerBtn.addEventListener('click', () => container.classList.add('active'));
-// Alterna o painel do formulário para o modo de login.
-loginBtn.addEventListener('click', () => container.classList.remove('active'));
+registerBtn?.addEventListener('click', () => container.classList.add('active'));
+loginBtn?.addEventListener('click', () => container.classList.remove('active'));
 
-// ---------- Utilidades ----------
-// Remove a pontuação para enviar o CPF no formato esperado pela API.
-const apenasDigitos = (txt) => txt.replace(/\D/g, '');
+const apenasDigitos = (valor) => valor.replace(/\D/g, '');
 
-// Confere os dígitos verificadores do CPF antes do envio ao servidor.
 function cpfValido(cpf) {
-  if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-
+  if (!/^\d{11}$/.test(cpf) || /^(\d)\1{10}$/.test(cpf)) return false;
   for (let tamanho = 9; tamanho <= 10; tamanho++) {
     let soma = 0;
     for (let i = 0; i < tamanho; i++) {
@@ -33,133 +21,76 @@ function cpfValido(cpf) {
   return true;
 }
 
-// Guarda um hash da senha (SHA-256) em vez da senha em texto puro.
-// Isso é só um quebra-galho para testes: no back-end de verdade usar
-// bcrypt ou argon2 com salt, de preferencia o bcrypt.
-// Gera um hash SHA-256 temporário para o cadastro de demonstração no navegador.
-async function hashSenha(senha) {
-  const bytes = new TextEncoder().encode(senha);
-  const buffer = await crypto.subtle.digest('SHA-256', bytes);
-  return Array.from(new Uint8Array(buffer))
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
-}
-
-// Bloqueia o botão durante o envio do formulário e informa a etapa atual.
 function setCarregando(botao, carregando, textoNormal, textoCarregando) {
   botao.disabled = carregando;
   botao.textContent = carregando ? textoCarregando : textoNormal;
 }
 
-// ---------- ARMAZENAMENTO TEMPORÁRIO (substituir pelo back-end depois) ----------
-const CHAVE_USUARIOS = 'usuarios';
-
-// Lê a lista de cadastros usada apenas pelo fluxo temporário de cadastro.
-function lerUsuarios() {
-  try {
-    return JSON.parse(localStorage.getItem(CHAVE_USUARIOS)) || [];
-  } catch {
-    return [];
-  }
-}
-
-// Persiste a lista temporária de cadastros do formulário de demonstração.
-function salvarUsuarios(lista) {
-  localStorage.setItem(CHAVE_USUARIOS, JSON.stringify(lista));
-}
-
-// Registra um candidato no armazenamento temporário enquanto não há rota de cadastro.
-async function cadastrarUsuario({ nome, email, cpf, senha }) {
-  const usuarios = lerUsuarios();
-
-  if (usuarios.some((u) => u.cpf === cpf)) {
-    return { success: false, error: 'Este CPF já está cadastrado.' };
-  }
-  if (usuarios.some((u) => u.email === email)) {
-    return { success: false, error: 'Este e-mail já está cadastrado.' };
-  }
-
-  usuarios.push({
-    id: Date.now(),
-    nome,
-    email,
-    cpf,
-    senhaHash: await hashSenha(senha),
-  });
-  salvarUsuarios(usuarios);
-
-  return { success: true, message: 'Cadastro realizado com sucesso! Faça login.' };
-}
-
-// Autentica o usuário no armazenamento temporário utilizado pelo cadastro de demonstração.
-async function autenticarUsuario({ cpf, senha }) {
-  const usuario = lerUsuarios().find((u) => u.cpf === cpf);
-
-  if (!usuario || usuario.senhaHash !== (await hashSenha(senha))) {
-    return { success: false, error: 'CPF ou senha incorretos.' };
-  }
-
-  return {
-    success: true,
-    message: `Bem-vindo, ${usuario.nome}!`,
-    usuario: { id: usuario.id, nome: usuario.nome },
-  };
-}
-// ---------- FIM DO ARMAZENAMENTO TEMPORÁRIO ----------
-
-// ---------- Formulários ----------
 const signupForm = document.getElementById('signupForm');
 const loginForm = document.getElementById('loginForm');
 
-// Valida e processa o cadastro temporário, que ainda não possui rota no backend.
-signupForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
+// Cadastro real: envia os dados à API. O hash da senha é responsabilidade do servidor.
+signupForm?.addEventListener('submit', async (evento) => {
+  evento.preventDefault();
 
-  const nome = signupForm.nome.value.trim();
-  const email = signupForm.email.value.trim().toLowerCase();
-  const cpf = apenasDigitos(signupForm.cpf.value);
-  const senha = signupForm.senha.value;
+  const nome_completo = signupForm.elements.nome.value.trim();
+  const email = signupForm.elements.email.value.trim().toLowerCase();
+  const cpf = apenasDigitos(signupForm.elements.cpf.value);
+  const senha = signupForm.elements.senha.value;
 
+  if (nome_completo.length < 3) {
+    alert('Informe seu nome completo.');
+    return;
+  }
   if (!cpfValido(cpf)) {
-    alert('CPF inválido!');
+    alert('Informe um CPF válido.');
     return;
   }
-  if (senha.length < 6) {
-    alert('A senha deve ter no mínimo 6 caracteres!');
+  if (senha.length < 8) {
+    alert('A senha deve ter no mínimo 8 caracteres.');
     return;
   }
 
-  const submitBtn = signupForm.querySelector('button[type="submit"]');
-  setCarregando(submitBtn, true, 'Cadastrar', 'Cadastrando...');
+  const botao = signupForm.querySelector('button[type="submit"]');
+  setCarregando(botao, true, 'Cadastrar', 'Cadastrando...');
 
   try {
-    const data = await cadastrarUsuario({ nome, email, cpf, senha });
+    const { response, data } = await window.apiRequest('/candidatos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome_completo, email, cpf, senha }),
+    });
 
-    if (data.success) {
-      alert(data.message);
-      signupForm.reset();
-      container.classList.remove('active');
-    } else {
-      alert(data.error);
+    if (!response.ok) {
+      alert(data.mensagem || 'Não foi possível realizar o cadastro.');
+      return;
     }
-  } catch (error) {
-    alert('Ocorreu um erro. Tente novamente.');
-    console.error(error);
+
+    alert('Cadastro realizado com sucesso! Faça login.');
+    signupForm.reset();
+    container.classList.remove('active');
+  } catch (erro) {
+    console.error('Erro ao cadastrar candidato:', erro);
+    alert('Não foi possível comunicar com o servidor. Tente novamente.');
   } finally {
-    setCarregando(submitBtn, false, 'Cadastrar', 'Cadastrando...');
+    setCarregando(botao, false, 'Cadastrar', 'Cadastrando...');
   }
 });
 
-// Envia as credenciais à API e redireciona após a criação da sessão no servidor.
-loginForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
+// Login por CPF e senha, conforme RF04.
+loginForm?.addEventListener('submit', async (evento) => {
+  evento.preventDefault();
 
-  const cpf = apenasDigitos(loginForm.cpf.value);
-  const senha = loginForm.senha.value;
-  const submitBtn = loginForm.querySelector('button[type="submit"]');
+  const cpf = apenasDigitos(loginForm.elements.cpf.value);
+  const senha = loginForm.elements.senha.value;
+  const botao = loginForm.querySelector('button[type="submit"]');
 
-  setCarregando(submitBtn, true, 'Entrar', 'Entrando...');
+  if (!/^\d{11}$/.test(cpf) || !senha) {
+    alert('Informe CPF e senha.');
+    return;
+  }
 
+  setCarregando(botao, true, 'Entrar', 'Entrando...');
   try {
     const { response, data } = await window.apiAuth('/login', {
       method: 'POST',
@@ -168,17 +99,17 @@ loginForm.addEventListener('submit', async (e) => {
     });
 
     if (!response.ok) {
-      alert(data.mensagem || 'Ocorreu um erro. Tente novamente.');
+      alert(data.mensagem || 'CPF ou senha inválidos.');
       return;
     }
 
     const destino = sessionStorage.getItem('voltarPara') || 'index.html';
     sessionStorage.removeItem('voltarPara');
     window.location.href = destino;
-  } catch (error) {
-    console.error('Erro ao comunicar com o servidor:', error);
+  } catch (erro) {
+    console.error('Erro ao comunicar com o servidor:', erro);
     alert('Ocorreu um erro ao comunicar com o servidor. Tente novamente.');
   } finally {
-    setCarregando(submitBtn, false, 'Entrar', 'Entrando...');
+    setCarregando(botao, false, 'Entrar', 'Entrando...');
   }
 });
