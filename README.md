@@ -95,9 +95,9 @@ Certificados aprovados são emitidos sob demanda por `GET /api/certificates/me`,
    ```
 
 3. Vídeos de Apresentação das Sprints
-   [Sprint 01](docs/videoSprint/sprint-01.mp4)
-   [Sprint 02](docs/videoSprint/sprint-02.mp4)
-   [Sprint 03](https://youtu.be/0hhjsxHscn0)
+   [Sprint 01](https://github.com/DevDogs-2026/ABP-Portal-Certificacao-Ageis/blob/main/docs/videoSprint/sprint-01.mp4)
+   [Sprint 02](https://github.com/DevDogs-2026/ABP-Portal-Certificacao-Ageis/blob/main/docs/videoSprint/sprint-02.mp4)
+   [Sprint 03](https://github.com/DevDogs-2026/ABP-Portal-Certificacao-Ageis/blob/main/docs/videoSprint/Sprint-03.mp4)
 
 5. Retrospective
    [Pasta - Retrospective](docs/retrospective)
