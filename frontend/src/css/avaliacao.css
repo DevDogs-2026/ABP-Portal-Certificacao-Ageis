@@ -247,6 +247,7 @@ button.btnLogin-popup {
 .btn__avaliacao {
     background-color: var(--color-success);
     color: var(--color-surface);
+    cursor: pointer;
     font-weight: var(--medium);
     font-size: 1.875rem;
     text-decoration: none;
