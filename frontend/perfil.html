@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <meta name="description" content="Veja seus dados, seu progresso e o certificado do curso Metodologias Ágeis." />
+  <meta name="theme-color" content="#3A66FF" />
+  <link rel="shortcut icon" href="./src/images/icons/dogschool.ico" type="image/x-icon" />
+  <!-- Guarda: exige login. Precisa ser o primeiro script do head -->
+  <script src="./src/js/guarda.js"></script>
+  <link rel="stylesheet" href="src/css/perfil.css" />
+  <title>Meu Perfil</title>
+</head>
+
+<body>
+  <div class="container" id="container">
+    <nav class="btn-home" aria-label="Navegação principal">
+      <a href="index.html" class="button-voltar"><i class="fa-solid fa-angle-left"></i>Home</a>
+    </nav>
+
+    <main class="painel">
+      <header class="cabecalho">
+        <h1 class="form-title">Meu Perfil</h1>
+        <p class="subtitulo" id="subtitulo">
+          Veja seus dados, acompanhe seu progresso e baixe seu certificado.
+        </p>
+      </header>
+
+      <noscript>
+        <p class="subtitulo">
+          Ative o JavaScript do navegador para ver e validar certificados.
+        </p>
+      </noscript>
+
+      <div class="abas" role="tablist" aria-label="Seções do perfil">
+        <button class="aba" role="tab" id="aba-meu" aria-controls="painel-meu" aria-selected="true" type="button">
+          Meu perfil
+        </button>
+        <button class="aba" role="tab" id="aba-validar" aria-controls="painel-validar" aria-selected="false"
+          tabindex="-1" type="button">
+          Validar código
+        </button>
+      </div>
+
+      <section id="painel-meu" role="tabpanel" aria-labelledby="aba-meu" tabindex="0">
+        <div class="estado" id="estado-semlogin" hidden>
+          <h2>Entre na sua conta</h2>
+          <p>
+            Faça login para ver seu perfil, seu progresso e o certificado do
+            curso.
+          </p>
+          <a href="acesso.html" class="botao">Entrar</a>
+        </div>
+
+        <div id="estado-perfil" hidden>
+          <section class="cartao perfil" aria-labelledby="perfil-titulo">
+            <div class="avatar" id="perfil-avatar" aria-hidden="true"></div>
+            <div class="perfil-info">
+              <h2 id="perfil-titulo">Dados do aluno</h2>
+              <dl class="dados">
+                <div>
+                  <dt>Nome</dt>
+                  <dd id="perfil-nome"></dd>
+                </div>
+                <div>
+                  <dt>CPF</dt>
+                  <dd id="perfil-cpf"></dd>
+                </div>
+                <div>
+                  <dt>E-mail</dt>
+                  <dd id="perfil-email"></dd>
+                </div>
+              </dl>
+
+              <form id="perfil-form" class="perfil-form" novalidate hidden>
+                <div class="campo">
+                  <label for="edit-nome">Nome</label>
+                  <input type="text" id="edit-nome" name="nome" maxlength="100" autocomplete="name" required />
+                </div>
+                <div class="campo">
+                  <label for="edit-email">E-mail</label>
+                  <input type="email" id="edit-email" name="email" maxlength="120" autocomplete="email" required />
+                </div>
+                <p class="campo-erro" id="perfil-erro" role="alert"></p>
+                <div class="perfil-form-acoes">
+                  <button type="submit" class="botao">Salvar</button>
+                  <button type="button" class="botao botao-secundario" id="btn-cancelar">
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+
+              <p class="perfil-status" id="perfil-status" role="status"></p>
+              <button type="button" class="botao botao-secundario" id="btn-editar">
+                Editar nome e e-mail
+              </button>
+            </div>
+          </section>
+
+          <section class="cartao" aria-labelledby="progresso-titulo">
+            <h2 id="progresso-titulo">Progresso no curso</h2>
+            <p class="curso-nome" id="perfil-curso"></p>
+            <p id="texto-progresso" class="texto-suave"></p>
+            <div class="barra" role="progressbar" aria-labelledby="texto-progresso" aria-valuemin="0"
+              aria-valuemax="100" aria-valuenow="0" aria-valuetext="0% concluído" id="barra">
+              <span class="barra-preenchida" id="barra-preenchida"></span>
+            </div>
+            <a href="avaliacao.html" class="botao" id="btn-continuar">Ir para a avaliação</a>
+          </section>
+
+          <section class="cartao" aria-labelledby="temas-titulo">
+            <h2 id="temas-titulo">Temas do curso</h2>
+            <p class="texto-suave" id="texto-temas"></p>
+            <ul class="temas" id="lista-temas"></ul>
+          </section>
+
+          <section class="cartao" aria-labelledby="historico-titulo">
+            <h2 id="historico-titulo">Histórico de respostas</h2>
+            <div class="campo historico-filtro">
+              <label for="filtro-tema">Filtrar por tema</label>
+              <select id="filtro-tema"></select>
+            </div>
+            <ol class="historico" id="lista-historico"></ol>
+          </section>
+
+          <section class="cartao-cert" aria-labelledby="cert-secao-titulo">
+            <h2 id="cert-secao-titulo">Meu certificado</h2>
+            <p class="texto-suave" id="cert-bloqueado" hidden>
+              Seja aprovado na avaliação (mínimo de 65% de acertos) para
+              liberar o certificado.
+            </p>
+
+            <div id="estado-liberado" hidden>
+              <div class="certificado" id="certificado">
+                <article class="folha" aria-label="Certificado de conclusão">
+                  <svg width="0" height="0" aria-hidden="true" focusable="false">
+                    <defs>
+                      <symbol id="canto" viewBox="0 0 100 100">
+                        <path d="M2 98V2H98M12 70V12H70M22 44V22H44" fill="none" stroke="currentColor" stroke-width="3"
+                          stroke-linecap="square" />
+                        <path d="M31 31l5 5-5 5-5-5z" fill="currentColor" />
+                      </symbol>
+                    </defs>
+                  </svg>
+                  <svg class="canto canto-se" aria-hidden="true">
+                    <use href="#canto" />
+                  </svg>
+                  <svg class="canto canto-sd" aria-hidden="true">
+                    <use href="#canto" />
+                  </svg>
+                  <svg class="canto canto-ie" aria-hidden="true">
+                    <use href="#canto" />
+                  </svg>
+                  <svg class="canto canto-id" aria-hidden="true">
+                    <use href="#canto" />
+                  </svg>
+
+                  <img class="cert-logo" src="src/images/logo/dogschool-logo-no-background.webp" alt="DogSchool" />
+
+                  <h2 class="cert-titulo">Certificado de conclusão</h2>
+
+                  <div class="cert-divisor" aria-hidden="true">
+                    <span></span>
+                    <svg viewBox="0 0 60 20">
+                      <path d="M2 10h12c4 0 5-7 10-7 4 0 6 7 6 7s2 7 6 7c5 0 6-7 10-7h12" fill="none"
+                        stroke="currentColor" stroke-width="1.5" />
+                      <path d="M30 6l4 4-4 4-4-4z" fill="currentColor" />
+                    </svg>
+                    <span></span>
+                  </div>
+
+                  <p class="cert-texto">
+                    Certificamos que <span id="cert-nome"></span><br />
+                    concluiu o curso online <span id="cert-curso"></span>
+                  </p>
+                  <p class="cert-cpf">
+                    Inscrito sob o número do CPF;<br />
+                    <span id="cert-cpf"></span>
+                  </p>
+
+                  <div class="cert-dados">
+                    <div class="cert-qr">
+                      <div class="qr-box" id="cert-qr" role="img" aria-label="QR Code de validação"></div>
+                      <strong>Validação online</strong>
+                      <small>QR CODE — validar certificado</small>
+                    </div>
+                    <div class="cert-celula">
+                      <span>Email:</span>
+                      <span id="cert-email"></span>
+                    </div>
+                    <div class="cert-celula">
+                      <span>Nota final: <span id="cert-nota"></span></span>
+                    </div>
+                    <div class="cert-celula">
+                      <span>Data e hora da emissão:</span>
+                      <span id="cert-data"></span>
+                    </div>
+                    <div class="cert-celula">
+                      <span>Percentual de acertos: <span id="cert-acertos"></span></span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <p class="cert-codigo-linha">
+                Código de validação: <strong id="cert-codigo"></strong>
+              </p>
+
+              <div class="acoes">
+                <button type="button" class="botao" id="btn-baixar">
+                  Baixar PDF
+                </button>
+                <button type="button" class="botao botao-secundario" id="btn-copiar">
+                  Copiar código
+                </button>
+              </div>
+              <p class="dica">
+                Na janela de impressão, escolha “Salvar como PDF”.
+              </p>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="painel-validar" role="tabpanel" aria-labelledby="aba-validar" tabindex="0" hidden>
+        <form id="validarForm" class="validar" novalidate>
+          <label for="codigo" class="validar-label">Código de validação</label>
+          <div class="validar-linha">
+            <input type="text" id="codigo" name="codigo" placeholder="Ex.: MA-7K2P-9XQ4" maxlength="14"
+              autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="codigo-ajuda"
+              required />
+            <button type="submit" class="botao">Validar</button>
+          </div>
+          <p class="validar-ajuda" id="codigo-ajuda">
+            O código está no QR Code ou abaixo do certificado.
+          </p>
+        </form>
+        <div class="resultado" id="resultado" role="status" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+  <script src="src/js/historico.js"></script>
+  <script src="src/js/perfil.js"></script>
+</body>
+
+</html>

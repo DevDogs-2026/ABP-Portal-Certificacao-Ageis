@@ -191,13 +191,8 @@ async function obterQuestaoAtual(req, res, next) {
             }
 
             const atual = progresso.rows[0];
-            await client.query(
-                `UPDATE progresso
-                 SET iniciado_em = COALESCE(iniciado_em, CURRENT_TIMESTAMP)
-                 WHERE id_progresso = $1
-                 RETURNING iniciado_em`,
-                [atual.id_progresso]
-            );
+            // IMPORTANTE: GET /current apenas consulta. Nunca deve retomar o cronômetro.
+            // A retomada acontece exclusivamente via POST /resume.
             const alternativas = await client.query(
                 `SELECT id_alternativa, letra, texto_alternativa
                  FROM alternativa
@@ -215,7 +210,11 @@ async function obterQuestaoAtual(req, res, next) {
             const tempo = await client.query(
                 `SELECT GREATEST(
                     0,
-                    $2 - FLOOR(EXTRACT(EPOCH FROM (CURRENT_TIMESTAMP - iniciado_em)))::integer
+                    $2 - tempo_acumulado_segundos
+                       - CASE WHEN cronometro_iniciado_em IS NULL THEN 0
+                           ELSE GREATEST(0, FLOOR(EXTRACT(EPOCH FROM
+                               (CURRENT_TIMESTAMP - cronometro_iniciado_em)))::integer)
+                         END
                  ) AS restante
                  FROM progresso
                  WHERE id_progresso = $1`,
@@ -230,6 +229,7 @@ async function obterQuestaoAtual(req, res, next) {
                 concluida: false,
                 idTentativa,
                 numeroQuestao: Number(respondidas.rows[0].total) + 1,
+                idProgresso: Number(atual.id_progresso),
                 totalQuestoes: TOTAL_QUESTOES,
                 restanteSegundos: Number(tempo.rows[0].restante),
                 questao: {
@@ -252,6 +252,67 @@ async function obterQuestaoAtual(req, res, next) {
     }
 }
 
+// Retoma explicitamente a questão. Um GET tardio ou um restore do Firefox
+// não pode reiniciar o relógio sem este POST enviado ao abrir a questão.
+// Repetir este POST enquanto a questão já estiver ativa não zera o tempo.
+async function retomarTentativa(req, res, next) {
+    const idTentativa = lerIdPositivo(req.params.id);
+    if (!idTentativa) {
+        return res.status(400).json({ mensagem: 'Identificador de tentativa inválido.' });
+    }
+
+    try {
+        const resultado = await executarTransacao(async (client) => {
+            const tentativa = await client.query(
+                `SELECT status_tentativa
+                 FROM tentativa_certificacao
+                 WHERE id_tentativa = $1 AND id_candidato = $2
+                 FOR UPDATE`,
+                [idTentativa, req.candidato.id]
+            );
+            if (!tentativa.rowCount) {
+                const error = new Error('Tentativa não encontrada.');
+                error.status = 404;
+                throw error;
+            }
+            if (tentativa.rows[0].status_tentativa === 'concluida') {
+                return { concluida: true };
+            }
+
+            const progresso = await client.query(
+                `SELECT p.id_progresso
+                 FROM progresso p
+                 WHERE p.id_tentativa = $1
+                   AND NOT EXISTS (
+                       SELECT 1 FROM resposta_candidato r
+                       WHERE r.id_progresso = p.id_progresso
+                   )
+                 ORDER BY p.id_tema
+                 LIMIT 1 FOR UPDATE OF p`,
+                [idTentativa]
+            );
+            if (!progresso.rowCount) {
+                const error = new Error('Não há questão pendente para retomar.');
+                error.status = 409;
+                throw error;
+            }
+
+            const idProgresso = progresso.rows[0].id_progresso;
+            await client.query(
+                `UPDATE progresso
+                 SET iniciado_em = COALESCE(iniciado_em, CURRENT_TIMESTAMP),
+                     cronometro_iniciado_em = COALESCE(cronometro_iniciado_em, CURRENT_TIMESTAMP)
+                 WHERE id_progresso = $1`,
+                [idProgresso]
+            );
+            return { retomada: true, concluida: false };
+        });
+        return res.json(resultado);
+    } catch (error) {
+        return next(error);
+    }
+}
+
 // Valida a alternativa no banco e registra o resultado da questão sem confiar no navegador.
 async function registrarResposta(req, res, next) {
     const idTentativa = lerIdPositivo(req.params.id);
@@ -260,6 +321,10 @@ async function registrarResposta(req, res, next) {
     }
 
     const idAlternativa = req.body?.idAlternativa;
+    const idProgresso = req.body?.idProgresso;
+    if (!Number.isSafeInteger(idProgresso) || idProgresso <= 0) {
+        return res.status(400).json({ mensagem: 'Identificador da questão atual inválido.' });
+    }
     if (idAlternativa !== null && idAlternativa !== undefined &&
         (!Number.isSafeInteger(idAlternativa) || idAlternativa <= 0)) {
         return res.status(400).json({ mensagem: 'Alternativa inválida.' });
@@ -287,37 +352,34 @@ async function registrarResposta(req, res, next) {
             }
 
             const pendente = await client.query(
-                `SELECT p.id_progresso, p.id_questao_sorteada, p.iniciado_em
+                `SELECT p.id_progresso, p.id_questao_sorteada, p.iniciado_em,
+                        p.tempo_acumulado_segundos, p.cronometro_iniciado_em
                  FROM progresso p
                  WHERE p.id_tentativa = $1
+                   AND p.id_progresso = $2
                    AND NOT EXISTS (
                        SELECT 1 FROM resposta_candidato r
                        WHERE r.id_progresso = p.id_progresso
                    )
-                 ORDER BY p.id_tema
-                 LIMIT 1
                  FOR UPDATE OF p`,
-                [idTentativa]
+                [idTentativa, idProgresso]
             );
             if (!pendente.rowCount) {
-                const error = new Error('Não há questão pendente para responder.');
+                const error = new Error('Esta questão já foi encerrada ou não pertence à tentativa.');
                 error.status = 409;
                 throw error;
             }
 
             const atual = pendente.rows[0];
-            if (!atual.iniciado_em) {
-                await client.query(
-                    `UPDATE progresso
-                     SET iniciado_em = CURRENT_TIMESTAMP
-                     WHERE id_progresso = $1`,
-                    [atual.id_progresso]
-                );
+            if (!atual.cronometro_iniciado_em) {
+                const error = new Error('Questão pausada. Retome a avaliação antes de responder.');
+                error.status = 409;
+                throw error;
             }
             const decorrido = await client.query(
-                `SELECT GREATEST(
-                    0,
-                    FLOOR(EXTRACT(EPOCH FROM (CURRENT_TIMESTAMP - iniciado_em)))::integer
+                `SELECT tempo_acumulado_segundos + GREATEST(0,
+                    FLOOR(EXTRACT(EPOCH FROM
+                        (CURRENT_TIMESTAMP - cronometro_iniciado_em)))::integer
                  ) AS segundos
                  FROM progresso
                  WHERE id_progresso = $1`,
@@ -325,15 +387,12 @@ async function registrarResposta(req, res, next) {
             );
             const expirou = Number(decorrido.rows[0].segundos) >= TEMPO_POR_QUESTAO;
 
-            if (!expirou && idAlternativa == null) {
-                const error = new Error('Selecione uma alternativa antes de confirmar.');
-                error.status = 400;
-                throw error;
-            }
+            // Alternativa nula representa questão encerrada sem resposta (timeout ou saída da página).
+            // Nesse caso, a questão é registrada como incorreta e não pode ser respondida novamente.
 
             let alternativaCorreta = null;
             let acertou = false;
-            const alternativaRegistrada = expirou ? null : idAlternativa;
+            const alternativaRegistrada = (expirou || idAlternativa == null) ? null : idAlternativa;
 
             if (alternativaRegistrada !== null) {
                 const alternativa = await client.query(
@@ -434,6 +493,76 @@ async function registrarResposta(req, res, next) {
     }
 }
 
+// Congela o tempo usado na questão atual ao voltar voluntariamente à página de regras.
+// Repetir a chamada não restaura segundos nem provoca efeito duplicado.
+async function pausarTentativa(req, res, next) {
+    const idTentativa = lerIdPositivo(req.params.id);
+    if (!idTentativa) {
+        return res.status(400).json({ mensagem: 'Identificador de tentativa inválido.' });
+    }
+
+    try {
+        const resultado = await executarTransacao(async (client) => {
+            const tentativa = await client.query(
+                `SELECT status_tentativa FROM tentativa_certificacao
+                 WHERE id_tentativa = $1 AND id_candidato = $2 FOR UPDATE`,
+                [idTentativa, req.candidato.id]
+            );
+            if (!tentativa.rowCount) {
+                const error = new Error('Tentativa não encontrada.');
+                error.status = 404;
+                throw error;
+            }
+            if (tentativa.rows[0].status_tentativa === 'concluida') {
+                return { pausada: false, concluida: true };
+            }
+
+            const progresso = await client.query(
+                `SELECT p.id_progresso, p.tempo_acumulado_segundos, p.cronometro_iniciado_em
+                 FROM progresso p
+                 WHERE p.id_tentativa = $1
+                   AND NOT EXISTS (
+                       SELECT 1 FROM resposta_candidato r
+                       WHERE r.id_progresso = p.id_progresso
+                   )
+                 ORDER BY p.id_tema
+                 LIMIT 1 FOR UPDATE OF p`,
+                [idTentativa]
+            );
+            if (!progresso.rowCount) {
+                return { pausada: false, concluida: false };
+            }
+
+            const atual = progresso.rows[0];
+            if (!atual.cronometro_iniciado_em) {
+                return {
+                    pausada: true,
+                    restanteSegundos: Math.max(0, TEMPO_POR_QUESTAO - atual.tempo_acumulado_segundos),
+                };
+            }
+
+            const pausado = await client.query(
+                `UPDATE progresso
+                 SET tempo_acumulado_segundos = LEAST($2,
+                     tempo_acumulado_segundos + GREATEST(0,
+                         FLOOR(EXTRACT(EPOCH FROM
+                             (CURRENT_TIMESTAMP - cronometro_iniciado_em)))::integer)),
+                     cronometro_iniciado_em = NULL
+                 WHERE id_progresso = $1
+                 RETURNING tempo_acumulado_segundos`,
+                [atual.id_progresso, TEMPO_POR_QUESTAO]
+            );
+            return {
+                pausada: true,
+                restanteSegundos: Math.max(0, TEMPO_POR_QUESTAO - pausado.rows[0].tempo_acumulado_segundos),
+            };
+        });
+        res.json(resultado);
+    } catch (error) {
+        next(error);
+    }
+}
+
 // Lista somente as tentativas do candidato autenticado para a página de progresso.
 async function listarTentativas(req, res, next) {
     try {
@@ -501,9 +630,53 @@ async function obterResultado(req, res, next) {
     }
 }
 
+// Progresso por tema e respostas históricas da conta autenticada.
+// Não devolve respostas de outros usuários nem hashes/senhas.
+async function obterHistoricoDetalhado(req, res, next) {
+    try {
+        const [temas, consulta] = await Promise.all([
+            pool.query('SELECT id_tema, nome_tema FROM tema ORDER BY id_tema'),
+            pool.query(
+                `SELECT ta.id_tentativa, p.id_tema, t.nome_tema, q.enunciado,
+                        r.acertou, r.encerramento_questao, a_escolhida.letra AS resposta_dada,
+                        (SELECT a_certa.letra FROM alternativa a_certa
+                         WHERE a_certa.id_questao = q.id_questao AND a_certa.correta = TRUE
+                         LIMIT 1) AS resposta_correta
+                 FROM tentativa_certificacao ta
+                 JOIN progresso p ON p.id_tentativa = ta.id_tentativa
+                 JOIN resposta_candidato r ON r.id_progresso = p.id_progresso
+                 JOIN questao q ON q.id_questao = p.id_questao_sorteada
+                 JOIN tema t ON t.id_tema = p.id_tema
+                 LEFT JOIN alternativa a_escolhida ON a_escolhida.id_alternativa = r.id_alternativa_escolhida
+                 WHERE ta.id_candidato = $1
+                 ORDER BY r.encerramento_questao DESC, r.id_resposta DESC`,
+                [req.candidato.id]
+            ),
+        ]);
+        return res.json({
+            temas: temas.rows.map(t => ({ id: Number(t.id_tema), nome: t.nome_tema })),
+            respostas: consulta.rows.map(r => ({
+                tentativaId: Number(r.id_tentativa),
+                temaId: Number(r.id_tema),
+                temaNome: r.nome_tema,
+                enunciado: r.enunciado,
+                acertou: r.acertou,
+                respostaDada: r.resposta_dada,
+                respostaCorreta: r.resposta_correta,
+                respondidoEm: r.encerramento_questao,
+            })),
+        });
+    } catch (error) {
+        return next(error);
+    }
+}
+
 router.post('/attempts', iniciarTentativa);
 router.get('/attempts', listarTentativas);
+router.get('/history', obterHistoricoDetalhado);
 router.get('/attempts/:id/current', obterQuestaoAtual);
+router.post('/attempts/:id/resume', retomarTentativa);
+router.post('/attempts/:id/pause', pausarTentativa);
 router.post('/attempts/:id/answers', registrarResposta);
 router.get('/attempts/:id/result', obterResultado);
 

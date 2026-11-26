@@ -1,20 +1,37 @@
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 700,600,500,400,300;
+    font-display: swap;
+    src: url('/src/fonts/files/PlusJakartaSans-Variable-latin.woff') format('woff');
+}
+
 :root {
-    --cor-primaria: #3A66FF;
-    --cor-secundaria: #762BEB;
-    --cor-fundo: #F4F6FF;
-    --cor-superficie: #FFFFFF;
-    --cor-texto: #101943;
-    --cor-texto-secundario: #536080;
-    --cor-aprovado: #08783F;
-    --cor-aprovado-fundo: #DDF5E8;
-    --cor-reprovado: #BD3D52;
-    --cor-borda: #E1E5F4;
+    --color-primary: #0038FA;
+    --color-secondary: #7A33CC;
+    --color-background: #F5F7FC;
+    --color-surface: #FFFFFF;
+    --color-text: #18233D;
+    --color-border: #060a13;
+    --color-text-other: #F5F7FC;
+    --color-success: #16804A;
+    --color-error: #C53D47;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --light: 300;
+    --regular: 400;
+    --medium: 500;
+    --semi-bold: 600;
+    --bold: 700;
 }
 
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 body {
@@ -66,26 +83,20 @@ body::after {
 }
 
 .logo {
-    display: inline-flex;
-    align-items: center;
-    color: var(--cor-texto);
-    font-size: 1.55rem;
-    font-weight: 800;
-    letter-spacing: -0.06em;
-    text-decoration: none;
+    position: relative;
+    font-size: 2.5rem;
+    font-weight: var(--bold);
+    padding: 0.3em clamp(0.5em, calc(16.4vw - 180px), 3em);
 }
 
-.logo-simbolo {
-    margin-right: 10px;
-    color: var(--cor-primaria);
-    font-size: 1.15rem;
-    letter-spacing: -0.4em;
-    transform: skew(-18deg);
+.title-primary {
+    color: var(--color-primary);
 }
 
-.logo-dog {
-    margin-right: 4px;
-    color: var(--cor-primaria);
+.title-secondary {
+    background: linear-gradient(to right, var(--color-text), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .pagina-resultado {

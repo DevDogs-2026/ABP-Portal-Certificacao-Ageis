@@ -1,0 +1,600 @@
+@font-face {
+    font-family: 'Plus Jakarta Sans';
+    font-style: normal;
+    font-weight: 700,600,500,400,300;
+    font-display: swap;
+    src: url('/src/fonts/files/PlusJakartaSans-Variable-latin.woff') format('woff');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+:root {
+    --color-primary: #0038FA;
+    --color-secondary: #7A33CC;
+    --color-background: #F5F7FC;
+    --color-surface: #FFFFFF;
+    --color-text: #18233D;
+    --color-border: #060a13;
+    --color-text-other: #F5F7FC;
+
+    /* Compatibilidade com as variáveis utilizadas no restante desta folha. */
+    --cor-primaria: #0038FA;
+    --cor-secundaria: #586687;
+    --cor-texto: #18233D;
+    --cor-fundo: #F5F7FC;
+    --cor-borda: #DEE5F3;
+    --cor-aprovado: #16804A;
+    --cor-reprovado: #C53D47;
+    --color-success: #16804A;
+    --color-error: #C53D47;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --light: 300;
+    --regular: 400;
+    --medium: 500;
+    --semi-bold: 600;
+    --bold: 700;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: "Plus Jakarta Sans", Arial, sans-serif;
+    line-height: 1.5;
+}
+
+.logo {
+    position: relative;
+    font-size: 2.5rem;
+    font-weight: var(--bold);
+    padding: 0.3em clamp(0.5em, calc(16.4vw - 180px), 3em);
+}
+
+.title-primary {
+    color: var(--color-primary);
+}
+
+.title-secondary {
+    background: linear-gradient(to right, var(--color-text), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ---------- Header transparente ---------- */
+header {
+    position: fixed;          /* fica por cima do hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6em 2em;
+    background: transparent;
+    border-bottom: 0.2rem solid #EDE7FF;
+    transition: background 0.4s, backdrop-filter 0.4s;
+}
+
+/* ao rolar a página, o header ganha um fundo translúcido */
+header.scrolled {
+    background: var(--color-background);
+    backdrop-filter: blur(8px);
+}
+
+/* ---------- Menu ---------- */
+.nav-bar {
+    display: flex;
+    align-items: center;
+    font-weight: var(--light);
+}
+
+.nav-bar ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-bar ul li a {
+    position: relative;          /* sempre, não só no hover */
+    display: inline-block;       /* padding e bottom passam a funcionar direito */
+    color: var(--color-text);
+    font-weight: var(--bold);
+    font-size: 1.3rem;
+    padding: 10px 22px;
+    border-radius: 50px;
+    margin: 0 4px;
+    transition: var(--transition);
+}
+
+.nav-bar ul li a:hover {
+    color: var(--color-primary); /* variável que existe */
+}
+
+.nav-bar ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;                 /* dentro da área do padding */
+    left: 22px;                  /* alinha com o início do texto */
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: var(--transition);
+}
+
+.nav-bar ul li a:hover::after {
+    width: calc(100% - 44px);    /* largura do texto (desconta o padding dos dois lados) */
+}
+
+.btnLogin-popup {
+    display: inline-block;
+    color: var(--color-secondary);
+    font-size: 1rem;
+    padding: 12px 40px;
+    border-radius: 25px;
+    border: 2px solid var(--color-secondary);
+    white-space: nowrap;
+    transition: 0.4s;
+}
+
+.btnLogin-popup:hover {
+    background: var(--color-secondary);
+    color: var(--color-text);
+    border: 2px solid var(--color-text);
+}
+
+.login-container { 
+    padding: 0 clamp(1rem, calc(21.9vw - 240px), 10rem);
+    display: flex; 
+    align-items: center; 
+
+}
+
+.usuario-nome { 
+    color: var(--color-text); 
+    font-size: 1.2rem; 
+    margin-right: 12px; 
+}
+
+button.btnLogin-popup { 
+    background: transparent; 
+    cursor: pointer; 
+}
+
+/* ---------- Hambúrguer (escondido no desktop) ---------- */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px;
+}
+
+.hamburger .line {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: var(--color-text);
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.hamburger.open .line:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburger.open .line:nth-child(2) { opacity: 0; }
+.hamburger.open .line:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* Os botões do conteúdo de Progresso mantêm o estilo original. */
+.botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 42px;
+    padding: 9px 16px;
+    border: 1px solid var(--cor-primaria);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--cor-primaria);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.botao:hover {
+    border-color: var(--cor-primaria);
+    box-shadow: 0 5px 15px rgb(0 56 250 / 12%);
+}
+
+@media (max-width: 1280px) {
+    /* Remover apenas a barra de rolagem horizontal */
+    body {
+        overflow-x: hidden;
+    }
+    /* Header */
+    header {
+        max-width: 100%;
+        padding: 1rem 0;
+        border-bottom: 0.2rem solid var(--color-secondary);
+    }
+    .logo {
+        font-size: 2.2rem;
+        padding: 0.2rem 2rem;
+    }
+    .nav-bar ul {
+        flex-wrap: nowrap;
+    }
+    .nav-bar ul li a {
+        font-size: 1.2rem;
+        padding: 0.5rem 0.8rem;
+        margin: 0;
+    }
+    .nav-bar ul li a::after {
+        left: 0.8rem;
+    }
+    .nav-bar ul li a:hover::after {
+        width: calc(100% - 1.6rem);
+    }
+    /* Hero: botões um pouco menores para caberem lado a lado */
+    .hero-buttons {
+        gap: 1rem 1.2rem;
+    }
+    .btn-inscricao,
+    .btn-saiba {
+        font-size: 1.05rem;
+        padding: 1.05rem 2.2rem;
+    }
+    .login-container { 
+        padding: 0 2rem;
+        display: flex; 
+        align-items: center;
+    }
+}
+
+/* Tablets em pé e celulares: menu hambúrguer, igual ao Index */
+@media (max-width: 960px) {
+    /* Header */
+    header {
+        padding: 0.8rem 1.5rem;
+    }
+    .logo {
+        font-size: 2rem;
+        padding: 0;
+    }
+    .hamburger {
+        display: flex;
+        order: 3;
+        margin-left: 0.6rem;
+    }
+    .login-container {
+        order: 2;
+        margin-left: auto;
+        padding: 0;
+    }
+
+    .nav-bar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-secondary);
+        max-height: 0;
+        border-bottom-left-radius: 28px;
+        border-bottom-right-radius: 28px;
+        overflow: hidden;
+        transition: max-height 0.4s;
+    }
+
+    .nav-bar.open { max-height: 320px; }
+
+    .nav-bar ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    .nav-bar ul li a {
+        color: var(--color-surface);
+        display: block;
+        margin: 4px 0;
+        padding: 0.5rem 1.2rem;
+    }
+
+    .nav-bar ul li a::after { display: none; }
+}
+
+@media (max-width: 600px) {
+    /* Header */
+    header {
+        padding: 0.7rem 1rem;
+    }
+    .logo {
+        font-size: 1.7rem;
+    }
+    .btnLogin-popup {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+    /* Hero */
+    .hero {
+        padding-top: 4.5rem;
+    }
+    .hero-buttons {
+        gap: 0.8rem;
+    }
+    .btn-inscricao,
+    .btn-saiba {
+        font-size: 1rem;
+        padding: 0.95rem 1.7rem;
+    }
+}
+
+.conteudo {
+    width: min(100% - 32px, 1040px);
+    margin: 0 auto;
+    /* O header é fixo; o topo extra evita que ele cubra o título. */
+    padding: clamp(104px, 12vw, 132px) 0 clamp(32px, 6vw, 68px);
+}
+
+.intro {
+    margin-bottom: 28px;
+}
+
+.sobretitulo {
+    margin: 0 0 6px;
+    color: var(--cor-primaria);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+h1,
+h2,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: 8px;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+}
+
+h2 {
+    margin-bottom: 0;
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+}
+
+.intro > p:last-child {
+    color: var(--cor-secundaria);
+}
+
+.estado,
+.erro,
+.estado-vazio {
+    padding: 16px 18px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 14px;
+    background: #fff;
+}
+
+.erro {
+    border-color: #f0c4cc;
+    color: var(--cor-reprovado);
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.cartao-metrica,
+.progresso-atual,
+.historico {
+    border: 1px solid var(--cor-borda);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 8px 26px rgb(23 39 85 / 5%);
+}
+
+.cartao-metrica {
+    display: flex;
+    min-height: 112px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+}
+
+.cartao-metrica span,
+.progresso-legenda {
+    color: var(--cor-secundaria);
+    font-size: 0.9rem;
+}
+
+.cartao-metrica strong {
+    font-size: 1.7rem;
+}
+
+.progresso-atual {
+    grid-column: 1 / -1;
+    padding: 20px;
+}
+
+.ajuda-progresso {
+    margin: 10px 0 0;
+    color: var(--cor-secundaria);
+    font-size: 0.82rem;
+}
+
+.progresso-legenda {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.barra-progresso {
+    height: 12px;
+    overflow: hidden;
+    border-radius: 99px;
+    background: #e7ecf6;
+}
+
+.barra-progresso span {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #3a66ff, #762beb);
+    transition: width 180ms ease;
+}
+
+.historico {
+    margin-top: 30px;
+    padding: clamp(18px, 4vw, 30px);
+}
+
+.titulo-secao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.botao-principal {
+    background: var(--cor-primaria);
+    color: #fff;
+}
+
+.lista-tentativas {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tentativa {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px 20px;
+    padding: 18px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 14px;
+}
+
+.tentativa h3 {
+    margin: 0 0 5px;
+    font-size: 1rem;
+}
+
+.tentativa p {
+    margin: 0;
+    color: var(--cor-secundaria);
+    font-size: 0.9rem;
+}
+
+.status-tentativa {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 800;
+}
+
+.status-tentativa::before {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: currentColor;
+    content: "";
+}
+
+.tentativa .status-aprovado {
+    color: var(--cor-aprovado);
+}
+
+.tentativa .status-reprovado {
+    color: var(--cor-reprovado);
+}
+
+.tentativa .status-andamento {
+    color: #79550a;
+}
+
+.tentativa .botao {
+    grid-row: span 2;
+}
+
+.botao:focus-visible,
+.cabecalho a:focus-visible,
+.btnLogin-popup:focus-visible {
+    outline: 3px solid #14213d;
+    outline-offset: 3px;
+}
+
+@media (max-width: 680px) {
+    .cabecalho {
+        flex-wrap: wrap;
+    }
+
+    .cabecalho nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .cabecalho nav ul {
+        gap: 10px 16px;
+    }
+
+    .resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .progresso-atual {
+        grid-column: auto;
+    }
+
+    .titulo-secao {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .tentativa {
+        grid-template-columns: 1fr;
+    }
+
+    .tentativa .botao {
+        grid-row: auto;
+        justify-self: start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

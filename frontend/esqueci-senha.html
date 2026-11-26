@@ -1,45 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Metodologia Ágil</title>
-    <link rel="stylesheet" href="src/css/esqueci-senha.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <link rel="shortcut icon" href="./src/images/icons/dogschool.ico" type="image/x-icon">
+  <link rel="stylesheet" href="src/css/esqueci-senha.css">
+  <title>Recuperar senha | DogSchool</title>
 </head>
 <body>
-    <div class="container" id="container">
-
-        <!-- Esqueci minha sinha box -->
-
-        <div class="form-container">
-            <form id="forgotform" method="post">
-                
-                <h1 class="title">Esqueci minha senha</h1>
-
-                <div class="input-icon">
-                    <img src="src/images/icons/cpf-icon.svg" alt="" aria-hidden="true">
-                    <input type="email" name="email" placeholder="Email" autocomplete="email" required>
-                </div>
-
-                <div class="input-icon">
-                    <img src="src/images/icons/lock-icon.svg" alt="" aria-hidden="true">
-                    <input type="password" name="senha" placeholder="Nova senha" minlength="6" autocomplete="new-password" required>
-                </div>
-
-
-                <div class="input-icon">
-                    <img src="src/images/icons/lock-icon.svg" alt="" aria-hidden="true">
-                    <input type="password" name="confirmacaoSenha" placeholder="Confirme a nova senha" minlength="6" autocomplete="new-password" required>
-                </div>
-
-                <button type="submit">Redefinir</button>
-            </form>
-        </div>
-                <a href="acesso.html" class="button-voltar"><img src="src/images/icons/seta-icon.png" class="icone-voltar">Voltar</a>
+  <div class="container recovery">
+    <nav class="btn-home"><a class="button-voltar" href="acesso.html">← Voltar ao login</a></nav>
+    <div class="form-container">
+      <form id="forgotform" autocomplete="on">
+        <h1 class="title">Recuperar senha</h1>
+        <p class="ajuda">Informe o e-mail cadastrado no DogSchool. Enviaremos um link de uso único, válido por 15 minutos.</p>
+        <label class="sr-only" for="recuperar-email">E-mail cadastrado</label>
+        <input id="recuperar-email" type="email" name="email" placeholder="Seu e-mail cadastrado" autocomplete="email" maxlength="255" required>
+        <button type="submit">Enviar link</button>
+        <p id="aviso-recuperacao" class="aviso" role="status" aria-live="polite"></p>
+      </form>
     </div>
-    <script src="src/js/esqueci-senha.js"></script>
+  </div>
+  <script src="src/js/api.js"></script>
+  <script src="src/js/esqueci-senha.js"></script>
 </body>
 </html>

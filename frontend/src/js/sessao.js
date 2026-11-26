@@ -1,76 +1,93 @@
-// Consulta a sessão no servidor e valida a estrutura do usuário autenticado.
-async function consultarUsuarioLogado() {
-  const { response, data } = await window.apiAuth('/me');
-
-  if (response.status === 401) return null;
-  if (!response.ok) {
-    throw new Error(data.mensagem || 'Não foi possível verificar a sessão.');
+// Sessão do DogSchool: consultar SEMPRE o backend (cookie HttpOnly).
+// Limpa chaves persistidas por versões antigas, inclusive CPFs e dados de cadastro.
+function limparDadosLocaisLegados() {
+  for (const chave of ['usuarios', 'usuarioLogado', 'tentativasLogin']) {
+    try { localStorage.removeItem(chave); } catch {}
   }
-  if (!data.usuario || typeof data.usuario.nome !== 'string') {
-    throw new Error('A resposta da sessão não contém um usuário válido.');
-  }
-
-  return data.usuario;
 }
 
-// Encerra a sessão no servidor antes de voltar à página inicial.
+limparDadosLocaisLegados();
+
+// O cache existe apenas na memória da aba; é perdido ao fechar/recarregar a página.
+let usuarioEmMemoria = null;
+
+function usuarioLogado() {
+  return usuarioEmMemoria;
+}
+
+async function consultarSessao() {
+  const response = await fetch('/api/auth/me', {
+    credentials: 'include',
+    cache: 'no-store',
+  });
+  if (!response.ok) {
+    usuarioEmMemoria = null;
+    return null;
+  }
+  const data = await response.json();
+  usuarioEmMemoria = data.usuario || null;
+  return usuarioEmMemoria;
+}
+
 async function sair() {
   try {
-    const { response, data } = await window.apiAuth('/logout', {
+    const response = await fetch('/api/auth/logout', {
       method: 'POST',
+      credentials: 'include',
     });
-
-    if (!response.ok) {
-      throw new Error(data.mensagem || 'Não foi possível encerrar a sessão.');
-    }
-
+    if (!response.ok) throw new Error('Falha ao encerrar sessão.');
+    usuarioEmMemoria = null;
+    limparDadosLocaisLegados();
     window.location.href = 'index.html';
   } catch (error) {
-    console.error('Erro ao encerrar a sessão:', error);
-    alert('Não foi possível sair da conta. Tente novamente.');
+    console.error('Erro no logout:', error);
+    alert('Não foi possível sair. Verifique a conexão e tente novamente.');
   }
 }
 
-// Confere a sessão de uma página privada e guarda o destino do redirecionamento.
 async function exigirLogin() {
   try {
-    const usuario = await consultarUsuarioLogado();
+    const usuario = await consultarSessao();
     if (usuario) return usuario;
-
-    const pagina = window.location.pathname.split('/').pop();
-    if (pagina) sessionStorage.setItem('voltarPara', pagina);
-    window.location.replace('acesso.html');
-    return null;
   } catch (error) {
-    console.error('Erro ao verificar a sessão:', error);
-    alert('Não foi possível verificar sua sessão. Tente novamente.');
-    window.location.replace('acesso.html');
-    return null;
+    console.error('Erro ao consultar sessão:', error);
   }
+  usuarioEmMemoria = null;
+  window.location.href = 'acesso.html';
+  return null;
 }
 
-// Exibe o nome do candidato e a ação de sair quando existe uma sessão ativa.
 async function atualizarHeader() {
   const area = document.querySelector('.login-container');
   if (!area) return;
 
   try {
-    const usuario = await consultarUsuarioLogado();
-    if (!usuario) return;
+    const usuario = await consultarSessao();
+    if (!usuario) return; // Mantém o botão de login do HTML.
 
-    const nome = document.createElement('span');
-    nome.className = 'usuario-nome';
-    nome.textContent = `Olá, ${usuario.nome.trim().split(/\s+/)[0]}`;
+    // Na página inicial, leva quem já está logado diretamente aos estudos.
+    const botaoPrincipal = document.querySelector('.btn-inscricao');
+    if (botaoPrincipal) {
+      botaoPrincipal.href = 'estudos.html';
+      const textoPrincipal = botaoPrincipal.querySelector('.btn-inscricao-texto');
+      if (textoPrincipal) textoPrincipal.textContent = 'Comece a estudar';
+    }
 
     const botaoSair = document.createElement('button');
     botaoSair.className = 'btnLogin-popup';
     botaoSair.textContent = 'Sair';
     botaoSair.addEventListener('click', sair);
-
-    area.replaceChildren(nome, botaoSair);
+    area.replaceChildren(botaoSair);
   } catch (error) {
-    console.error('Erro ao carregar a sessão no cabeçalho:', error);
+    usuarioEmMemoria = null;
+    console.error('Erro ao atualizar sessão no cabeçalho:', error);
   }
+}
+
+// Limpa somente dados legados do navegador; não altera cadastros do PostgreSQL.
+function limparDadosDeTeste(_email) {
+  limparDadosLocaisLegados();
+  window.location.reload();
 }
 
 atualizarHeader();
