@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS tentativa_certificacao (
     iniciada_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     concluida_em TIMESTAMP,
     status_tentativa VARCHAR(20) NOT NULL DEFAULT 'em_andamento'
-        CHECK (status_tentativa IN ('em_andamento', 'concluida'))
+        CHECK (status_tentativa IN ('em_andamento', 'pausada', 'concluida'))
 );
 
 CREATE TABLE IF NOT EXISTS progresso (
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS resposta_candidato (
     inicio_questao TIMESTAMP NOT NULL,
     encerramento_questao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     tempo_utilizado_segundos INTEGER NOT NULL CHECK (tempo_utilizado_segundos >= 0),
-    status_resposta VARCHAR(20) NOT NULL CHECK (status_resposta IN ('respondida', 'tempo_esgotado')),
+    status_resposta VARCHAR(20) NOT NULL CHECK (status_resposta IN ('respondida', 'tempo_esgotado', 'interrompida')),
     acertou BOOLEAN NOT NULL DEFAULT FALSE
 );
 
