@@ -97,8 +97,9 @@ Certificados aprovados são emitidos sob demanda por `GET /api/certificates/me`,
 3. Vídeos de Apresentação das Sprints
    [Sprint 01](docs/videoSprint/sprint-01.mp4)
    [Sprint 02](docs/videoSprint/sprint-02.mp4)
+   [Sprint 03](https://youtu.be/0hhjsxHscn0)
 
-4. Retrospective
+5. Retrospective
    [Pasta - Retrospective](docs/retrospective)
    
 6. Backlog
